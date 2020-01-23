@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="advanced">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/jl1.0.1.jar!/javazoom/jl/player/advanced" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
