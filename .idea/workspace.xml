@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6490e37d-a31c-4aae-a17b-084fd43a8c4d" name="Default Changelist" comment="" />
+    <list default="true" id="6490e37d-a31c-4aae-a17b-084fd43a8c4d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/music-streaming-service.iml" beforeDir="false" afterPath="$PROJECT_DIR$/music-streaming-service.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/music-streaming-service/Main.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,7 +39,8 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/jl1.0.1.jar!/javazoom/jl/decoder" />
+    <property name="findjar.last.used.dir" value="$PROJECT_DIR$/lib" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/json-simple-1.1.1.jar!/" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -43,7 +48,7 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Console Font" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Songs">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="music-streaming-service" />
@@ -51,8 +56,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Songs" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Songs" />
+      <module name="music-streaming-service" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Songs" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -67,7 +80,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1579755322922</updated>
-      <workItem from="1579755327380" duration="1608000" />
+      <workItem from="1579755327380" duration="1835000" />
+      <workItem from="1579815255872" duration="711000" />
+      <workItem from="1579846339382" duration="6703000" />
     </task>
     <servers />
   </component>
@@ -75,29 +90,45 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="666" y="265" key="FileChooserDialogImpl" timestamp="1579756271122">
+    <state x="1032" y="186" key="#Inspections" timestamp="1579847828114">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="666" y="265" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1579756271122" />
-    <state width="1340" height="232" key="GridCell.Tab.0.bottom" timestamp="1579756794498">
+    <state x="1032" y="186" key="#Inspections/0.0.1920.1040@0.0.1920.1040" timestamp="1579847828114" />
+    <state x="1032" y="186" key="#Project_Structure" timestamp="1579847875181">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1340" height="232" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1579756794498" />
-    <state width="1340" height="232" key="GridCell.Tab.0.center" timestamp="1579756794498">
+    <state x="1032" y="186" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1579847875181" />
+    <state x="904" y="319" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog" timestamp="1579850206991">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1340" height="232" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1579756794498" />
-    <state width="1340" height="232" key="GridCell.Tab.0.left" timestamp="1579756794498">
+    <state x="904" y="319" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1579850206991" />
+    <state x="666" y="265" key="FileChooserDialogImpl" timestamp="1579851040197">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1340" height="232" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1579756794498" />
-    <state width="1340" height="232" key="GridCell.Tab.0.right" timestamp="1579756794498">
+    <state x="666" y="265" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1579851040197" />
+    <state width="914" height="245" key="GridCell.Tab.0.bottom" timestamp="1579854261804">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1340" height="232" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1579756794498" />
-    <state x="440" y="98" key="SettingsEditor" timestamp="1579756571998">
+    <state width="914" height="245" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1579854261804" />
+    <state width="914" height="245" key="GridCell.Tab.0.center" timestamp="1579854261804">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="440" y="98" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1579756571998" />
+    <state width="914" height="245" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1579854261804" />
+    <state width="914" height="245" key="GridCell.Tab.0.left" timestamp="1579854261804">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="914" height="245" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1579854261804" />
+    <state width="914" height="245" key="GridCell.Tab.0.right" timestamp="1579854261804">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="914" height="245" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1579854261804" />
+    <state x="654" y="139" key="SettingsEditor" timestamp="1579851043978">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="654" y="139" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1579851043978" />
+    <state x="668" y="349" key="com.intellij.ide.util.TipDialog" timestamp="1579846386271">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="668" y="349" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1579846386271" />
   </component>
 </project>

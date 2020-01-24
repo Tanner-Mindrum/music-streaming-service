@@ -13,5 +13,7 @@
     <orderEntry type="library" name="advanced" level="project" />
     <orderEntry type="library" name="player" level="project" />
     <orderEntry type="library" name="decoder" level="project" />
+    <orderEntry type="library" name="gson-2.8.6" level="application" />
+    <orderEntry type="library" name="json-simple-1.1.1" level="project" />
   </component>
 </module>
