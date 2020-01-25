@@ -3,8 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="6490e37d-a31c-4aae-a17b-084fd43a8c4d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/music-streaming-service.iml" beforeDir="false" afterPath="$PROJECT_DIR$/music-streaming-service.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/CECS327InputStream.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/music-streaming-service/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Songs.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CECS327InputStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/CECS327InputStream.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Songs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/Songs.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +52,7 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Console Font" />
   </component>
-  <component name="RunManager" selected="Application.Songs">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="music-streaming-service" />
@@ -57,7 +61,7 @@
       </method>
     </configuration>
     <configuration name="Songs" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Songs" />
+      <option name="MAIN_CLASS_NAME" value="Backend.Songs" />
       <module name="music-streaming-service" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -65,8 +69,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Songs" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Songs" />
       </list>
     </recent_temporary>
   </component>
@@ -82,7 +86,9 @@
       <updated>1579755322922</updated>
       <workItem from="1579755327380" duration="1835000" />
       <workItem from="1579815255872" duration="711000" />
-      <workItem from="1579846339382" duration="6703000" />
+      <workItem from="1579846339382" duration="7057000" />
+      <workItem from="1579920360990" duration="3949000" />
+      <workItem from="1579927043367" duration="3590000" />
     </task>
     <servers />
   </component>
@@ -94,6 +100,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1032" y="186" key="#Inspections/0.0.1920.1040@0.0.1920.1040" timestamp="1579847828114" />
+    <state x="1032" y="186" key="#Notifications" timestamp="1579921553063">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1032" y="186" key="#Notifications/0.0.1920.1040@0.0.1920.1040" timestamp="1579921553063" />
     <state x="1032" y="186" key="#Project_Structure" timestamp="1579847875181">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -106,29 +116,33 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="666" y="265" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1579851040197" />
-    <state width="914" height="245" key="GridCell.Tab.0.bottom" timestamp="1579854261804">
+    <state width="914" height="242" key="GridCell.Tab.0.bottom" timestamp="1579930407275">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="914" height="245" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1579854261804" />
-    <state width="914" height="245" key="GridCell.Tab.0.center" timestamp="1579854261804">
+    <state width="914" height="242" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1579930407275" />
+    <state width="914" height="242" key="GridCell.Tab.0.center" timestamp="1579930407275">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="914" height="245" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1579854261804" />
-    <state width="914" height="245" key="GridCell.Tab.0.left" timestamp="1579854261804">
+    <state width="914" height="242" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1579930407275" />
+    <state width="914" height="242" key="GridCell.Tab.0.left" timestamp="1579930407275">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="914" height="245" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1579854261804" />
-    <state width="914" height="245" key="GridCell.Tab.0.right" timestamp="1579854261804">
+    <state width="914" height="242" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1579930407275" />
+    <state width="914" height="242" key="GridCell.Tab.0.right" timestamp="1579930407275">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="914" height="245" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1579854261804" />
+    <state width="914" height="242" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1579930407275" />
     <state x="654" y="139" key="SettingsEditor" timestamp="1579851043978">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="654" y="139" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1579851043978" />
-    <state x="668" y="349" key="com.intellij.ide.util.TipDialog" timestamp="1579846386271">
+    <state x="668" y="349" key="com.intellij.ide.util.TipDialog" timestamp="1579927043976">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="668" y="349" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1579846386271" />
+    <state x="668" y="349" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1579927043976" />
+    <state x="1103" y="229" key="search.everywhere.popup" timestamp="1579930363752">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1103" y="229" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1579930363752" />
   </component>
 </project>

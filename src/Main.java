@@ -1,5 +1,8 @@
+import Backend.CECS327InputStream;
+import Frames.LoginFrame;
 import javazoom.jl.decoder.JavaLayerException;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -11,7 +14,7 @@ public class Main {
      */
     void mp3play(String file) {
         try {
-            // It uses CECS327InputStream as InputStream to play the song
+            // It uses Backend.CECS327InputStream as InputStream to play the song
             InputStream is = new CECS327InputStream(file);
             javazoom.jl.player.Player mp3player = new javazoom.jl.player.Player(is);
             mp3player.play();
@@ -27,7 +30,11 @@ public class Main {
         /* Change path for testing
         *  Tanner's path: "C://CECS 327//music-streaming-service//imperial.mp3"
         */
-        player.mp3play("C://CECS 327//music-streaming-service//imperial.mp3");
+        //player.mp3play("C://CECS 327//music-streaming-service//imperial.mp3");
+
+        JFrame frame = new LoginFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
     }
 
 }

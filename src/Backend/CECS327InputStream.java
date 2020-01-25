@@ -1,5 +1,5 @@
-/**
- * The CECS327InputStream implements InputStream. The class implements
+package Backend; /**
+ * The Backend.CECS327InputStream implements InputStream. The class implements
  * markers that are used in AudioInputStream
  *
  * @author  Oscar Morales-Ponce
