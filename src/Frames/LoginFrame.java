@@ -14,8 +14,8 @@ public class LoginFrame extends JFrame {
     private JButton loginButton;
     private JButton signUpButton;
 
-    private static final int FRAME_WIDTH = 550;
-    private static final int FRAME_HEIGHT = 400;
+    private static final int FRAME_WIDTH = 600;
+    private static final int FRAME_HEIGHT = 450;
 
 
     public LoginFrame() {
@@ -42,6 +42,7 @@ public class LoginFrame extends JFrame {
         JPanel loginPanel = new JPanel();
         BoxLayout boxLayout = new BoxLayout(loginPanel, BoxLayout.Y_AXIS);
         loginPanel.setLayout(boxLayout);
+        loginPanel.add(Box.createRigidArea(new Dimension(0, 30)));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         loginPanel.add(titleLabel);
         loginPanel.add(Box.createRigidArea(new Dimension(0, 60)));
@@ -63,6 +64,13 @@ public class LoginFrame extends JFrame {
         public void actionPerformed(ActionEvent click) {
             if (click.getSource() == loginButton) {
                 setVisible(false);
+            }
+            else if (click.getSource() == signUpButton) {
+                // Open sign up frame
+                SignUpFrame signUpFrame = new SignUpFrame();
+                setVisible(false);
+                signUpFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                signUpFrame.setVisible(true);
             }
         }
     }
