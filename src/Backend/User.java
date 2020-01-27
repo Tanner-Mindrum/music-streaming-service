@@ -2,9 +2,13 @@ package Backend;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -20,24 +24,29 @@ public class User {
         userName = name;
     }
 
-    public User(String email, String userName, String month, String day, String year) throws IOException {
-        // Creating JSONArray for the array of users
-        JSONArray userArray = new JSONArray();
+    public static void main(String[] args) throws IOException, ParseException {
+        User hunter = new User("tymee@gmail.com", "tymeekong", "November", "10", "1998");
+    }
 
+    public User(String email, String username, String month, String day, String year) throws IOException, ParseException {
+        System.out.println(checkUserExists("Glocklone"));
+        // Creating JSONArray for the array of users
+        JSONParser parser = new JSONParser();
+        JSONArray userArray = (JSONArray) parser.parse(new FileReader("C:\\Users\\Hunter\\Documents\\-Eclipse Workspace-\\CECS 327\\music-streaming-service\\user.json"));
         // Creating the JSON Object
-        JSONObject userObject1 = new JSONObject();
+        JSONObject userObject = new JSONObject();
 
         // Creating map for userInfo
         Map userInfo = new LinkedHashMap(4);
         // Inserting data into JSONObject
         userInfo.put("email", email);
-        userInfo.put("userName", userName);
-        userInfo.put("id", 1);
+        userInfo.put("username", username);
+        userInfo.put("id", userArray.size() + 1);
         String dateOfBirth = month + "/" + day + "/" + year;
         userInfo.put("dob", dateOfBirth);
 
         // Inserting userInfo to the user JSON object
-        userObject1.put("info", userInfo);
+        userObject.put("info", userInfo);
 
 
         // Initialize user with no playlists
@@ -45,11 +54,11 @@ public class User {
         JSONArray playlists = new JSONArray();
 
 
-        userObject1.put("playlists", playlists);
+        userObject.put("playlists", playlists);
 
 
         // Adding the user object to the array
-        userArray.add(userObject1);
+        userArray.add(userObject);
 
 
         // writing JSON to file
@@ -58,9 +67,64 @@ public class User {
 
         fileWriter.flush();
         fileWriter.close();
+    }
+
+    public boolean checkUserExists(String username) throws IOException, ParseException {
+
+        // if user exists: return true
+        // else return false
+        JSONParser parser = new JSONParser();
+        JSONArray userArray = (JSONArray) parser.parse(new FileReader("C:\\Users\\Hunter\\Documents\\-Eclipse Workspace-\\CECS 327\\music-streaming-service\\user.json"));
+
+        for (Object info : userArray) {
+            JSONObject userInfoSearch = (JSONObject) info;
+
+            // dupe for user
+            Map release = ((Map) userInfoSearch.get("info"));
+            Iterator<Map.Entry> releaseItr = release.entrySet().iterator();
+            while (releaseItr.hasNext()) {
+                Map.Entry data = releaseItr.next();
+                if (data.getKey().equals("username")) {
+                    if (username.equals(data.getValue())) {
+                        return true; // true means a duplicate has been found
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    // If this returns true, prompt them again, false: call constructor
+    public boolean checkDuplicateUser(String email, String username) throws IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        JSONArray userArray = (JSONArray) parser.parse(new FileReader("C:\\Users\\Hunter\\Documents\\-Eclipse Workspace-\\CECS 327\\music-streaming-service\\user.json"));
+
+        for (Object info : userArray) {
+            JSONObject userInfoSearch = (JSONObject) info;
+
+            // dupe for user
+            Map release = ((Map) userInfoSearch.get("info"));
+            Iterator<Map.Entry> releaseItr = release.entrySet().iterator();
+            while (releaseItr.hasNext()) {
+                Map.Entry data = releaseItr.next();
+                if (data.getKey().equals("email")) {
+                    if (email.equals(data.getValue())) {
+                        return true; // true means a duplicate has been found
+                    }
+                }
+                if (data.getKey().equals("username")) {
+                    if (username.equals(data.getValue())) {
+                        return true; // true means a duplicate has been found
+                    }
+                }
+            }
+
+        }
 
 
-        // User 2 to test the Array of JSON objects
+
+
+        return false;
     }
 
     public void createPlaylist(String playlistName){
