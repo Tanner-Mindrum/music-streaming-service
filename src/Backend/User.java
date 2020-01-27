@@ -24,15 +24,11 @@ public class User {
         userName = name;
     }
 
-    public static void main(String[] args) throws IOException, ParseException {
-        User hunter = new User("tymee@gmail.com", "tymeekong", "November", "10", "1998");
-    }
-
     public User(String email, String username, String month, String day, String year) throws IOException, ParseException {
-        System.out.println(checkUserExists("Glocklone"));
         // Creating JSONArray for the array of users
         JSONParser parser = new JSONParser();
-        JSONArray userArray = (JSONArray) parser.parse(new FileReader("C:\\Users\\Hunter\\Documents\\-Eclipse Workspace-\\CECS 327\\music-streaming-service\\user.json"));
+        // Tanner's path: C://CECS 327//music-streaming-service//user.json
+        JSONArray userArray = (JSONArray) parser.parse(new FileReader("C:\\CECS 327\\music-streaming-service\\user.json"));
         // Creating the JSON Object
         JSONObject userObject = new JSONObject();
 
@@ -42,7 +38,8 @@ public class User {
         userInfo.put("email", email);
         userInfo.put("username", username);
         userInfo.put("id", userArray.size() + 1);
-        String dateOfBirth = month + "/" + day + "/" + year;
+        String dateOfBirth = month + " - " + day + " - " + year;
+        System.out.println(dateOfBirth);
         userInfo.put("dob", dateOfBirth);
 
         // Inserting userInfo to the user JSON object
@@ -74,7 +71,7 @@ public class User {
         // if user exists: return true
         // else return false
         JSONParser parser = new JSONParser();
-        JSONArray userArray = (JSONArray) parser.parse(new FileReader("C:\\Users\\Hunter\\Documents\\-Eclipse Workspace-\\CECS 327\\music-streaming-service\\user.json"));
+        JSONArray userArray = (JSONArray) parser.parse(new FileReader("C://CECS 327//music-streaming-service//user.json"));
 
         for (Object info : userArray) {
             JSONObject userInfoSearch = (JSONObject) info;
@@ -95,9 +92,9 @@ public class User {
     }
 
     // If this returns true, prompt them again, false: call constructor
-    public boolean checkDuplicateUser(String email, String username) throws IOException, ParseException {
+    public String checkDuplicateUser(String email, String username) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
-        JSONArray userArray = (JSONArray) parser.parse(new FileReader("C:\\Users\\Hunter\\Documents\\-Eclipse Workspace-\\CECS 327\\music-streaming-service\\user.json"));
+        JSONArray userArray = (JSONArray) parser.parse(new FileReader("C://CECS 327//music-streaming-service//user.json"));
 
         for (Object info : userArray) {
             JSONObject userInfoSearch = (JSONObject) info;
@@ -109,12 +106,12 @@ public class User {
                 Map.Entry data = releaseItr.next();
                 if (data.getKey().equals("email")) {
                     if (email.equals(data.getValue())) {
-                        return true; // true means a duplicate has been found
+                        return "email"; // true means a duplicate has been found
                     }
                 }
                 if (data.getKey().equals("username")) {
                     if (username.equals(data.getValue())) {
-                        return true; // true means a duplicate has been found
+                        return "username"; // true means a duplicate has been found
                     }
                 }
             }
@@ -124,7 +121,7 @@ public class User {
 
 
 
-        return false;
+        return "okay";
     }
 
     public void createPlaylist(String playlistName){
