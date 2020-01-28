@@ -24,17 +24,27 @@ public class MusicFrame extends JFrame {
     public void createComponents() {
         MusicFrameListener listener = new MusicFrameListener();
         panel = new JPanel();
+
+        BoxLayout boxLayout = new BoxLayout(panel, BoxLayout.Y_AXIS);
+        panel.setLayout(boxLayout);
+
         titleLabel = new JLabel("Ghetto Spotify");
         titleLabel.setFont(new Font("Arial", Font.PLAIN, 18));
         panel.add(titleLabel);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         searchField = new JTextField(20);
+        searchField.setMaximumSize(searchField.getPreferredSize());
         panel.add(searchField);
 
         searchButton = new JButton("Search");
         searchButton.addActionListener(listener);
         panel.add(searchButton);
+
+        Box playlistBox = Box.createHorizontalBox();
+        playlistBox.add(new JTextField("Left"));
+        playlistBox.setMaximumSize(playlistBox.getPreferredSize());
+        panel.add(playlistBox, BorderLayout.CENTER);
 
         this.add(panel);
 
