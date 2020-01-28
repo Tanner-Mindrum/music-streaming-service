@@ -10,8 +10,8 @@ public class MusicFrame extends JFrame {
     private JLabel searchLabel;
     private JButton searchButton;
     private JTextField searchField;
-    private static final int FRAME_WIDTH = 550;
-    private static final int FRAME_HEIGHT = 400;
+    private static final int FRAME_WIDTH = 1280;
+    private static final int FRAME_HEIGHT = 720;
     private JPanel panel;
 
     public MusicFrame() {
