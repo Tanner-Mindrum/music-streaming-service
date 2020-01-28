@@ -13,6 +13,8 @@ public class MusicFrame extends JFrame {
     private static final int FRAME_WIDTH = 1280;
     private static final int FRAME_HEIGHT = 720;
     private JPanel panel;
+    private JLabel userNameLabel;
+    private String usernameName;
 
     public MusicFrame() {
 
@@ -33,6 +35,9 @@ public class MusicFrame extends JFrame {
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         //panel.add(titleLabel);
 
+        // TODO: LIMIT NAME SIZE
+        userNameLabel = new JLabel(String.format("<html><p>%s</p></html>", usernameName));
+
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         searchField = new JTextField(20);
         searchField.setMaximumSize(searchField.getPreferredSize());
@@ -44,11 +49,14 @@ public class MusicFrame extends JFrame {
         //panel.add(searchButton);
 
         Box topBox = Box.createHorizontalBox();
-        topBox.setPreferredSize(new Dimension(1260, 80));
+        topBox.setPreferredSize(new Dimension(1260, 40));
         topBox.setBorder(BorderFactory.createLineBorder(Color.RED));
         topBox.add(titleLabel);
+        topBox.add(Box.createRigidArea(new Dimension(370, 0)));
+//        topBox.add(Box.createHorizontalGlue());
         topBox.add(searchField);
         topBox.add(searchButton);
+        topBox.add(userNameLabel);
         panel.add(topBox);
 
         Box playlistBox = Box.createVerticalBox();
