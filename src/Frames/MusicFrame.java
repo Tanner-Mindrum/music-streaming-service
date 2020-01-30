@@ -1,9 +1,13 @@
 package Frames;
 
+import Backend.Songs;
+import org.json.simple.parser.ParseException;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class MusicFrame extends JFrame {
     private JLabel titleLabel;
@@ -15,6 +19,7 @@ public class MusicFrame extends JFrame {
     private JPanel panel;
     private JLabel userNameLabel;
     private String usernameName;
+    private JTextArea displaySongArea;
 
     public MusicFrame() {
 
@@ -42,6 +47,7 @@ public class MusicFrame extends JFrame {
         searchField = new JTextField(20);
         searchField.setMaximumSize(searchField.getPreferredSize());
         searchField.setAlignmentX(Component.CENTER_ALIGNMENT);
+        searchField.addActionListener(listener);
         //panel.add(searchField);
 
         searchButton = new JButton("Search");
@@ -65,6 +71,16 @@ public class MusicFrame extends JFrame {
         playlistBox.setAlignmentX(Component.LEFT_ALIGNMENT);
         panel.add(playlistBox, BorderLayout.CENTER);
 
+        displaySongArea = new JTextArea(20, 50);
+
+        Box songsBox = Box.createHorizontalBox();
+        songsBox.setPreferredSize(new Dimension(700, 400));
+        //dobLabelBox.setBorder(BorderFactory.createLineBorder(Color.RED));
+        songsBox.add(Box.createRigidArea(new Dimension(150, 300)));
+        songsBox.add(displaySongArea);
+        panel.add(songsBox);
+
+
         this.add(panel);
 
 
@@ -74,8 +90,15 @@ public class MusicFrame extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (e.getSource() == searchButton) {
-                System.out.println("Search button was clicked");
+            if (e.getSource() == searchButton || e.getSource() == searchField) {
+                String inputForSearch = searchField.getText().trim();
+                Songs newSong = new Songs();
+                try {
+                    System.out.println(newSong.findSong(inputForSearch));
+                } catch (IOException | ParseException ex) {
+                    ex.printStackTrace();
+                }
+
             }
         }
     }

@@ -162,6 +162,4 @@ public class SignUpFrame extends JFrame {
             }
         }
     }
-
-
 }
