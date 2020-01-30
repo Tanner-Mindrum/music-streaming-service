@@ -4,6 +4,7 @@ import Backend.User;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -51,16 +52,16 @@ public class SignUpFrame extends JFrame {
         duplicateEmailLabel = new JLabel("That email already exists!");
         duplicateUsernameLabel = new JLabel("That username already exists!");
         
-        emailField = new JTextField(15);
+        emailField = new JTextField(22);
         emailField.setMaximumSize(emailField.getPreferredSize());
-        userNameField = new JTextField(15);
+        userNameField = new JTextField(22);
         userNameField.setMaximumSize(userNameField.getPreferredSize());
 
         monthBox = new JComboBox<String>(months);
         monthBox.setMaximumSize(monthBox.getPreferredSize());
-        dayField = new JTextField(15);
+        dayField = new JTextField(4);
         dayField.setMaximumSize(dayField.getPreferredSize());
-        yearField = new JTextField(15);
+        yearField = new JTextField(7);
         yearField.setMaximumSize(yearField.getPreferredSize());
 
         signUpButton = new JButton("Sign Up");
@@ -68,16 +69,53 @@ public class SignUpFrame extends JFrame {
         backButton = new JButton("Back");
         backButton.addActionListener(new ButtonListener());
 
-        BoxLayout boxLayout = new BoxLayout(signUpPanel, BoxLayout.Y_AXIS);
-        signUpPanel.setLayout(boxLayout);
-        signUpPanel.add(emailLabel);
-        signUpPanel.add(emailField);
-        signUpPanel.add(userNameLabel);
-        signUpPanel.add(userNameField);
-        signUpPanel.add(dateOfBirthLabel);
-        signUpPanel.add(monthBox);
-        signUpPanel.add(dayField);
-        signUpPanel.add(yearField);
+        final int width = 150;
+
+        Box emailBox = Box.createHorizontalBox();
+        emailBox.setPreferredSize(new Dimension(550, 10));
+        emailBox.add(Box.createRigidArea(new Dimension(width, 0)));
+        emailBox.add(emailLabel);
+        signUpPanel.add(emailBox);
+
+        Box emailFieldBox = Box.createHorizontalBox();
+        emailFieldBox.setPreferredSize(new Dimension(550, 25));
+        //usernameLabelBox.setBorder(BorderFactory.createLineBorder(Color.RED));
+        emailFieldBox.add(Box.createRigidArea(new Dimension(width, 0)));
+        emailFieldBox.add(emailField);
+        signUpPanel.add(emailFieldBox);
+
+        Box usernameBox = Box.createHorizontalBox();
+        usernameBox.setPreferredSize(new Dimension(550, 10));
+        //usernameBox.setBorder(BorderFactory.createLineBorder(Color.RED));
+        usernameBox.add(Box.createRigidArea(new Dimension(width, 0)));
+        usernameBox.add(userNameLabel);
+        signUpPanel.add(usernameBox);
+
+        Box usernameFieldBox = Box.createHorizontalBox();
+        usernameFieldBox.setPreferredSize(new Dimension(550, 25));
+        //usernameLabelBox.setBorder(BorderFactory.createLineBorder(Color.RED));
+        usernameFieldBox.add(Box.createRigidArea(new Dimension(width, 0)));
+        usernameFieldBox.add(userNameField);
+        signUpPanel.add(usernameFieldBox);
+
+        Box dobLabelBox = Box.createHorizontalBox();
+        dobLabelBox.setPreferredSize(new Dimension(550, 10));
+        //dobLabelBox.setBorder(BorderFactory.createLineBorder(Color.RED));
+        dobLabelBox.add(Box.createRigidArea(new Dimension(width, 0)));
+        dobLabelBox.add(dateOfBirthLabel);
+        signUpPanel.add(dobLabelBox);
+
+        Box dateBox = Box.createHorizontalBox();
+        dateBox.setPreferredSize(new Dimension(550, 30));
+        //dateBox.setBorder(BorderFactory.createLineBorder(Color.RED));
+        dateBox.add(Box.createRigidArea(new Dimension(width, 0)));
+        dateBox.add(monthBox);
+        dateBox.add(Box.createRigidArea(new Dimension(10, 0)));
+        dateBox.add(dayField);
+        dateBox.add(Box.createRigidArea(new Dimension(10, 0)));
+        dateBox.add(yearField);
+        signUpPanel.add(dateBox);
+
         signUpPanel.add(duplicateEmailLabel);
         duplicateEmailLabel.setVisible(false);
         signUpPanel.add(duplicateUsernameLabel);

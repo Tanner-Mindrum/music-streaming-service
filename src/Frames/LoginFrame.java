@@ -39,6 +39,7 @@ public class LoginFrame extends JFrame {
 
         enterUsernameField = new JTextField(15);
         enterUsernameField.setMaximumSize(enterUsernameField.getPreferredSize());
+        enterUsernameField.addActionListener(new ButtonListener());
 
         loginButton = new JButton("Log in");
         loginButton.addActionListener(new ButtonListener());
@@ -72,7 +73,7 @@ public class LoginFrame extends JFrame {
 
     class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent click) {
-            if (click.getSource() == loginButton) {
+            if (click.getSource() == loginButton || click.getSource() == enterUsernameField) {
                 User checkUser = new User();
                 try {
                     if (!checkUser.checkUserExists(enterUsernameField.getText().trim())) {
