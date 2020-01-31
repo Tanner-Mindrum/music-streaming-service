@@ -92,6 +92,7 @@ public class MusicFrame extends JFrame {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == searchButton || e.getSource() == searchField) {
                 String inputForSearch = searchField.getText().trim();
+                
                 Songs newSong = new Songs();
                 try {
                     System.out.println(newSong.findSong(inputForSearch));
