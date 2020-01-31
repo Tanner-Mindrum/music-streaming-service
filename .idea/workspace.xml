@@ -3,9 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="6490e37d-a31c-4aae-a17b-084fd43a8c4d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Backend/Songs.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/music-streaming-service/Backend/Songs.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Frames/MusicFrame$MusicFrameListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/music-streaming-service/Frames/MusicFrame$MusicFrameListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Frames/MusicFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/music-streaming-service/Frames/MusicFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backend/SongInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/SongInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Backend/Songs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/Songs.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Frames/MusicFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Frames/MusicFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Frames/SignUpFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Frames/SignUpFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/Player.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +57,20 @@
   </component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
+      <option name="MAIN_CLASS_NAME" value="Backend.Main" />
+      <module name="music-streaming-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Backend.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Player" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Backend.Player" />
       <module name="music-streaming-service" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -81,6 +99,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Player" />
         <item itemvalue="Application.User" />
         <item itemvalue="Application.Songs" />
       </list>
@@ -103,7 +122,7 @@
       <workItem from="1579927043367" duration="3590000" />
       <workItem from="1580247839032" duration="3373000" />
       <workItem from="1580366788431" duration="5318000" />
-      <workItem from="1580416145897" duration="5654000" />
+      <workItem from="1580416145897" duration="11322000" />
     </task>
     <task id="LOCAL-00001" summary="Updated User.java">
       <created>1580077575026</created>
@@ -167,26 +186,26 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="666" y="265" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1579851040197" />
-    <state width="1877" height="247" key="GridCell.Tab.0.bottom" timestamp="1580422506115">
+    <state width="1877" height="245" key="GridCell.Tab.0.bottom" timestamp="1580455782361">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="212" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580084417713" />
-    <state width="1877" height="247" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1580422506115" />
-    <state width="1877" height="247" key="GridCell.Tab.0.center" timestamp="1580422506115">
+    <state width="1877" height="245" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1580455782361" />
+    <state width="1877" height="245" key="GridCell.Tab.0.center" timestamp="1580455782361">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="212" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1580084417713" />
-    <state width="1877" height="247" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1580422506115" />
-    <state width="1877" height="247" key="GridCell.Tab.0.left" timestamp="1580422506115">
+    <state width="1877" height="245" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1580455782361" />
+    <state width="1877" height="245" key="GridCell.Tab.0.left" timestamp="1580455782361">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="212" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1580084417713" />
-    <state width="1877" height="247" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1580422506115" />
-    <state width="1877" height="247" key="GridCell.Tab.0.right" timestamp="1580422506115">
+    <state width="1877" height="245" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1580455782361" />
+    <state width="1877" height="245" key="GridCell.Tab.0.right" timestamp="1580455782361">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="212" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1580084417713" />
-    <state width="1877" height="247" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1580422506115" />
+    <state width="1877" height="245" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1580455782361" />
     <state x="654" y="139" key="SettingsEditor" timestamp="1580084711034">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

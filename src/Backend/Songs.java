@@ -13,14 +13,14 @@ import java.util.Map;
 public class Songs {
 
     private String songName;
-    private String songLength;
+    private Double songLength;
     private String artistName;
     private String albumName;
     private String songID;
 
     public Songs() {
         songName = "";
-        songLength = "";
+        songLength = 0.0;
         artistName = "";
         albumName = "";
         songID = "";
@@ -114,11 +114,11 @@ public class Songs {
         this.songName = songName;
     }
 
-    public String getSongLength() {
+    public Double getSongLength() {
         return songLength;
     }
 
-    public void setSongLength(String songLength) {
+    public void setSongLength(Double songLength) {
         this.songLength = songLength;
     }
 

@@ -1,5 +1,6 @@
 package Frames;
 
+import Backend.SongInfo;
 import Backend.Songs;
 import org.json.simple.parser.ParseException;
 
@@ -8,6 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MusicFrame extends JFrame {
     private JLabel titleLabel;
@@ -91,17 +93,22 @@ public class MusicFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == searchButton || e.getSource() == searchField) {
-                String inputForSearch = searchField.getText().trim();
+                String inputForSearch = searchField.getText().trim().toLowerCase();
                 
-                Songs newSong = new Songs();
+                SongInfo findSongInfo = new SongInfo();
+                ArrayList<Songs> foundSongs = new ArrayList<Songs>(); // Create own array to store a copy of found songs
+                // Add all found songs to array
                 try {
-                    System.out.println(newSong.findSong(inputForSearch));
+                    foundSongs.addAll(findSongInfo.findSong(inputForSearch));
                 } catch (IOException | ParseException ex) {
                     ex.printStackTrace();
                 }
-
+                // Loop through our array and print song details
+                for (Songs s : foundSongs) {
+                    System.out.println(s.getSongName() + ", " + s.getArtistName() + ", " + s.getAlbumName() + ", "
+                            + s.getSongLength() + ", " + s.getSongID());
+                }
             }
         }
     }
-
 }
