@@ -2,6 +2,7 @@ package Frames;
 
 import Backend.SongInfo;
 import Backend.Songs;
+import Backend.User;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
@@ -22,12 +23,21 @@ public class MusicFrame extends JFrame {
     private JLabel userNameLabel;
     private String usernameName;
     private JTextArea displaySongArea;
+    private static Box songsBox;
+    private static JList<String> songList;
+    private static int searchCount = 0;
+    private static JScrollPane scrollPane;
+    private static JScrollPane playListPane;
+    private JButton createPlaylistButton;
+    private JButton deletePlaylistButton;
+    private JButton addToPlaylistButton;
+    private User currUser;
 
-    public MusicFrame() {
-
+    public MusicFrame(User user) {
         createComponents();
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
         this.setTitle("Home Page");
+        currUser = user;
     }
 
     public void createComponents() {
@@ -54,7 +64,23 @@ public class MusicFrame extends JFrame {
 
         searchButton = new JButton("Search");
         searchButton.addActionListener(listener);
-        //panel.add(searchButton);
+
+        createPlaylistButton = new JButton("Create Playlist");
+        createPlaylistButton.addActionListener(listener);
+
+        deletePlaylistButton = new JButton("Delete Playlist");
+        deletePlaylistButton.addActionListener(listener);
+
+        addToPlaylistButton = new JButton("Add");
+        addToPlaylistButton.addActionListener(listener);
+
+        DefaultListModel<String> playListModel = new DefaultListModel<String>();
+        JList<String> playListList = new JList<>(playListModel);
+        playListPane = new JScrollPane(playListList);
+
+        DefaultListModel<String> songModel = new DefaultListModel<String>();
+        JList<String> songsList = new JList<>(playListModel);
+        scrollPane = new JScrollPane(songsList);
 
         Box topBox = Box.createHorizontalBox();
         topBox.setPreferredSize(new Dimension(1260, 40));
@@ -68,18 +94,22 @@ public class MusicFrame extends JFrame {
         panel.add(topBox);
 
         Box playlistBox = Box.createVerticalBox();
-        playlistBox.add(new JTextField("Left"));
         playlistBox.setMaximumSize(playlistBox.getPreferredSize());
         playlistBox.setAlignmentX(Component.LEFT_ALIGNMENT);
+        playlistBox.add(playListPane);
+        playlistBox.setBorder(BorderFactory.createLineBorder(Color.RED));
+        playlistBox.add(createPlaylistButton);
+        playlistBox.add(deletePlaylistButton);
         panel.add(playlistBox, BorderLayout.CENTER);
 
         displaySongArea = new JTextArea(20, 50);
 
-        Box songsBox = Box.createHorizontalBox();
+        songsBox = Box.createHorizontalBox();
         songsBox.setPreferredSize(new Dimension(700, 400));
-        //dobLabelBox.setBorder(BorderFactory.createLineBorder(Color.RED));
+        songsBox.setBorder(BorderFactory.createLineBorder(Color.RED));
         songsBox.add(Box.createRigidArea(new Dimension(150, 300)));
-        songsBox.add(displaySongArea);
+        songsBox.add(scrollPane);
+        songsBox.add(addToPlaylistButton);
         panel.add(songsBox);
 
 
@@ -93,8 +123,9 @@ public class MusicFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == searchButton || e.getSource() == searchField) {
+                searchCount++;
                 String inputForSearch = searchField.getText().trim().toLowerCase();
-                
+
                 SongInfo findSongInfo = new SongInfo();
                 ArrayList<Songs> foundSongs = new ArrayList<Songs>(); // Create own array to store a copy of found songs
                 // Add all found songs to array
@@ -104,10 +135,32 @@ public class MusicFrame extends JFrame {
                     ex.printStackTrace();
                 }
                 // Loop through our array and print song details
+                DefaultListModel<String> model = new DefaultListModel<>();
                 for (Songs s : foundSongs) {
                     System.out.println(s.getSongName() + ", " + s.getArtistName() + ", " + s.getAlbumName() + ", "
                             + s.getSongLength() + ", " + s.getSongID());
+                    model.addElement(s.getSongName());
                 }
+                songList = new JList<>(model);
+
+                songsBox.remove(scrollPane);
+                repaint();
+                validate();
+                scrollPane = new JScrollPane(songList);
+                songsBox.add(scrollPane);
+                validate();
+                repaint();
+            }
+            else if (e.getSource() == songList) {
+                System.out.println("hello");
+            }
+            else if (e.getSource() == createPlaylistButton) {
+                CreatePlaylistFrame pFrame = new CreatePlaylistFrame(currUser);
+                pFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                pFrame.setVisible(true);
+            }
+            else if (e.getSource() == addToPlaylistButton) {
+                System.out.println(songList.getSelectedValue());
             }
         }
     }

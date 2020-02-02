@@ -80,7 +80,7 @@ public class LoginFrame extends JFrame {
                         userDoesNotExistLabel.setVisible(true);
                     }
                     else {
-                        MusicFrame musicFrame = new MusicFrame();
+                        MusicFrame musicFrame = new MusicFrame(checkUser);
                         setVisible(false);
                         musicFrame.setVisible(true);
                     }

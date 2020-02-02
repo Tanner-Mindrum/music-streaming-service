@@ -3,14 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="6490e37d-a31c-4aae-a17b-084fd43a8c4d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Backend/Songs.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/music-streaming-service/Backend/Songs.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Frames/MusicFrame$MusicFrameListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/music-streaming-service/Frames/MusicFrame$MusicFrameListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Frames/MusicFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/music-streaming-service/Frames/MusicFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Backend/SongInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/SongInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Backend/Songs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/Songs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backend/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Frames/LoginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Frames/LoginFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Frames/MusicFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Frames/MusicFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Frames/SignUpFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Frames/SignUpFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user.json" beforeDir="false" afterPath="$PROJECT_DIR$/user.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,7 +119,8 @@
       <workItem from="1579927043367" duration="3590000" />
       <workItem from="1580247839032" duration="3373000" />
       <workItem from="1580366788431" duration="5318000" />
-      <workItem from="1580416145897" duration="11322000" />
+      <workItem from="1580416145897" duration="11621000" />
+      <workItem from="1580620436378" duration="9104000" />
     </task>
     <task id="LOCAL-00001" summary="Updated User.java">
       <created>1580077575026</created>
@@ -186,26 +184,26 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="666" y="265" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1579851040197" />
-    <state width="1877" height="245" key="GridCell.Tab.0.bottom" timestamp="1580455782361">
+    <state width="914" height="245" key="GridCell.Tab.0.bottom" timestamp="1580629757760">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="212" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580084417713" />
-    <state width="1877" height="245" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1580455782361" />
-    <state width="1877" height="245" key="GridCell.Tab.0.center" timestamp="1580455782361">
+    <state width="914" height="245" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1580629757760" />
+    <state width="914" height="245" key="GridCell.Tab.0.center" timestamp="1580629757760">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="212" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1580084417713" />
-    <state width="1877" height="245" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1580455782361" />
-    <state width="1877" height="245" key="GridCell.Tab.0.left" timestamp="1580455782361">
+    <state width="914" height="245" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1580629757760" />
+    <state width="914" height="245" key="GridCell.Tab.0.left" timestamp="1580629757760">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="212" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1580084417713" />
-    <state width="1877" height="245" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1580455782361" />
-    <state width="1877" height="245" key="GridCell.Tab.0.right" timestamp="1580455782361">
+    <state width="914" height="245" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1580629757760" />
+    <state width="914" height="245" key="GridCell.Tab.0.right" timestamp="1580629757760">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="212" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1580084417713" />
-    <state width="1877" height="245" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1580455782361" />
+    <state width="914" height="245" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1580629757760" />
     <state x="654" y="139" key="SettingsEditor" timestamp="1580084711034">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -215,10 +213,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1161" y="268" width="540" height="524" key="StructurePopup/0.0.1920.1040@0.0.1920.1040" timestamp="1580368876855" />
-    <state x="668" y="349" key="com.intellij.ide.util.TipDialog" timestamp="1580416146539">
+    <state x="668" y="349" key="com.intellij.ide.util.TipDialog" timestamp="1580620435633">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="668" y="349" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1580416146539" />
+    <state x="668" y="349" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1580620435633" />
     <state x="578" y="330" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1580077697675">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

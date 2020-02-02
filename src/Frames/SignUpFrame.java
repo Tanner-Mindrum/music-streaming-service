@@ -151,7 +151,7 @@ public class SignUpFrame extends JFrame {
                         User newUser = new User(emailField.getText().trim(), userNameField.getText().trim(),
                                 (String) monthBox.getSelectedItem(), dayField.getText().trim(),
                                 yearField.getText().trim());
-                        MusicFrame musicFrame = new MusicFrame();
+                        MusicFrame musicFrame = new MusicFrame(newUser);
                         setVisible(false);
                         musicFrame.setVisible(true);
                     }

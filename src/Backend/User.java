@@ -117,10 +117,6 @@ public class User {
             }
 
         }
-
-
-
-
         return "okay";
     }
 
@@ -135,6 +131,27 @@ public class User {
         // TODO : Add created playlist map to the user's playlist array
         //playlists.add(playlistMap);
     }
+
+//    public ArrayList<String> getPlaylistNames() throws IOException, ParseException {
+//        ArrayList<String> playListNames = new ArrayList<>();
+//
+//        JSONParser parser = new JSONParser();
+//        JSONArray information = (JSONArray) parser.parse(new FileReader("C://CECS 327//music-streaming-service//user.json"));
+//        for (Object info : information) {
+//            JSONObject entryInfo = (JSONObject) info;
+//
+//            Map release = ((Map) entryInfo.get("release"));
+//            Iterator<Map.Entry> releaseItr = release.entrySet().iterator();
+//            while (releaseItr.hasNext()) {
+//                Map.Entry data = releaseItr.next();
+//                if (data.getKey().equals("name")) {
+//
+//                }
+//            }
+//
+//        }
+//
+//    }
 
 
 
