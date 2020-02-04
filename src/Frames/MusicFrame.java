@@ -74,6 +74,7 @@ public class MusicFrame extends JFrame {
         addToPlaylistButton = new JButton("Add");
         addToPlaylistButton.addActionListener(listener);
 
+        // TODO: PREFILL PLAYLIST
         DefaultListModel<String> playListModel = new DefaultListModel<String>();
         JList<String> playListList = new JList<>(playListModel);
         playListPane = new JScrollPane(playListList);

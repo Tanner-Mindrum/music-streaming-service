@@ -1,5 +1,6 @@
 package Frames;
 
+import Backend.ModifyUser;
 import Backend.User;
 import org.json.simple.parser.ParseException;
 
@@ -74,21 +75,20 @@ public class LoginFrame extends JFrame {
     class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent click) {
             if (click.getSource() == loginButton || click.getSource() == enterUsernameField) {
-                User checkUser = new User();
+
+                ModifyUser checkUser = new ModifyUser(enterUsernameField.getText().trim());
                 try {
                     if (!checkUser.checkUserExists(enterUsernameField.getText().trim())) {
                         userDoesNotExistLabel.setVisible(true);
                     }
                     else {
-                        MusicFrame musicFrame = new MusicFrame(checkUser);
+                        MusicFrame musicFrame = new MusicFrame(new User(enterUsernameField.getText().trim()));
                         setVisible(false);
                         musicFrame.setVisible(true);
                     }
                 } catch (IOException | ParseException e) {
                     e.printStackTrace();
                 }
-
-
             }
             else if (click.getSource() == signUpButton) {
                 // Open sign up frame

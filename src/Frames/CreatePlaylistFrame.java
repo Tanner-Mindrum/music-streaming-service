@@ -43,10 +43,11 @@ public class CreatePlaylistFrame extends JFrame {
 
     class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent click) {
-            if (click.getSource() == addButton || click.getSource() == playListNameField) {
-                currUser.createPlaylist(playListNameField.getText().trim());
-                setVisible(false);
-            }
+//            if (click.getSource() == addButton || click.getSource() == playListNameField) {
+//                ModifyUser mu = new ModifyUser(currUser.getUsername());
+//                mu.createPlaylist(playListNameField.getText().trim());
+//                setVisible(false);
+//            }
         }
 
     }

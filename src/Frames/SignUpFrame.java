@@ -1,5 +1,6 @@
 package Frames;
 
+import Backend.ModifyUser;
 import Backend.User;
 import org.json.simple.parser.ParseException;
 
@@ -134,7 +135,7 @@ public class SignUpFrame extends JFrame {
                 loginFrame.setVisible(true);
             }
             else if (click.getSource() == signUpButton) {
-                User checkUser = new User();
+                ModifyUser checkUser = new ModifyUser(userNameField.getText().trim());
                 try {
                     if (checkUser.checkDuplicateUser(emailField.getText().trim(),
                             userNameField.getText().trim()).equals("email")) {
