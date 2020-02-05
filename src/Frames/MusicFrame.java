@@ -31,6 +31,7 @@ public class MusicFrame extends JFrame {
     private JButton createPlaylistButton;
     private JButton deletePlaylistButton;
     private JButton addToPlaylistButton;
+    private JButton playSongButton;
     private User currUser;
 
     public MusicFrame(User user) {
@@ -74,6 +75,9 @@ public class MusicFrame extends JFrame {
         addToPlaylistButton = new JButton("Add");
         addToPlaylistButton.addActionListener(listener);
 
+        playSongButton = new JButton("Play Song");
+        playSongButton.addActionListener(listener);
+
         // TODO: PREFILL PLAYLIST
         DefaultListModel<String> playListModel = new DefaultListModel<String>();
         JList<String> playListList = new JList<>(playListModel);
@@ -111,12 +115,10 @@ public class MusicFrame extends JFrame {
         songsBox.add(Box.createRigidArea(new Dimension(150, 300)));
         songsBox.add(scrollPane);
         songsBox.add(addToPlaylistButton);
+        songsBox.add(playSongButton);
         panel.add(songsBox);
 
-
         this.add(panel);
-
-
     }
 
     class MusicFrameListener implements ActionListener {
@@ -141,6 +143,7 @@ public class MusicFrame extends JFrame {
                     System.out.println(s.getSongName() + ", " + s.getArtistName() + ", " + s.getAlbumName() + ", "
                             + s.getSongLength() + ", " + s.getSongID());
                     model.addElement(s.getSongName());
+                    
                 }
                 songList = new JList<>(model);
 
@@ -162,6 +165,16 @@ public class MusicFrame extends JFrame {
             }
             else if (e.getSource() == addToPlaylistButton) {
                 System.out.println(songList.getSelectedValue());
+            }
+            else if (e.getSource() == playSongButton) {
+                SongInfo findSongInfo = new SongInfo();
+                ArrayList<Songs> foundSongs = new ArrayList<Songs>(); // Create own array to store a copy of found songs
+                try {
+                    foundSongs.addAll(findSongInfo.findSong(songList.getSelectedValue()));
+                } catch (IOException | ParseException ex) {
+                    ex.printStackTrace();
+                }
+                System.out.println((foundSongs.get(songList.getSelectedIndex())).getSongID());
             }
         }
     }

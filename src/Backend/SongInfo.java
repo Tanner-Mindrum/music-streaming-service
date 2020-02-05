@@ -104,7 +104,12 @@ public class SongInfo {
             }
         }
 
+        System.out.println(songList);
         return songList;
+    }
+
+    public String getSongID() {
+        return songID;
     }
 
 }
