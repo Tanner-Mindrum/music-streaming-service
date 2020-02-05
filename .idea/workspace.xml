@@ -3,11 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="6490e37d-a31c-4aae-a17b-084fd43a8c4d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Backend/ModifyUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/ModifyUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Backend/Songs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/Songs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Backend/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Frames/CreatePlaylistFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Frames/CreatePlaylistFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user.json" beforeDir="false" afterPath="$PROJECT_DIR$/user.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Backend/ModifyUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/music-streaming-service/Backend/ModifyUser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Backend/Songs.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/music-streaming-service/Backend/Songs.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Backend/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/music-streaming-service/Backend/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Frames/CreatePlaylistFrame$ButtonListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/music-streaming-service/Frames/CreatePlaylistFrame$ButtonListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Frames/CreatePlaylistFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/music-streaming-service/Frames/CreatePlaylistFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/META-INF/music-streaming-service.kotlin_module" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,7 +145,14 @@
       <option name="project" value="LOCAL" />
       <updated>1580082258689</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Updated ModifyUser.java to add multiple playlists">
+      <created>1580867017542</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1580867017542</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -154,7 +162,8 @@
     <MESSAGE value="Updated User.java" />
     <MESSAGE value="Updated User.java to work with JSON writing" />
     <MESSAGE value="Updated User.java to work with JSON writing, user overloading" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated User.java to work with JSON writing, user overloading" />
+    <MESSAGE value="Updated ModifyUser.java to add multiple playlists" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated ModifyUser.java to add multiple playlists" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1032" y="186" key="#Inspections" timestamp="1579847828114">
@@ -173,10 +182,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="904" y="319" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1579850206991" />
-    <state x="291" y="9" key="CommitChangelistDialog2" timestamp="1580084437501">
+    <state x="291" y="9" key="CommitChangelistDialog2" timestamp="1580867404264">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="291" y="9" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1580084437501" />
+    <state x="291" y="9" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1580867404264" />
     <state x="144" y="71" key="DiffContextDialog" timestamp="1580077865280">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -214,6 +223,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1161" y="268" width="540" height="524" key="StructurePopup/0.0.1920.1040@0.0.1920.1040" timestamp="1580368876855" />
+    <state x="435" y="118" key="VCS.ChangeListViewerDialog" timestamp="1580867345834">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="435" y="118" key="VCS.ChangeListViewerDialog/0.0.1536.824@0.0.1536.824" timestamp="1580867345834" />
     <state x="668" y="349" key="com.intellij.ide.util.TipDialog" timestamp="1580852672034">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -222,6 +235,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="578" y="330" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1580077697675" />
+    <state x="501" y="278" key="git4idea.rebase.GitRebaseDialog" timestamp="1580867346909">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="501" y="278" key="git4idea.rebase.GitRebaseDialog/0.0.1536.824@0.0.1536.824" timestamp="1580867346909" />
     <state x="882" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1580855120611">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
