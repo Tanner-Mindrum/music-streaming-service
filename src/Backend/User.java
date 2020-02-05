@@ -39,9 +39,10 @@ public class User {
         // Creating JSONArray for the array of users
         JSONParser parser = new JSONParser();
         // Tanner's path: C://CECS 327//music-streaming-service//user.json
-        JSONArray userArray = (JSONArray) parser.parse(new FileReader("C:\\CECS 327\\music-streaming-service\\user.json"));
+        JSONArray userArray = (JSONArray) parser.parse(new FileReader("C:\\Users\\Hunter\\Documents\\-Eclipse Workspace-\\music-streaming-service\\user.json"));
         // Creating the JSON Object
         JSONObject userObject = new JSONObject();
+
 
         // Creating map for userInfo
         Map userInfo = new LinkedHashMap(4);
@@ -62,7 +63,6 @@ public class User {
 
 
         userObject.put("playlists", playlists);
-
 
         // Adding the user object to the array
         userArray.add(userObject);

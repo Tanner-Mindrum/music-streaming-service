@@ -7,6 +7,7 @@ import org.json.simple.parser.ParseException;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -26,7 +27,8 @@ public class ModifyUser {
         // if user exists: return true
         // else return false
         JSONParser parser = new JSONParser();
-        JSONArray userArray = (JSONArray) parser.parse(new FileReader("C://CECS 327//music-streaming-service//user.json"));
+        // C://CECS 327//music-streaming-service//user.json
+        JSONArray userArray = (JSONArray) parser.parse(new FileReader("C:\\Users\\Hunter\\Documents\\-Eclipse Workspace-\\music-streaming-service\\user.json"));
 
         for (Object info : userArray) {
             JSONObject userInfoSearch = (JSONObject) info;
@@ -42,6 +44,7 @@ public class ModifyUser {
                     }
                 }
             }
+
         }
         return false;
     }
@@ -49,7 +52,7 @@ public class ModifyUser {
     // If this returns true, prompt them again, false: call constructor
     public String checkDuplicateUser(String email, String username) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
-        JSONArray userArray = (JSONArray) parser.parse(new FileReader("C://CECS 327//music-streaming-service//user.json"));
+        JSONArray userArray = (JSONArray) parser.parse(new FileReader("C:\\Users\\Hunter\\Documents\\-Eclipse Workspace-\\music-streaming-service\\user.json"));
 
         for (Object info : userArray) {
             JSONObject userInfoSearch = (JSONObject) info;
@@ -75,27 +78,46 @@ public class ModifyUser {
         return "okay";
     }
 
+    // TODO: Check duplicate playlist names
     public void createPlaylist(String playlistName) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
-        JSONArray userArray = (JSONArray) parser.parse(new FileReader("C://CECS 327//music-streaming-service//user.json"));
+        JSONArray userArray = (JSONArray) parser.parse(new FileReader("C:\\Users\\Hunter\\Documents\\-Eclipse Workspace-\\music-streaming-service\\user.json"));
 
         for (Object info : userArray) {
             JSONObject userInfoSearch = (JSONObject) info;
 
-            Map user = ((Map) userInfoSearch.get("info"));
-            Iterator<Map.Entry> releaseItr = user.entrySet().iterator();
+            JSONArray playlists = (JSONArray) userInfoSearch.get("playlists");
+
+            Map userInfo = ((Map) userInfoSearch.get("info"));
+            Iterator<Map.Entry> releaseItr = userInfo.entrySet().iterator();
             while (releaseItr.hasNext()) {
                 Map.Entry data = releaseItr.next();
                 if (data.getKey().equals("username")) {
                     if (username.equals(data.getValue())) {
-                        Map playlistMap = new LinkedHashMap(2); // Creating subfields for playlists
+                        Map playlistMap = new LinkedHashMap(2); // Creating sub-fields for playlists
                         playlistMap.put("name", playlistName); // temp line for default playlist
                         // Initialize an empty array
-                        JSONArray playlistSongs = new JSONArray();
-                        playlistMap.put("songs", playlistSongs);
+                        playlistMap.put("songs", new JSONArray());
+
+                        // Insert into playlists array
+                        //userInfoSearch.put("playlists", playlistMap);
+
+                        playlists.add(playlistMap);
+
                     }
                 }
+
             }
+
+
+
+
+            // Writing playlist to JSON file
+            PrintWriter fileWriter = new PrintWriter("user.json");
+            fileWriter.write(userArray.toJSONString());
+
+            fileWriter.flush();
+            fileWriter.close();
         }
 
 //        Map playlistMap = new LinkedHashMap(2); // Creating subfields for playlists
