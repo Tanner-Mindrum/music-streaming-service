@@ -28,7 +28,9 @@ public class Songs {
 
     public static void main(String[] args) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
-        JSONArray information = (JSONArray) parser.parse(new FileReader("C://CECS 327//music-streaming-service//music.json"));
+        // C:\Users\Hunter\Documents\-Eclipse Workspace-\music-streaming-service\music.json
+        // C://CECS 327//music-streaming-service//music.json
+        JSONArray information = (JSONArray) parser.parse(new FileReader("C:\\Users\\Hunter\\Documents\\-Eclipse Workspace-\\music-streaming-service\\music.json"));
 
         for (Object info : information) {
             JSONObject songInfo = (JSONObject) info;

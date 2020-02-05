@@ -1,10 +1,13 @@
 package Frames;
 
+import Backend.ModifyUser;
 import Backend.User;
+import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class CreatePlaylistFrame extends JFrame {
 
@@ -43,11 +46,17 @@ public class CreatePlaylistFrame extends JFrame {
 
     class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent click) {
-//            if (click.getSource() == addButton || click.getSource() == playListNameField) {
-//                ModifyUser mu = new ModifyUser(currUser.getUsername());
-//                mu.createPlaylist(playListNameField.getText().trim());
-//                setVisible(false);
-//            }
+            if (click.getSource() == addButton || click.getSource() == playListNameField) {
+                ModifyUser mu = new ModifyUser(currUser.getUsername());
+                try {
+                    mu.createPlaylist(playListNameField.getText().trim());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                setVisible(false);
+            }
         }
 
     }
