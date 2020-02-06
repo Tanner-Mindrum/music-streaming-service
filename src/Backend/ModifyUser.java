@@ -126,14 +126,38 @@ public class ModifyUser {
 
 
 
+    }
 
-//        Map playlistMap = new LinkedHashMap(2); // Creating subfields for playlists
-//        playlistMap.put("name", playlistName); // temp line for default playlist
-//        // Initialize an empty array
-//        JSONArray playlistSongs = new JSONArray();
-//        playlistMap.put("songs", playlistSongs);
+    public void deletePlaylist(String playlistName) throws IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
 
-        // TODO : Add created playlist map to the user's playlist array
-        //playlists.add(playlistMap);
+        for (Object info : userArray){
+            JSONObject userInfoSearch = (JSONObject) info;
+
+            JSONArray playlists = (JSONArray) userInfoSearch.get("playlists");
+
+            Map userInfo = ((Map) userInfoSearch.get("info"));
+            Iterator<Map.Entry> releaseItr = userInfo.entrySet().iterator();
+            while (releaseItr.hasNext()){
+                Map.Entry data = releaseItr.next();
+                if (data.getKey().equals("username")){
+                    if (username.equals("username")){
+                        // Delete user's playlist with passed in name:
+                        // Iterate through the playlists and check the name
+                        for (int i = 0; i < playlists.size(); i++){
+                            JSONObject tempPlaylist = (JSONObject) playlists.get(i);
+                            // If playlistName matches
+                            if (playlistName.equals(tempPlaylist.get("name"))) {
+                                // delete playlist
+                                tempPlaylist.remove(tempPlaylist);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
     }
 }

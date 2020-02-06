@@ -3,10 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="6490e37d-a31c-4aae-a17b-084fd43a8c4d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Backend/ModifyUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/music-streaming-service/Backend/ModifyUser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Frames/MusicFrame$MusicFrameListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/music-streaming-service/Frames/MusicFrame$MusicFrameListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Backend/SongInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/music-streaming-service/Backend/SongInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Backend/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/music-streaming-service/Backend/User.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Backend/ModifyUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/ModifyUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user.json" beforeDir="false" afterPath="$PROJECT_DIR$/user.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,7 +155,14 @@
       <option name="project" value="LOCAL" />
       <updated>1580867017542</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Updated ModifyUser.java to add multiple playlists &amp; git ignore">
+      <created>1581025685620</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1581025685620</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -167,7 +173,8 @@
     <MESSAGE value="Updated User.java to work with JSON writing" />
     <MESSAGE value="Updated User.java to work with JSON writing, user overloading" />
     <MESSAGE value="Updated ModifyUser.java to add multiple playlists" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated ModifyUser.java to add multiple playlists" />
+    <MESSAGE value="Updated ModifyUser.java to add multiple playlists &amp; git ignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated ModifyUser.java to add multiple playlists &amp; git ignore" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1032" y="186" key="#Inspections" timestamp="1579847828114">
@@ -190,10 +197,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="904" y="319" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1579850206991" />
-    <state x="291" y="9" key="CommitChangelistDialog2" timestamp="1581025662121">
+    <state x="291" y="9" key="CommitChangelistDialog2" timestamp="1581025684931">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="291" y="9" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1581025662121" />
+    <state x="291" y="9" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1581025684931" />
     <state x="144" y="71" key="DiffContextDialog" timestamp="1580077865280">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -202,25 +209,25 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="666" y="265" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1579851040197" />
-    <state width="1493" height="174" key="GridCell.Tab.0.bottom" timestamp="1581025662176">
+    <state width="1493" height="174" key="GridCell.Tab.0.bottom" timestamp="1581026811559">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="174" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1581025662176" />
+    <state width="1493" height="174" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1581026811559" />
     <state width="1877" height="242" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1580710492856" />
-    <state width="1493" height="174" key="GridCell.Tab.0.center" timestamp="1581025662176">
+    <state width="1493" height="174" key="GridCell.Tab.0.center" timestamp="1581026811558">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="174" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1581025662176" />
+    <state width="1493" height="174" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1581026811558" />
     <state width="1877" height="242" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1580710492855" />
-    <state width="1493" height="174" key="GridCell.Tab.0.left" timestamp="1581025662176">
+    <state width="1493" height="174" key="GridCell.Tab.0.left" timestamp="1581026811558">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="174" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1581025662176" />
+    <state width="1493" height="174" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1581026811558" />
     <state width="1877" height="242" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1580710492855" />
-    <state width="1493" height="174" key="GridCell.Tab.0.right" timestamp="1581025662176">
+    <state width="1493" height="174" key="GridCell.Tab.0.right" timestamp="1581026811559">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="174" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1581025662176" />
+    <state width="1493" height="174" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1581026811559" />
     <state width="1877" height="242" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1580710492855" />
     <state x="654" y="139" key="SettingsEditor" timestamp="1580084711034">
       <screen x="0" y="0" width="1920" height="1040" />
