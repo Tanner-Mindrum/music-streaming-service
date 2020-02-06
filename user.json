@@ -1,1 +1,38 @@
-[{"playlists":[],"info":{"dob":"January.1.2020","id":1,"email":"tan.min@email.com","username":"tannermin"}},{"playlists":[],"info":{"dob":"January.2.2020","id":2,"email":"tymee.kong@email.edu","username":"tymeekong"}},{"playlists":[{"name":"Lil Uzi Vert","songs":[]}],"info":{"dob":"November.10.1998","id":3,"email":"huntertigerdavis@gmail.com","username":"huntershot"}}]
+[
+  {
+    "playlists": [],
+    "info": {
+      "dob": "January.1.2020",
+      "id": 1,
+      "email": "tan.min@email.com",
+      "username": "tannermin"
+    }
+  },
+  {
+    "playlists": [],
+    "info": {
+      "dob": "January.2.2020",
+      "id": 2,
+      "email": "tymee.kong@email.edu",
+      "username": "tymeekong"
+    }
+  },
+  {
+    "playlists": [
+      {
+        "songs": [],
+        "name": "Lil Uzi Vert"
+      },
+      {
+        "name": "Rap Workout",
+        "songs": []
+      }
+    ],
+    "info": {
+      "dob": "November.10.1998",
+      "id": 3,
+      "email": "huntertigerdavis@gmail.com",
+      "username": "huntershot"
+    }
+  }
+]

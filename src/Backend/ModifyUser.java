@@ -28,7 +28,7 @@ public class ModifyUser {
         // else return false
         JSONParser parser = new JSONParser();
         // C://CECS 327//music-streaming-service//user.json
-        JSONArray userArray = (JSONArray) parser.parse(new FileReader("C:\\Users\\Hunter\\Documents\\-Eclipse Workspace-\\music-streaming-service\\user.json"));
+        JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
 
         for (Object info : userArray) {
             JSONObject userInfoSearch = (JSONObject) info;
@@ -52,7 +52,7 @@ public class ModifyUser {
     // If this returns true, prompt them again, false: call constructor
     public String checkDuplicateUser(String email, String username) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
-        JSONArray userArray = (JSONArray) parser.parse(new FileReader("C:\\Users\\Hunter\\Documents\\-Eclipse Workspace-\\music-streaming-service\\user.json"));
+        JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
 
         for (Object info : userArray) {
             JSONObject userInfoSearch = (JSONObject) info;
@@ -78,10 +78,14 @@ public class ModifyUser {
         return "okay";
     }
 
+    // DELETE Playlists
+    // Get songs in the playlist
+    // Display playlists entirely
+    // Create a new thread to play a song, stop the thread and restart it to play a new song
     // TODO: Check duplicate playlist names
     public void createPlaylist(String playlistName) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
-        JSONArray userArray = (JSONArray) parser.parse(new FileReader("C:\\Users\\Hunter\\Documents\\-Eclipse Workspace-\\music-streaming-service\\user.json"));
+        JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
 
         for (Object info : userArray) {
             JSONObject userInfoSearch = (JSONObject) info;
@@ -119,6 +123,9 @@ public class ModifyUser {
             fileWriter.flush();
             fileWriter.close();
         }
+
+
+
 
 //        Map playlistMap = new LinkedHashMap(2); // Creating subfields for playlists
 //        playlistMap.put("name", playlistName); // temp line for default playlist
