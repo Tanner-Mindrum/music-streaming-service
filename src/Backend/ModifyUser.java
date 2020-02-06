@@ -8,6 +8,7 @@ import org.json.simple.parser.ParseException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -78,6 +79,43 @@ public class ModifyUser {
         return "okay";
     }
 
+    public ArrayList<String> getPlaylists() throws IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
+
+        for (Object info : userArray){
+            JSONObject userInfoSearch = (JSONObject) info;
+
+            JSONArray playlists = (JSONArray) userInfoSearch.get("playlists");
+
+            Map userInfo = ((Map) userInfoSearch.get("info"));
+            Iterator<Map.Entry> releaseItr = userInfo.entrySet().iterator();
+            while (releaseItr.hasNext()){
+                Map.Entry data = releaseItr.next();
+                if (data.getKey().equals("username")){
+                    if (username.equals("username")){
+
+                        ArrayList<String> playlistNames = new ArrayList<>();
+                        Map playlistMap = ((Map) playlists);
+                        // Iterate through the playlists and add to arraylist
+                        for (int i = 0; i < playlists.size(); i++){
+                            playlistMap.get("name");
+                            JSONObject tempPlaylist = (JSONObject) playlists.get(i);
+                            playlistNames.add();
+
+                        }
+                        break;
+
+                    }
+                }
+            }
+        }
+        return playlistNames;
+
+
+    }
+
+
     // DELETE Playlists
     // Get songs in the playlist
     // Display playlists entirely
@@ -127,7 +165,7 @@ public class ModifyUser {
 
 
     }
-
+    // TODO Check if working
     public void deletePlaylist(String playlistName) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
         JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
@@ -148,7 +186,7 @@ public class ModifyUser {
                         for (int i = 0; i < playlists.size(); i++){
                             JSONObject tempPlaylist = (JSONObject) playlists.get(i);
                             // If playlistName matches
-                            if (playlistName.equals(tempPlaylist.get("name"))) {
+                            if (playlistName.equals(tempPlaylist)) {
                                 // delete playlist
                                 tempPlaylist.remove(tempPlaylist);
                             }
