@@ -103,8 +103,6 @@ public class SongInfo {
                 break;
             }
         }
-
-        System.out.println(songList);
         return songList;
     }
 

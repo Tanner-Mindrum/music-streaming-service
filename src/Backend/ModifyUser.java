@@ -28,7 +28,7 @@ public class ModifyUser {
         // else return false
         JSONParser parser = new JSONParser();
         // C://CECS 327//music-streaming-service//user.json
-        JSONArray userArray = (JSONArray) parser.parse(new FileReader("C:\\Users\\Hunter\\Documents\\-Eclipse Workspace-\\music-streaming-service\\user.json"));
+        JSONArray userArray = (JSONArray) parser.parse(new FileReader("C:\\CECS 327\\music-streaming-service\\user.json"));
 
         for (Object info : userArray) {
             JSONObject userInfoSearch = (JSONObject) info;
@@ -81,7 +81,7 @@ public class ModifyUser {
     // TODO: Check duplicate playlist names
     public void createPlaylist(String playlistName) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
-        JSONArray userArray = (JSONArray) parser.parse(new FileReader("C:\\Users\\Hunter\\Documents\\-Eclipse Workspace-\\music-streaming-service\\user.json"));
+        JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
 
         for (Object info : userArray) {
             JSONObject userInfoSearch = (JSONObject) info;

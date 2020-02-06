@@ -1,5 +1,6 @@
 package Frames;
 
+import Backend.Player;
 import Backend.SongInfo;
 import Backend.Songs;
 import Backend.User;
@@ -170,10 +171,13 @@ public class MusicFrame extends JFrame {
                 SongInfo findSongInfo = new SongInfo();
                 ArrayList<Songs> foundSongs = new ArrayList<Songs>(); // Create own array to store a copy of found songs
                 try {
-                    foundSongs.addAll(findSongInfo.findSong(songList.getSelectedValue()));
+                    foundSongs.addAll(findSongInfo.findSong(songList.getSelectedValue().toLowerCase()));
                 } catch (IOException | ParseException ex) {
                     ex.printStackTrace();
                 }
+                Player player = new Player();
+                player.mp3play("out/production/music-streaming-service/musicsrc/" +
+                        foundSongs.get(songList.getSelectedIndex()).getSongID() + ".mp3");
                 System.out.println((foundSongs.get(songList.getSelectedIndex())).getSongID());
             }
         }

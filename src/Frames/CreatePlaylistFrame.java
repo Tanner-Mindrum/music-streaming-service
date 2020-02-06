@@ -50,9 +50,7 @@ public class CreatePlaylistFrame extends JFrame {
                 ModifyUser mu = new ModifyUser(currUser.getUsername());
                 try {
                     mu.createPlaylist(playListNameField.getText().trim());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (ParseException e) {
+                } catch (IOException | ParseException e) {
                     e.printStackTrace();
                 }
                 setVisible(false);
