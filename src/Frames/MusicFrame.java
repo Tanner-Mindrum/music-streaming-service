@@ -1,9 +1,6 @@
 package Frames;
 
-import Backend.Player;
-import Backend.SongInfo;
-import Backend.Songs;
-import Backend.User;
+import Backend.*;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
@@ -26,7 +23,6 @@ public class MusicFrame extends JFrame {
     private JTextArea displaySongArea;
     private static Box songsBox;
     private static JList<String> songList;
-    private static int searchCount = 0;
     private static JScrollPane scrollPane;
     private static JScrollPane playListPane;
     private JButton createPlaylistButton;
@@ -34,6 +30,10 @@ public class MusicFrame extends JFrame {
     private JButton addToPlaylistButton;
     private JButton playSongButton;
     private User currUser;
+    private Thread musicThread;
+    private Multithread multithread;
+    private ArrayList<Songs> foundSongs;
+    private SongInfo findSongInfo;
 
     public MusicFrame(User user) {
         createComponents();
@@ -45,6 +45,9 @@ public class MusicFrame extends JFrame {
     public void createComponents() {
         MusicFrameListener listener = new MusicFrameListener();
         panel = new JPanel();
+
+       foundSongs = new ArrayList<Songs>();
+       findSongInfo = new SongInfo();
 
         //BoxLayout boxLayout = new BoxLayout(panel, new FlowLayout());
         panel.setLayout(new FlowLayout());
@@ -85,7 +88,7 @@ public class MusicFrame extends JFrame {
         playListPane = new JScrollPane(playListList);
 
         DefaultListModel<String> songModel = new DefaultListModel<String>();
-        JList<String> songsList = new JList<>(playListModel);
+        JList<String> songsList = new JList<>(songModel);
         scrollPane = new JScrollPane(songsList);
 
         Box topBox = Box.createHorizontalBox();
@@ -127,24 +130,17 @@ public class MusicFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == searchButton || e.getSource() == searchField) {
-                searchCount++;
-                String inputForSearch = searchField.getText().trim().toLowerCase();
-
-                SongInfo findSongInfo = new SongInfo();
-                ArrayList<Songs> foundSongs = new ArrayList<Songs>(); // Create own array to store a copy of found songs
-                // Add all found songs to array
+                // Search for song
                 try {
-                    foundSongs.addAll(findSongInfo.findSong(inputForSearch));
+                    foundSongs.addAll(findSongInfo.findSong(searchField.getText().trim().toLowerCase()));
                 } catch (IOException | ParseException ex) {
                     ex.printStackTrace();
                 }
-                // Loop through our array and print song details
+
+                // Loop through our array and add to model
                 DefaultListModel<String> model = new DefaultListModel<>();
                 for (Songs s : foundSongs) {
-                    System.out.println(s.getSongName() + ", " + s.getArtistName() + ", " + s.getAlbumName() + ", "
-                            + s.getSongLength() + ", " + s.getSongID());
                     model.addElement(s.getSongName());
-                    
                 }
                 songList = new JList<>(model);
 
@@ -161,24 +157,27 @@ public class MusicFrame extends JFrame {
             }
             else if (e.getSource() == createPlaylistButton) {
                 CreatePlaylistFrame pFrame = new CreatePlaylistFrame(currUser);
-                pFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 pFrame.setVisible(true);
             }
             else if (e.getSource() == addToPlaylistButton) {
+                if (songList.isSelectionEmpty()) {
+                    System.out.println("bleehh");
+                }
                 System.out.println(songList.getSelectedValue());
             }
             else if (e.getSource() == playSongButton) {
-                SongInfo findSongInfo = new SongInfo();
-                ArrayList<Songs> foundSongs = new ArrayList<Songs>(); // Create own array to store a copy of found songs
-                try {
-                    foundSongs.addAll(findSongInfo.findSong(songList.getSelectedValue().toLowerCase()));
-                } catch (IOException | ParseException ex) {
-                    ex.printStackTrace();
+
+                if (!songList.isSelectionEmpty()) {
+                    String songID = foundSongs.get(songList.getSelectedIndex()).getSongID();
+
+                    multithread = new Multithread();
+                    musicThread = new Thread(multithread);
+                    multithread.setIdToPlay(songID);
+                    musicThread.start();
                 }
-                Player player = new Player();
-                player.mp3play("out/production/music-streaming-service/musicsrc/" +
-                        foundSongs.get(songList.getSelectedIndex()).getSongID() + ".mp3");
-                System.out.println((foundSongs.get(songList.getSelectedIndex())).getSongID());
+                else {
+                    System.out.println("nothing");
+                }
             }
         }
     }
