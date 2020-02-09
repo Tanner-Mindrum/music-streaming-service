@@ -1,6 +1,6 @@
 package Frames;
 
-import Backend.Player;
+import Backend.ModifyUser;
 import Backend.SongInfo;
 import Backend.Songs;
 import Backend.User;
@@ -34,15 +34,16 @@ public class MusicFrame extends JFrame {
     private JButton addToPlaylistButton;
     private JButton playSongButton;
     private User currUser;
+    private ModifyUser modifyUser;
 
-    public MusicFrame(User user) {
+    public MusicFrame(User user) throws IOException, ParseException {
+        currUser = user;
         createComponents();
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
         this.setTitle("Home Page");
-        currUser = user;
     }
 
-    public void createComponents() {
+    public void createComponents() throws IOException, ParseException {
         MusicFrameListener listener = new MusicFrameListener();
         panel = new JPanel();
 
@@ -54,8 +55,8 @@ public class MusicFrame extends JFrame {
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         //panel.add(titleLabel);
 
-        // TODO: LIMIT NAME SIZE
-        userNameLabel = new JLabel(String.format("<html><p>%s</p></html>", usernameName));
+        // TODO: LIMIT NAME SIZE & Format in top bar
+        userNameLabel = new JLabel(String.format("<html><p>%s</p></html>", currUser.getUsername()));
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         searchField = new JTextField(20);
@@ -79,13 +80,20 @@ public class MusicFrame extends JFrame {
         playSongButton = new JButton("Play Song");
         playSongButton.addActionListener(listener);
 
-        // TODO: PREFILL PLAYLIST
+        // TODO: Re-Fill Playlists after adding or deleting one
+        // Playlist Display
+        modifyUser = new ModifyUser(currUser.getUsername());
+        ArrayList<String> playlists = modifyUser.getPlaylists();
+
         DefaultListModel<String> playListModel = new DefaultListModel<String>();
+        for (String element : playlists){
+            playListModel.addElement(element);
+        }
         JList<String> playListList = new JList<>(playListModel);
         playListPane = new JScrollPane(playListList);
 
         DefaultListModel<String> songModel = new DefaultListModel<String>();
-        JList<String> songsList = new JList<>(playListModel);
+        JList<String> songsList = new JList<>(songModel);
         scrollPane = new JScrollPane(songsList);
 
         Box topBox = Box.createHorizontalBox();
@@ -100,7 +108,7 @@ public class MusicFrame extends JFrame {
         panel.add(topBox);
 
         Box playlistBox = Box.createVerticalBox();
-        playlistBox.setMaximumSize(playlistBox.getPreferredSize());
+        playlistBox.setPreferredSize(new Dimension(300, 500));
         playlistBox.setAlignmentX(Component.LEFT_ALIGNMENT);
         playlistBox.add(playListPane);
         playlistBox.setBorder(BorderFactory.createLineBorder(Color.RED));
@@ -111,7 +119,7 @@ public class MusicFrame extends JFrame {
         displaySongArea = new JTextArea(20, 50);
 
         songsBox = Box.createHorizontalBox();
-        songsBox.setPreferredSize(new Dimension(700, 400));
+        songsBox.setPreferredSize(new Dimension(800, 500));
         songsBox.setBorder(BorderFactory.createLineBorder(Color.RED));
         songsBox.add(Box.createRigidArea(new Dimension(150, 300)));
         songsBox.add(scrollPane);
@@ -160,9 +168,14 @@ public class MusicFrame extends JFrame {
                 System.out.println("hello");
             }
             else if (e.getSource() == createPlaylistButton) {
-                CreatePlaylistFrame pFrame = new CreatePlaylistFrame(currUser);
-                pFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                pFrame.setVisible(true);
+                CreatePlaylistFrame createPFrame = new CreatePlaylistFrame(currUser);
+                createPFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                createPFrame.setVisible(true);
+            }
+            else if (e.getSource() == deletePlaylistButton){
+                DeletePlaylistFrame deletePFrame = new DeletePlaylistFrame(currUser);
+                deletePFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                deletePFrame.setVisible(true);
             }
             else if (e.getSource() == addToPlaylistButton) {
                 System.out.println(songList.getSelectedValue());
@@ -171,13 +184,10 @@ public class MusicFrame extends JFrame {
                 SongInfo findSongInfo = new SongInfo();
                 ArrayList<Songs> foundSongs = new ArrayList<Songs>(); // Create own array to store a copy of found songs
                 try {
-                    foundSongs.addAll(findSongInfo.findSong(songList.getSelectedValue().toLowerCase()));
+                    foundSongs.addAll(findSongInfo.findSong(songList.getSelectedValue()));
                 } catch (IOException | ParseException ex) {
                     ex.printStackTrace();
                 }
-                Player player = new Player();
-                player.mp3play("out/production/music-streaming-service/musicsrc/" +
-                        foundSongs.get(songList.getSelectedIndex()).getSongID() + ".mp3");
                 System.out.println((foundSongs.get(songList.getSelectedIndex())).getSongID());
             }
         }

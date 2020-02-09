@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6490e37d-a31c-4aae-a17b-084fd43a8c4d" name="Default Changelist" comment="">
+    <list default="true" id="6490e37d-a31c-4aae-a17b-084fd43a8c4d" name="Default Changelist" comment="DeletePlaylists">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Backend/ModifyUser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Frames/CreatePlaylistFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/music-streaming-service/Frames/CreatePlaylistFrame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Frames/MusicFrame$MusicFrameListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/music-streaming-service/Frames/MusicFrame$MusicFrameListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Frames/MusicFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/music-streaming-service/Frames/MusicFrame.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Backend/ModifyUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/ModifyUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Frames/CreatePlaylistFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Frames/CreatePlaylistFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Frames/MusicFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Frames/MusicFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user.json" beforeDir="false" afterPath="$PROJECT_DIR$/user.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +54,14 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Hunter\Documents\-Eclipse Workspace-\music-streaming-service\.idea" />
+      <recent name="C:\Users\Hunter\Documents\-Eclipse Workspace-\music-streaming-service\src\Frames" />
+      <recent name="C:\Users\Hunter\Documents\-Eclipse Workspace-\music-streaming-service\src\Backend" />
+    </key>
+  </component>
+  <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Backend.Main" />
       <module name="music-streaming-service" />
@@ -63,45 +75,9 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Player" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Backend.Player" />
-      <module name="music-streaming-service" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Songs" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Backend.Songs" />
-      <module name="music-streaming-service" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="User" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Backend.User" />
-      <module name="music-streaming-service" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Backend.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <list>
-      <item itemvalue="Application.Main" />
-      <item itemvalue="Application.Player" />
-      <item itemvalue="Application.Songs" />
-      <item itemvalue="Application.User" />
-    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Player" />
-        <item itemvalue="Application.User" />
-        <item itemvalue="Application.Songs" />
       </list>
     </recent_temporary>
   </component>
@@ -168,11 +144,28 @@
       <option name="project" value="LOCAL" />
       <updated>1581026876049</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="DeletePlaylists">
+      <created>1581028162058</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1581028162058</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Updated User.java" />
@@ -180,7 +173,8 @@
     <MESSAGE value="Updated User.java to work with JSON writing, user overloading" />
     <MESSAGE value="Updated ModifyUser.java to add multiple playlists" />
     <MESSAGE value="Updated ModifyUser.java to add multiple playlists &amp; git ignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated ModifyUser.java to add multiple playlists &amp; git ignore" />
+    <MESSAGE value="DeletePlaylists" />
+    <option name="LAST_COMMIT_MESSAGE" value="DeletePlaylists" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1032" y="186" key="#Inspections" timestamp="1579847828114">
@@ -195,6 +189,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1032" y="186" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1579847875181" />
+    <state x="223" y="68" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1581215875668">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="223" y="68" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1581215875668" />
     <state x="517" y="216" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1581024712176">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -203,10 +201,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="904" y="319" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1579850206991" />
-    <state x="291" y="9" key="CommitChangelistDialog2" timestamp="1581026875348">
+    <state x="291" y="9" key="CommitChangelistDialog2" timestamp="1581216088871">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="291" y="9" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1581026875348" />
+    <state x="291" y="9" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1581216088871" />
     <state x="144" y="71" key="DiffContextDialog" timestamp="1580077865280">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -215,25 +213,25 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="666" y="265" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1579851040197" />
-    <state width="1493" height="174" key="GridCell.Tab.0.bottom" timestamp="1581027442996">
+    <state width="745" height="145" key="GridCell.Tab.0.bottom" timestamp="1581216072540">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="174" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1581027442996" />
+    <state width="745" height="145" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1581216072540" />
     <state width="1877" height="242" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1580710492856" />
-    <state width="1493" height="174" key="GridCell.Tab.0.center" timestamp="1581027442996">
+    <state width="745" height="145" key="GridCell.Tab.0.center" timestamp="1581216072540">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="174" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1581027442996" />
+    <state width="745" height="145" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1581216072540" />
     <state width="1877" height="242" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1580710492855" />
-    <state width="1493" height="174" key="GridCell.Tab.0.left" timestamp="1581027442996">
+    <state width="745" height="145" key="GridCell.Tab.0.left" timestamp="1581216072540">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="174" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1581027442996" />
+    <state width="745" height="145" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1581216072540" />
     <state width="1877" height="242" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1580710492855" />
-    <state width="1493" height="174" key="GridCell.Tab.0.right" timestamp="1581027442996">
+    <state width="745" height="145" key="GridCell.Tab.0.right" timestamp="1581216072540">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="174" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1581027442996" />
+    <state width="745" height="145" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1581216072540" />
     <state width="1877" height="242" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1580710492855" />
     <state x="654" y="139" key="SettingsEditor" timestamp="1580084711034">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -260,10 +258,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="501" y="278" key="git4idea.rebase.GitRebaseDialog/0.0.1536.824@0.0.1536.824" timestamp="1580867346909" />
-    <state x="882" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1580855120611">
+    <state x="882" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1581208278967">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="882" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1580855120611" />
+    <state x="882" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1581208278967" />
     <state x="1103" y="229" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1579930363752" />
   </component>
 </project>
