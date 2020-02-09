@@ -29,7 +29,7 @@ public class SongInfo {
 
     public ArrayList<Songs> findSong(String name) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
-        JSONArray information = (JSONArray) parser.parse(new FileReader("C://CECS 327//music-streaming-service//music.json"));
+        JSONArray information = (JSONArray) parser.parse(new FileReader("music.json"));
         boolean match = false;
 
         for (Object info : information) {
