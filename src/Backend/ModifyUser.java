@@ -8,7 +8,6 @@ import org.json.simple.parser.ParseException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -29,7 +28,7 @@ public class ModifyUser {
         // else return false
         JSONParser parser = new JSONParser();
         // C://CECS 327//music-streaming-service//user.json
-        JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
+        JSONArray userArray = (JSONArray) parser.parse(new FileReader("C:\\Users\\Hunter\\Documents\\-Eclipse Workspace-\\music-streaming-service\\user.json"));
 
         for (Object info : userArray) {
             JSONObject userInfoSearch = (JSONObject) info;
@@ -53,7 +52,7 @@ public class ModifyUser {
     // If this returns true, prompt them again, false: call constructor
     public String checkDuplicateUser(String email, String username) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
-        JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
+        JSONArray userArray = (JSONArray) parser.parse(new FileReader("C:\\Users\\Hunter\\Documents\\-Eclipse Workspace-\\music-streaming-service\\user.json"));
 
         for (Object info : userArray) {
             JSONObject userInfoSearch = (JSONObject) info;
@@ -79,51 +78,10 @@ public class ModifyUser {
         return "okay";
     }
 
-    public ArrayList<String> getPlaylists() throws IOException, ParseException {
-        JSONParser parser = new JSONParser();
-        JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
-
-        for (Object info : userArray){
-            JSONObject userInfoSearch = (JSONObject) info;
-
-            JSONArray playlists = (JSONArray) userInfoSearch.get("playlists");
-
-            Map userInfo = ((Map) userInfoSearch.get("info"));
-            Iterator<Map.Entry> releaseItr = userInfo.entrySet().iterator();
-            while (releaseItr.hasNext()){
-                Map.Entry data = releaseItr.next();
-                if (data.getKey().equals("username")){
-                    if (username.equals("username")){
-
-                        ArrayList<String> playlistNames = new ArrayList<>();
-                        Map playlistMap = ((Map) playlists);
-                        // Iterate through the playlists and add to arraylist
-                        for (int i = 0; i < playlists.size(); i++){
-                            playlistMap.get("name");
-                            JSONObject tempPlaylist = (JSONObject) playlists.get(i);
-                            playlistNames.add();
-
-                        }
-                        break;
-
-                    }
-                }
-            }
-        }
-        return playlistNames;
-
-
-    }
-
-
-    // DELETE Playlists
-    // Get songs in the playlist
-    // Display playlists entirely
-    // Create a new thread to play a song, stop the thread and restart it to play a new song
     // TODO: Check duplicate playlist names
     public void createPlaylist(String playlistName) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
-        JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
+        JSONArray userArray = (JSONArray) parser.parse(new FileReader("C:\\Users\\Hunter\\Documents\\-Eclipse Workspace-\\music-streaming-service\\user.json"));
 
         for (Object info : userArray) {
             JSONObject userInfoSearch = (JSONObject) info;
@@ -162,40 +120,13 @@ public class ModifyUser {
             fileWriter.close();
         }
 
+//        Map playlistMap = new LinkedHashMap(2); // Creating subfields for playlists
+//        playlistMap.put("name", playlistName); // temp line for default playlist
+//        // Initialize an empty array
+//        JSONArray playlistSongs = new JSONArray();
+//        playlistMap.put("songs", playlistSongs);
 
-
-    }
-    // TODO Check if working
-    public void deletePlaylist(String playlistName) throws IOException, ParseException {
-        JSONParser parser = new JSONParser();
-        JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
-
-        for (Object info : userArray){
-            JSONObject userInfoSearch = (JSONObject) info;
-
-            JSONArray playlists = (JSONArray) userInfoSearch.get("playlists");
-
-            Map userInfo = ((Map) userInfoSearch.get("info"));
-            Iterator<Map.Entry> releaseItr = userInfo.entrySet().iterator();
-            while (releaseItr.hasNext()){
-                Map.Entry data = releaseItr.next();
-                if (data.getKey().equals("username")){
-                    if (username.equals("username")){
-                        // Delete user's playlist with passed in name:
-                        // Iterate through the playlists and check the name
-                        for (int i = 0; i < playlists.size(); i++){
-                            JSONObject tempPlaylist = (JSONObject) playlists.get(i);
-                            // If playlistName matches
-                            if (playlistName.equals(tempPlaylist)) {
-                                // delete playlist
-                                tempPlaylist.remove(tempPlaylist);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-
+        // TODO : Add created playlist map to the user's playlist array
+        //playlists.add(playlistMap);
     }
 }
