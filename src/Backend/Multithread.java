@@ -1,5 +1,9 @@
 package Backend;
 
+import javazoom.jl.decoder.JavaLayerException;
+
+import java.io.IOException;
+
 public class Multithread implements Runnable {
 
     private SongInfo songInfo;
@@ -23,8 +27,17 @@ public class Multithread implements Runnable {
 
     @Override
     public void run() {
-        player.mp3play("out/production/music-streaming-service/musicsrc/" +
-                idToPlay + ".mp3");
+        try {
+            player = new Player("out/production/music-streaming-service/musicsrc/" +
+                    idToPlay + ".mp3");
+        } catch (IOException | JavaLayerException e) {
+            e.printStackTrace();
+        }
+        try {
+            player.mp3play();
+        } catch (JavaLayerException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setIdToPlay(String pID) {
