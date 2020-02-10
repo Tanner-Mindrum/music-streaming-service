@@ -66,7 +66,7 @@ public class MusicFrame extends JFrame {
         //BoxLayout boxLayout = new BoxLayout(panel, new FlowLayout());
         panel.setLayout(new FlowLayout());
 
-        titleLabel = new JLabel("Streamo");
+        titleLabel = new JLabel("Groovi");
         titleLabel.setFont(new Font("Arial", Font.PLAIN, 18));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         //panel.add(titleLabel);
