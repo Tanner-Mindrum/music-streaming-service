@@ -44,7 +44,7 @@ public class MusicFrame extends JFrame {
     private JMenuItem m1;
     private JButton stopButton;
     ArrayList<Songs> foundSongs = new ArrayList<Songs>();
-
+    ArrayList<Songs> foundFinalSongs = new ArrayList<Songs>();
 
     public MusicFrame(User user) throws IOException, ParseException {
         currUser = user;
@@ -159,9 +159,10 @@ public class MusicFrame extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            foundSongs.clear();
             SongInfo findSongInfo = new SongInfo();
             if (e.getSource() == searchButton || e.getSource() == searchField) {
+                foundSongs.clear();
+                foundFinalSongs.clear();
                 // Search for song
                 try {
                     foundSongs.addAll(findSongInfo.findSong(searchField.getText().trim().toLowerCase()));
@@ -172,15 +173,13 @@ public class MusicFrame extends JFrame {
                 // Loop through our array and add to model
                 DefaultListModel<String> model = new DefaultListModel<>();
                 Set<String> currSongs = new HashSet<String>();
-                int count = 0;
                 for (Songs s : foundSongs) {
-                    count++;
                     if (!currSongs.contains(s.getSongName())) {
                         currSongs.add(s.getSongName());
+                        foundFinalSongs.add(s);
                         model.addElement(s.getSongName());
                     }
                 }
-                System.out.println(count);
                 songList = new JList<>(model);
 
                 songsBox.remove(scrollPane);
@@ -218,7 +217,7 @@ public class MusicFrame extends JFrame {
             else if (e.getSource() == playSongButton) {
 
                 if (songList != null && !songList.isSelectionEmpty()) {
-                    String songID = foundSongs.get(songList.getSelectedIndex()).getSongID();
+                    String songID = foundFinalSongs.get(songList.getSelectedIndex()).getSongID();
 
                     multithread = new Multithread();
                     musicThread = new Thread(multithread);

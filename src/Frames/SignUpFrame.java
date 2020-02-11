@@ -42,6 +42,7 @@ public class SignUpFrame extends JFrame {
 
     private final Integer[] days = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,
                                         20,21,22,23,24,25,26,27,28,29,30,31};
+
     private ArrayList<Integer> years = new ArrayList<>();
 
     public SignUpFrame() {
@@ -93,13 +94,11 @@ public class SignUpFrame extends JFrame {
         Box emailBox = Box.createHorizontalBox();
         emailBox.setPreferredSize(new Dimension(550, 10));
         emailBox.add(Box.createRigidArea(new Dimension(width, 0)));
-        //emailBox.setBorder(BorderFactory.createLineBorder(Color.RED));
         emailBox.add(emailLabel);
         signUpPanel.add(emailBox);
 
         Box emailFieldBox = Box.createHorizontalBox();
         emailFieldBox.setPreferredSize(new Dimension(550, 25));
-        //emailFieldBox.setBorder(BorderFactory.createLineBorder(Color.RED));
         emailFieldBox.add(Box.createRigidArea(new Dimension(width, 0)));
         emailFieldBox.add(emailField);
         signUpPanel.add(emailFieldBox);
@@ -115,14 +114,12 @@ public class SignUpFrame extends JFrame {
 
         Box usernameBox = Box.createHorizontalBox();
         usernameBox.setPreferredSize(new Dimension(550, 10));
-        //usernameBox.setBorder(BorderFactory.createLineBorder(Color.RED));
         usernameBox.add(Box.createRigidArea(new Dimension(width, 0)));
         usernameBox.add(userNameLabel);
         signUpPanel.add(usernameBox);
 
         Box usernameFieldBox = Box.createHorizontalBox();
         usernameFieldBox.setPreferredSize(new Dimension(550, 25));
-        //usernameLabelBox.setBorder(BorderFactory.createLineBorder(Color.RED));
         usernameFieldBox.add(Box.createRigidArea(new Dimension(width, 0)));
         usernameFieldBox.add(userNameField);
         usernameFieldBox.add(Box.createRigidArea(new Dimension(width, 0)));
@@ -137,19 +134,14 @@ public class SignUpFrame extends JFrame {
         noUsernameEnteredLabel.setVisible(false);
         signUpPanel.add(usernameErrorLabelBox);
 
-        //////////////////////////////////////////
-        // -----
         Box passwordBox = Box.createHorizontalBox();
         passwordBox.setPreferredSize(new Dimension(550, 10));
-        //usernameBox.setBorder(BorderFactory.createLineBorder(Color.RED));
         passwordBox.add(Box.createRigidArea(new Dimension(width, 0)));
         passwordBox.add(passwordLabel);
         signUpPanel.add(passwordBox);
 
-        //--------
         Box passwordFieldBox = Box.createHorizontalBox();
         passwordFieldBox.setPreferredSize(new Dimension(550, 25));
-        //usernameLabelBox.setBorder(BorderFactory.createLineBorder(Color.RED));
         passwordFieldBox.add(Box.createRigidArea(new Dimension(width, 0)));
         passwordFieldBox.add(passwordField);
         passwordFieldBox.add(Box.createRigidArea(new Dimension(width, 0)));
@@ -161,18 +153,15 @@ public class SignUpFrame extends JFrame {
         passwordErrorLabelBox.add(noPasswordEnteredLabel);
         noPasswordEnteredLabel.setVisible(false);
         signUpPanel.add(passwordErrorLabelBox);
-        //////////////////////////////////////////////////////////////////
 
         Box dobLabelBox = Box.createHorizontalBox();
         dobLabelBox.setPreferredSize(new Dimension(550, 10));
-        //dobLabelBox.setBorder(BorderFactory.createLineBorder(Color.RED));
         dobLabelBox.add(Box.createRigidArea(new Dimension(width, 0)));
         dobLabelBox.add(dateOfBirthLabel);
         signUpPanel.add(dobLabelBox);
 
         Box dateBox = Box.createHorizontalBox();
         dateBox.setPreferredSize(new Dimension(550, 28));
-        //dateBox.setBorder(BorderFactory.createLineBorder(Color.RED));
         dateBox.add(Box.createRigidArea(new Dimension(width+3, 0)));
         dateBox.add(monthBox);
         dateBox.add(Box.createRigidArea(new Dimension(25, 0)));
@@ -183,7 +172,6 @@ public class SignUpFrame extends JFrame {
 
         Box buttonBox = Box.createHorizontalBox();
         buttonBox.setPreferredSize(new Dimension(550, 30));
-        //dobLabelBox.setBorder(BorderFactory.createLineBorder(Color.RED));
         buttonBox.add(Box.createRigidArea(new Dimension(width, 20)));
         buttonBox.add(Box.createRigidArea(new Dimension(50, 0)));
         buttonBox.add(backButton);
@@ -191,8 +179,6 @@ public class SignUpFrame extends JFrame {
         buttonBox.add(signUpButton);
         signUpPanel.add(buttonBox);
 
-//        signUpPanel.add(backButton);
-//        signUpPanel.add(signUpButton);
         this.add(signUpPanel);
     }
 

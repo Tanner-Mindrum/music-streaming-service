@@ -58,44 +58,80 @@ public class LoginFrame extends JFrame {
         signUpButton.addActionListener(new ButtonListener());
 
         JPanel loginPanel = new JPanel();
-        BoxLayout boxLayout = new BoxLayout(loginPanel, BoxLayout.Y_AXIS);
-        loginPanel.setLayout(boxLayout);
-        loginPanel.add(Box.createRigidArea(new Dimension(0, 30)));
+        loginPanel.add(Box.createRigidArea(new Dimension(2, 50)));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         loginPanel.add(titleLabel);
-        loginPanel.add(Box.createRigidArea(new Dimension(0, 30)));
-        userDoesNotExistLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        loginPanel.add(userDoesNotExistLabel);
+        loginPanel.add(Box.createRigidArea(new Dimension(0, 15)));
+
+        Box userDoesNotExistBox = Box.createHorizontalBox();
+        userDoesNotExistBox.setPreferredSize(new Dimension(550, 20));
+        userDoesNotExistBox.add(Box.createRigidArea(new Dimension(185, 20)));
+        userDoesNotExistBox.add(userDoesNotExistLabel);
         userDoesNotExistLabel.setVisible(false);
-        loginPanel.add(Box.createRigidArea(new Dimension(0, 20)));
-        usernameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        loginPanel.add(usernameLabel);
-        loginPanel.add(enterUsernameField);
-        //noUsernameEnteredLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        loginPanel.add(noUsernameEnteredLabel);
+        loginPanel.add(userDoesNotExistBox);
+
+        Box userBox = Box.createHorizontalBox();
+        userBox.setPreferredSize(new Dimension(550, 15));
+        userBox.add(Box.createRigidArea(new Dimension(217, 0)));
+        userBox.add(usernameLabel);
+        loginPanel.add(userBox);
+
+        Box userFieldBox = Box.createHorizontalBox();
+        userFieldBox.setPreferredSize(new Dimension(550, 20));
+        userFieldBox.add(Box.createRigidArea(new Dimension(195, 50)));
+        userFieldBox.add(enterUsernameField);
+        loginPanel.add(userFieldBox);
+
+        Box noUserBox = Box.createHorizontalBox();
+        noUserBox.setPreferredSize(new Dimension(550, 20));
+        noUserBox.add(Box.createRigidArea(new Dimension(198, 20)));
+        noUserBox.add(noUsernameEnteredLabel);
         noUsernameEnteredLabel.setVisible(false);
-        loginPanel.add(Box.createRigidArea(new Dimension(0, 25)));
-        passwordLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        loginPanel.add(passwordLabel);
-        loginPanel.add(enterPasswordField);
-        //noPasswordEnteredLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        loginPanel.add(noPasswordEnteredLabel);
+        loginPanel.add(noUserBox);
+
+        Box passwordBox = Box.createHorizontalBox();
+        passwordBox.setPreferredSize(new Dimension(550, 15));
+        passwordBox.add(Box.createRigidArea(new Dimension(217, 0)));
+        passwordBox.add(passwordLabel);
+        loginPanel.add(passwordBox);
+
+        Box passwordFieldBox = Box.createHorizontalBox();
+        passwordFieldBox.setPreferredSize(new Dimension(550, 20));
+        passwordFieldBox.add(Box.createRigidArea(new Dimension(195, 0)));
+        passwordFieldBox.add(enterPasswordField);
+        loginPanel.add(passwordFieldBox);
+
+        Box noPasswordBox = Box.createHorizontalBox();
+        noPasswordBox.setPreferredSize(new Dimension(550, 20));
+        noPasswordBox.add(Box.createRigidArea(new Dimension(199, 20)));
+        noPasswordBox.add(noPasswordEnteredLabel);
         noPasswordEnteredLabel.setVisible(false);
-        loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        loginPanel.add(Box.createRigidArea(new Dimension(0, 20)));
-        loginPanel.add(loginButton);
-        loginPanel.add(Box.createRigidArea(new Dimension(0, 60)));
-        noAccLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        loginPanel.add(noAccLabel);
-        signUpButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        loginPanel.add(signUpButton);
+        loginPanel.add(noPasswordBox);
+
+        Box loginBox = Box.createHorizontalBox();
+        loginBox.setPreferredSize(new Dimension(550, 50));
+        loginBox.add(Box.createRigidArea(new Dimension(244, 50)));
+        loginBox.add(loginButton);
+        loginPanel.add(loginBox);
+
+        Box noAccBox = Box.createHorizontalBox();
+        noAccBox.setPreferredSize(new Dimension(550, 20));
+        noAccBox.add(Box.createRigidArea(new Dimension(213, 50)));
+        noAccBox.add(noAccLabel);
+        loginPanel.add(noAccBox);
+
+        Box signUpBox = Box.createHorizontalBox();
+        signUpBox.setPreferredSize(new Dimension(550, 30));
+        signUpBox.add(Box.createRigidArea(new Dimension(240, 50)));
+        signUpBox.add(signUpButton);
+        loginPanel.add(signUpBox);
 
         this.add(loginPanel);
     }
 
     class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent click) {
-            if (click.getSource() == loginButton || click.getSource() == enterUsernameField) {
+            if (click.getSource() == loginButton || click.getSource() == enterUsernameField || click.getSource() == enterPasswordField) {
 
                 if (enterUsernameField.getText().trim().length() == 0 && enterPasswordField.getText().trim().length() == 0) {
                     userDoesNotExistLabel.setVisible(false);
@@ -113,6 +149,8 @@ public class LoginFrame extends JFrame {
                     ModifyUser checkUser = new ModifyUser(enterUsernameField.getText().trim());
                     try {
                         if (!checkUser.checkUserExists(enterUsernameField.getText().trim(), enterPasswordField.getText().trim())) {
+                            noUsernameEnteredLabel.setVisible(false);
+                            noPasswordEnteredLabel.setVisible(false);
                             userDoesNotExistLabel.setVisible(true);
                         } else {
                             MusicFrame musicFrame = new MusicFrame(new User(enterUsernameField.getText().trim()));
