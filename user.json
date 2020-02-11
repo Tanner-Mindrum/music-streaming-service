@@ -40,6 +40,7 @@
       }
     ],
     "info": {
+      "password": "yuh",
       "dob": "November.10.1998",
       "id": 3,
       "email": "huntertigerdavis@gmail.com",
@@ -51,15 +52,20 @@
       {
         "songs": [
           "I Didn't Mean To",
-          "Turkey And Dressin"
+          "Turkey And Dressin",
+          "Bailando",
+          "Turkey And Dressin",
+          "Turkey And Dressin",
+          "Turkey And Dressin",
+          "Quiet Nights Of Quiet Stars [Corcovado] [The Frank Sinatra Collection]"
         ],
         "name": "Study"
       },
       {
         "songs": [
-          "I Didn't Mean To"
+          "Let's Get It Started"
         ],
-        "name": "Yuh"
+        "name": "Workout"
       }
     ],
     "info": {
@@ -68,6 +74,21 @@
       "id": 4,
       "email": "hunterd98@gmail.com",
       "username": "DynamicHunter"
+    }
+  },
+  {
+    "playlists": [
+      {
+        "songs": [],
+        "name": "Million Days"
+      }
+    ],
+    "info": {
+      "password": "0o00o0",
+      "dob": "January.1.2020",
+      "id": 5,
+      "email": "quickscoper5406@gmail.com",
+      "username": "Jeffrey Nguyen"
     }
   }
 ]

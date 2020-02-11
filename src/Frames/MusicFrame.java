@@ -299,6 +299,7 @@ public class MusicFrame extends JFrame {
         }
     }
 
+
     public void refreshPlaylistList() throws IOException, ParseException {
 
         playlists.clear();
