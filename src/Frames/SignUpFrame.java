@@ -15,15 +15,12 @@ public class SignUpFrame extends JFrame {
 
     private JLabel emailLabel;
     private JTextField emailField;
-    private JLabel emailErrorLabel;
     private JLabel userNameLabel;
     private JTextField userNameField;
-    private JLabel userNameErrorLabel;
     private JLabel dateOfBirthLabel;
     private JComboBox<String> monthBox;
     private JComboBox<Integer> dayBox;
     private JComboBox<Integer> yearBox;
-    private JTextField yearField;
     private JButton signUpButton;
     private JButton backButton;
     private JPanel signUpPanel;
@@ -31,6 +28,9 @@ public class SignUpFrame extends JFrame {
     private JLabel duplicateUsernameLabel;
     private JLabel noEmailEnteredLabel;
     private JLabel noUsernameEnteredLabel;
+    private JLabel noPasswordEnteredLabel;
+    private JLabel passwordLabel;
+    private JTextField passwordField;
 
 
     private static final int FRAME_WIDTH = 600;
@@ -57,19 +57,21 @@ public class SignUpFrame extends JFrame {
         signUpPanel = new JPanel();
 
         emailLabel = new JLabel("Email: ");
-        emailErrorLabel = new JLabel("Please enter your email.");
         userNameLabel = new JLabel("Name: ");
-        userNameErrorLabel = new JLabel("Please enter your username");
+        passwordLabel = new JLabel("Password: ");
         dateOfBirthLabel = new JLabel("Date of birth: ");
         duplicateEmailLabel = new JLabel("<html><font color='red'>Email already in use!</font></html>");
         duplicateUsernameLabel = new JLabel("<html><font color='red'>Username already in use!</font></html>");
         noEmailEnteredLabel = new JLabel("<html><font color='red'>Please enter an email.</font></html>");
         noUsernameEnteredLabel = new JLabel("<html><font color='red'>Please enter a username.</font></html>");
+        noPasswordEnteredLabel = new JLabel("<html><font color='red'>Please enter a password.</font></html>");
 
         emailField = new JTextField(22);
         emailField.setMaximumSize(emailField.getPreferredSize());
         userNameField = new JTextField(22);
-        //userNameField.setMaximumSize(userNameField.getPreferredSize());
+        userNameField.setMaximumSize(userNameField.getPreferredSize());
+        passwordField = new JTextField(22);
+        passwordField.setMaximumSize(passwordField.getPreferredSize());
 
         monthBox = new JComboBox<String>(months);
         monthBox.setMaximumSize(monthBox.getPreferredSize());
@@ -135,6 +137,32 @@ public class SignUpFrame extends JFrame {
         noUsernameEnteredLabel.setVisible(false);
         signUpPanel.add(usernameErrorLabelBox);
 
+        //////////////////////////////////////////
+        // -----
+        Box passwordBox = Box.createHorizontalBox();
+        passwordBox.setPreferredSize(new Dimension(550, 10));
+        //usernameBox.setBorder(BorderFactory.createLineBorder(Color.RED));
+        passwordBox.add(Box.createRigidArea(new Dimension(width, 0)));
+        passwordBox.add(passwordLabel);
+        signUpPanel.add(passwordBox);
+
+        //--------
+        Box passwordFieldBox = Box.createHorizontalBox();
+        passwordFieldBox.setPreferredSize(new Dimension(550, 25));
+        //usernameLabelBox.setBorder(BorderFactory.createLineBorder(Color.RED));
+        passwordFieldBox.add(Box.createRigidArea(new Dimension(width, 0)));
+        passwordFieldBox.add(passwordField);
+        passwordFieldBox.add(Box.createRigidArea(new Dimension(width, 0)));
+        signUpPanel.add(passwordFieldBox);
+
+        Box passwordErrorLabelBox = Box.createHorizontalBox();
+        passwordErrorLabelBox.setPreferredSize(new Dimension(550, 18));
+        passwordErrorLabelBox.add(Box.createRigidArea(new Dimension(width, 0)));
+        passwordErrorLabelBox.add(noPasswordEnteredLabel);
+        noPasswordEnteredLabel.setVisible(false);
+        signUpPanel.add(passwordErrorLabelBox);
+        //////////////////////////////////////////////////////////////////
+
         Box dobLabelBox = Box.createHorizontalBox();
         dobLabelBox.setPreferredSize(new Dimension(550, 10));
         //dobLabelBox.setBorder(BorderFactory.createLineBorder(Color.RED));
@@ -179,23 +207,54 @@ public class SignUpFrame extends JFrame {
             else if (click.getSource() == signUpButton) {
                 ModifyUser checkUser = new ModifyUser(userNameField.getText().trim());
                 try {
-                    if (emailField.getText().trim().length() == 0 && userNameField.getText().trim().length() == 0) {
+                    if (emailField.getText().trim().length() == 0 && userNameField.getText().trim().length() == 0
+                            && passwordField.getText().trim().length() == 0) {
                         duplicateEmailLabel.setVisible(false);
                         duplicateUsernameLabel.setVisible(false);
                         noUsernameEnteredLabel.setVisible(true);
                         noEmailEnteredLabel.setVisible(true);
+                        noPasswordEnteredLabel.setVisible(true);
+                    }
+                    else if (emailField.getText().trim().length() == 0 && userNameField.getText().trim().length() == 0) {
+                        duplicateEmailLabel.setVisible(false);
+                        duplicateUsernameLabel.setVisible(false);
+                        noUsernameEnteredLabel.setVisible(true);
+                        noEmailEnteredLabel.setVisible(true);
+                        noPasswordEnteredLabel.setVisible(false);
+                    }
+                    else if (userNameField.getText().trim().length() == 0 && passwordField.getText().trim().length() == 0) {
+                        duplicateEmailLabel.setVisible(false);
+                        duplicateUsernameLabel.setVisible(false);
+                        noUsernameEnteredLabel.setVisible(true);
+                        noEmailEnteredLabel.setVisible(false);
+                        noPasswordEnteredLabel.setVisible(true);
+                    }
+                    else if (emailField.getText().trim().length() == 0 && passwordField.getText().trim().length() == 0) {
+                        duplicateEmailLabel.setVisible(false);
+                        duplicateUsernameLabel.setVisible(false);
+                        noUsernameEnteredLabel.setVisible(false);
+                        noEmailEnteredLabel.setVisible(true);
+                        noPasswordEnteredLabel.setVisible(true);
                     }
                     else if (emailField.getText().trim().length() == 0) {
                         duplicateEmailLabel.setVisible(false);
                         duplicateUsernameLabel.setVisible(false);
                         noUsernameEnteredLabel.setVisible(false);
+                        noPasswordEnteredLabel.setVisible(false);
                         noEmailEnteredLabel.setVisible(true);
                     }
                     else if (userNameField.getText().trim().length() == 0) {
                         duplicateUsernameLabel.setVisible(false);
                         duplicateEmailLabel.setVisible(false);
                         noEmailEnteredLabel.setVisible(false);
+                        noPasswordEnteredLabel.setVisible(false);
                         noUsernameEnteredLabel.setVisible(true);
+                    }
+                    else if (passwordField.getText().trim().length() == 0) {
+                        duplicateUsernameLabel.setVisible(false);
+                        duplicateEmailLabel.setVisible(false);
+                        noEmailEnteredLabel.setVisible(false);
+                        noUsernameEnteredLabel.setVisible(false);
                     }
                     else if (checkUser.checkDuplicateUser(emailField.getText().trim(),
                             userNameField.getText().trim()).equals("email")) {
@@ -213,7 +272,7 @@ public class SignUpFrame extends JFrame {
                         duplicateUsernameLabel.setVisible(true);
                     }
                     else {
-                        User newUser = new User(emailField.getText().trim(), userNameField.getText().trim(),
+                        User newUser = new User(emailField.getText().trim(), userNameField.getText().trim(), passwordField.getText().trim(),
                                 (String) monthBox.getSelectedItem(), Integer.toString((int) dayBox.getSelectedItem()),
                                 Integer.toString((int)yearBox.getSelectedItem()));
                         MusicFrame musicFrame = new MusicFrame(newUser);

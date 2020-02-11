@@ -23,7 +23,9 @@ public class ModifyUser {
         userObject = null;
     }
 
-    public boolean checkUserExists(String username) throws IOException, ParseException {
+    public boolean checkUserExists(String username, String password) throws IOException, ParseException {
+        boolean usernameFound = false;
+        boolean passwordFound = false;
 
         // if user exists: return true
         // else return false
@@ -41,13 +43,23 @@ public class ModifyUser {
                 Map.Entry data = releaseItr.next();
                 if (data.getKey().equals("username")) {
                     if (username.equals(data.getValue())) {
-                        return true; // true means a duplicate has been found
+                        usernameFound = true;
                     }
                 }
             }
 
+            Map passwordCheck = ((Map) userInfoSearch.get("info"));
+            Iterator<Map.Entry> passwordCheckItr = passwordCheck.entrySet().iterator();
+            while (passwordCheckItr.hasNext()) {
+                Map.Entry data = passwordCheckItr.next();
+                if (usernameFound && data.getKey().equals("password")) {
+                    if (password.equals(data.getValue())) {
+                        passwordFound = true;
+                    }
+                }
+            }
         }
-        return false;
+        return usernameFound && passwordFound;
     }
 
     // If this returns true, prompt them again, false: call constructor

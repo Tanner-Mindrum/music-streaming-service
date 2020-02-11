@@ -16,6 +16,7 @@ public class User {
 
     private String email;
     private String username;
+    private String password;
     private String dob;
     private int id;
 
@@ -30,10 +31,11 @@ public class User {
         this.username = username;
     }
 
-    public User(String email, String username, String month, String day, String year) throws IOException, ParseException {
+    public User(String email, String username, String password, String month, String day, String year) throws IOException, ParseException {
         // Set fields
         this.email = email;
         this.username = username;
+        this.password = password;
         this.dob = month + "." + day + "." + year;
 
         // Creating JSONArray for the array of users
@@ -50,6 +52,7 @@ public class User {
         // Inserting data into JSONObject
         userInfo.put("email", this.email);
         userInfo.put("username", this.username);
+        userInfo.put("password", this.password);
         this.id = userArray.size() + 1;
         userInfo.put("id", this.id);
         userInfo.put("dob", this.dob);
@@ -83,8 +86,4 @@ public class User {
     public String getUsername() {
         return this.username;
     }
-
-
-
-
 }
