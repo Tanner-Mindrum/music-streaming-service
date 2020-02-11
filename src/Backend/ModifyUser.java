@@ -70,7 +70,14 @@ public class ModifyUser {
         return usernameFound && passwordFound;
     }
 
-    // If this returns true, prompt them again, false: call constructor
+    /**
+     * Checks if a user already exists with the email or username given
+     * @param email
+     * @param username
+     * @return
+     * @throws IOException
+     * @throws ParseException
+     */
     public String checkDuplicateUser(String email, String username) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
         JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
@@ -99,6 +106,12 @@ public class ModifyUser {
         return "okay";
     }
 
+    /**
+     * Gets the playlists to udpdate the display
+     * @return
+     * @throws IOException
+     * @throws ParseException
+     */
     public ArrayList<String> getPlaylists() throws IOException, ParseException {
         JSONParser parser = new JSONParser();
         JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
@@ -130,12 +143,12 @@ public class ModifyUser {
     }
 
 
-    // DELETE Playlists
-    // Get songs in the playlist
-    // Display playlists entirely
-    // Create a new thread to play a song, stop the thread and restart it to play a new song
-
-    // TODO: Check duplicate playlist names
+    /**
+     * Creates a new playlist with a specified name for the user
+     * @param playlistName
+     * @throws IOException
+     * @throws ParseException
+     */
     public void createPlaylist(String playlistName) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
         JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
@@ -176,11 +189,14 @@ public class ModifyUser {
             fileWriter.flush();
             fileWriter.close();
         }
-
-
-
     }
 
+    /**
+     * Deletes the selected playlist
+     * @param playlistName
+     * @throws IOException
+     * @throws ParseException
+     */
     public void deletePlaylist(String playlistName) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
         JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
@@ -218,6 +234,13 @@ public class ModifyUser {
         }
     }
 
+    /**
+     * Adds a selected song to a playlist
+     * @param songName
+     * @param playlistName
+     * @throws IOException
+     * @throws ParseException
+     */
     public void addToPlaylist(String songName, String playlistName) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
         JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));

@@ -26,24 +26,7 @@ public class Songs {
         albumName = "";
         songID = "";
     }
-
-    public static void main(String[] args) throws IOException, ParseException {
-        JSONParser parser = new JSONParser();
-        JSONArray information = (JSONArray) parser.parse(new FileReader("C:\\CECS 327\\music-streaming-service\\music.json"));
-
-        for (Object info : information) {
-            JSONObject songInfo = (JSONObject) info;
-
-            Map release = ((Map) songInfo.get("release"));
-            Iterator<Map.Entry> releaseItr = release.entrySet().iterator();
-            while (releaseItr.hasNext()) {
-                Map.Entry data = releaseItr.next();
-                if (data.getKey().equals("name")) {
-                    System.out.println(data.getValue());
-                }
-            }
-        }
-    }
+    
 
     public String getSongName() {
         return songName;
