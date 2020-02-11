@@ -30,12 +30,8 @@ public class Multithread implements Runnable {
         try {
             player = new Player("out/production/music-streaming-service/musicsrc/" +
                     idToPlay + ".mp3");
-        } catch (IOException | JavaLayerException e) {
-            e.printStackTrace();
-        }
-        try {
             player.mp3play();
-        } catch (JavaLayerException e) {
+        } catch (IOException | JavaLayerException | InterruptedException e) {
             e.printStackTrace();
         }
     }

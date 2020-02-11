@@ -24,8 +24,12 @@ public class Player {
     /**
      * Play a given audio file.
      */
-    public void mp3play() throws JavaLayerException {
-        if (mp3player != null) { mp3player.play(); }
+    public void mp3play() throws JavaLayerException, InterruptedException {
+        if (mp3player != null) {
+//            mp3player.close();
+//            TimeUnit.SECONDS.sleep(5);
+            mp3player.play();
+        }
     }
 
     public void mp3stop() {

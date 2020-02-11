@@ -17,6 +17,7 @@ public class Songs {
     private String artistName;
     private String albumName;
     private String songID;
+    private String termsName;
 
     public Songs() {
         songName = "";
@@ -146,5 +147,13 @@ public class Songs {
 
     public void setSongID(String songID) {
         this.songID = songID;
+    }
+
+    public String getTermsName() {
+        return termsName;
+    }
+
+    public void setTermsName(String termsName) {
+        this.termsName = termsName;
     }
 }

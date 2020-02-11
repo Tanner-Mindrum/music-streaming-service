@@ -1,11 +1,6 @@
 package Frames;
 
 import Backend.*;
-
-import Backend.ModifyUser;
-import Backend.SongInfo;
-import Backend.Songs;
-import Backend.User;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
@@ -14,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class MusicFrame extends JFrame {
     private JLabel titleLabel;
@@ -39,8 +36,6 @@ public class MusicFrame extends JFrame {
     private User currUser;
     private Thread musicThread;
     private Multithread multithread;
-    private ArrayList<Songs> foundSongs;
-    private SongInfo findSongInfo;
     private ModifyUser modifyUser;
     private ArrayList<String> playlists;
     DefaultListModel<String> songModel;
@@ -48,6 +43,8 @@ public class MusicFrame extends JFrame {
     private JMenu userMenu;
     private JMenuItem m1;
     private JButton stopButton;
+    ArrayList<Songs> foundSongs = new ArrayList<Songs>();
+
 
     public MusicFrame(User user) throws IOException, ParseException {
         currUser = user;
@@ -60,14 +57,13 @@ public class MusicFrame extends JFrame {
         MusicFrameListener listener = new MusicFrameListener();
         panel = new JPanel();
 
-       foundSongs = new ArrayList<Songs>();
-       findSongInfo = new SongInfo();
+//       foundSongs = new ArrayList<Songs>();
 
         //BoxLayout boxLayout = new BoxLayout(panel, new FlowLayout());
         panel.setLayout(new FlowLayout());
 
-        titleLabel = new JLabel("Groovi");
-        titleLabel.setFont(new Font("Arial", Font.PLAIN, 18));
+        titleLabel = new JLabel("Groovee");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         //panel.add(titleLabel);
 
@@ -163,6 +159,8 @@ public class MusicFrame extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            foundSongs.clear();
+            SongInfo findSongInfo = new SongInfo();
             if (e.getSource() == searchButton || e.getSource() == searchField) {
                 // Search for song
                 try {
@@ -173,9 +171,16 @@ public class MusicFrame extends JFrame {
 
                 // Loop through our array and add to model
                 DefaultListModel<String> model = new DefaultListModel<>();
+                Set<String> currSongs = new HashSet<String>();
+                int count = 0;
                 for (Songs s : foundSongs) {
-                    model.addElement(s.getSongName());
+                    count++;
+                    if (!currSongs.contains(s.getSongName())) {
+                        currSongs.add(s.getSongName());
+                        model.addElement(s.getSongName());
+                    }
                 }
+                System.out.println(count);
                 songList = new JList<>(model);
 
                 songsBox.remove(scrollPane);
@@ -228,7 +233,9 @@ public class MusicFrame extends JFrame {
                 loginFrame.setVisible(true);
             }
             else if (e.getSource() == stopButton) {
-                multithread.stopSong();
+                if (songList != null && !songList.isSelectionEmpty()) {
+                    multithread.stopSong();
+                }
             }
         }
     }

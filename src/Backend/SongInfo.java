@@ -21,6 +21,7 @@ public class SongInfo {
     private String songID;
     private String artistName;
     private String albumName;
+    private String termsName;
 
     public SongInfo() {
         newSong = null;
@@ -61,6 +62,13 @@ public class SongInfo {
                         newSong.setSongID((String) data.getValue());
                     }
                 }
+                if (data.getKey().equals("terms")) {
+                    assert data.getValue() instanceof String;
+                    this.songID = (String) data.getValue();
+                    if (match) {
+                        newSong.setTermsName((String) data.getValue());
+                    }
+                }
             }
 
             Map release = ((Map) entryInfo.get("release"));
@@ -72,6 +80,14 @@ public class SongInfo {
                     this.albumName = (String) data.getValue();
                     if (match) {
                         newSong.setAlbumName((String) data.getValue());
+                    }
+                    else if ((((String) data.getValue()).toLowerCase()).equals(name)) {
+                        newSong.setSongName(songName);
+                        newSong.setSongLength(songLength);
+                        newSong.setSongID(songID);
+                        newSong.setArtistName(artistName);
+                        newSong.setAlbumName(albumName);
+                        songList.add(newSong);
                     }
                 }
             }
@@ -93,7 +109,27 @@ public class SongInfo {
                         newSong.setAlbumName(albumName);
                         songList.add(newSong);
                     }
-                    // Check if artist names match when searching by artist
+                }
+            }
+
+            Map artist2 = ((Map) entryInfo.get("artist"));
+            Iterator<Map.Entry> artistItr2 = artist2.entrySet().iterator();
+            while (artistItr2.hasNext()) {
+                Map.Entry data = artistItr2.next();
+                if (data.getKey().equals("terms")) {
+                    this.termsName = (String) data.getValue();
+                    if (match) {
+                        newSong.setTermsName((String) data.getValue());
+                    }
+                    else if ((((String) data.getValue()).toLowerCase()).equals(name)) {
+                        newSong.setSongName(songName);
+                        newSong.setSongLength(songLength);
+                        newSong.setSongID(songID);
+                        newSong.setArtistName(artistName);
+                        newSong.setAlbumName(albumName);
+                        newSong.setTermsName(termsName);
+                        songList.add(newSong);
+                    }
                 }
             }
 

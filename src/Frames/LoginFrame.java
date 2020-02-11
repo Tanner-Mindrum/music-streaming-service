@@ -32,8 +32,8 @@ public class LoginFrame extends JFrame {
 
     public void createComponents() {
 
-        titleLabel = new JLabel("Music Streaming Service!");
-        titleLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        titleLabel = new JLabel("Groovee");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 30));
         usernameLabel = new JLabel("Enter your username: ");
         noAccLabel = new JLabel("Don't have an account?");
         userDoesNotExistLabel = new JLabel("Incorrect username.");
@@ -52,8 +52,9 @@ public class LoginFrame extends JFrame {
         loginPanel.setLayout(boxLayout);
         loginPanel.add(Box.createRigidArea(new Dimension(0, 30)));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        //titleLabel.setFont(titleLabel.getFont().deriveFont(Font.BOLD));
         loginPanel.add(titleLabel);
-        loginPanel.add(Box.createRigidArea(new Dimension(0, 50)));
+        loginPanel.add(Box.createRigidArea(new Dimension(0, 35)));
         userDoesNotExistLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         loginPanel.add(userDoesNotExistLabel);
         userDoesNotExistLabel.setVisible(false);
