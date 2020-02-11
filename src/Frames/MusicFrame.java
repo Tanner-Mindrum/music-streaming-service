@@ -159,6 +159,10 @@ public class MusicFrame extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             SongInfo findSongInfo = new SongInfo();
+            /*
+            When the user clicks the searchButton or presses enter on the searchField
+            The song arraylist will be cleared and the found songs will be displayed
+            into the list for the user */
             if (e.getSource() == searchButton || e.getSource() == searchField) {
                 foundSongs.clear();
                 foundFinalSongs.clear();
@@ -195,10 +199,12 @@ public class MusicFrame extends JFrame {
             else if (e.getSource() == songList) {
                 System.out.println("hello");
             }
+            //This opens up a createplaylist frame for users to add a playlist
             else if (e.getSource() == createPlaylistButton) {
                 CreatePlaylistFrame2 pFrame = new CreatePlaylistFrame2(currUser);
                 pFrame.setVisible(true);
             }
+            //Allows the user to delete the playlist by clicking on an existing playlist
             else if (e.getSource() == deletePlaylistButton){
                 if (!playListList.isSelectionEmpty()) {
                     try {
@@ -209,6 +215,7 @@ public class MusicFrame extends JFrame {
                     }
                 }
             }
+            //Adds a song to the playlist
             else if (e.getSource() == addToPlaylistButton) {
                 if (songList != null) {
                     try {
@@ -218,6 +225,7 @@ public class MusicFrame extends JFrame {
                     }
                 }
             }
+            //This plays the song when the user clicks playsong
             else if (e.getSource() == playSongButton) {
 
                 if (songList != null && !songList.isSelectionEmpty()) {
@@ -229,6 +237,7 @@ public class MusicFrame extends JFrame {
                     musicThread.start();
                 }
             }
+            //This logs the user out of the musicframe
             else if (e.getSource() == m1) {
                 LoginFrame loginFrame = new LoginFrame();
                 setVisible(false);
@@ -299,7 +308,12 @@ public class MusicFrame extends JFrame {
         }
     }
 
-
+    /**
+     * Whenever the user adds a new playlist, it repaints the frame
+     * to display the new added playlist
+     * @throws IOException
+     * @throws ParseException
+     */
     public void refreshPlaylistList() throws IOException, ParseException {
 
         playlists.clear();
