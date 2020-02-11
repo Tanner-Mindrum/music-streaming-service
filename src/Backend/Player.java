@@ -11,6 +11,7 @@ public class Player {
     private javazoom.jl.player.advanced.AdvancedPlayer mp3player;
     private InputStream is;
 
+    // Constructs a null input stream and advanced player object
     public Player() {
         is = null;
         mp3player = null;
@@ -26,12 +27,11 @@ public class Player {
      */
     public void mp3play() throws JavaLayerException, InterruptedException {
         if (mp3player != null) {
-//            mp3player.close();
-//            TimeUnit.SECONDS.sleep(5);
             mp3player.play();
         }
     }
 
+    // Close MP3 player
     public void mp3stop() {
         if (mp3player != null) { mp3player.close(); }
     }

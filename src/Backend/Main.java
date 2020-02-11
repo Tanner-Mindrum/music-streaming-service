@@ -7,11 +7,8 @@ import javax.swing.*;
 public class Main {
 
     public static void main(String[] args) {
-        /* Change path for testing
-         *  Tanner's path: "C://CECS 327//music-streaming-service//imperial.mp3"
-         */
-        //player.mp3play("C://CECS 327//music-streaming-service//imperial.mp3");
 
+        // Spawn initial log in frame
         JFrame frame = new LoginFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);

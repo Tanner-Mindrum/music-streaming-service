@@ -18,25 +18,31 @@ public class ModifyUser {
     private String username;
     private JSONObject userObject;
 
+    // Constructor with username parameter to find user in JSON
     public ModifyUser(String name) {
         this.username = name;
         userObject = null;
     }
 
+    /**
+     * Finds if a user exists in the JSON file when given a username and password
+     * @param username - String username
+     * @param password - String password
+     * @return - true if the username and corresponding password is found
+     * @throws IOException
+     * @throws ParseException
+     */
     public boolean checkUserExists(String username, String password) throws IOException, ParseException {
         boolean usernameFound = false;
         boolean passwordFound = false;
 
-        // if user exists: return true
-        // else return false
         JSONParser parser = new JSONParser();
-        // C://CECS 327//music-streaming-service//user.json
         JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
 
         for (Object info : userArray) {
             JSONObject userInfoSearch = (JSONObject) info;
 
-            // dupe for user
+            // Check if the username exists in the JSON
             Map release = ((Map) userInfoSearch.get("info"));
             Iterator<Map.Entry> releaseItr = release.entrySet().iterator();
             while (releaseItr.hasNext()) {
@@ -48,6 +54,7 @@ public class ModifyUser {
                 }
             }
 
+            // If username is found, then check if a corresponding password matches with password parameter
             Map passwordCheck = ((Map) userInfoSearch.get("info"));
             Iterator<Map.Entry> passwordCheckItr = passwordCheck.entrySet().iterator();
             while (passwordCheckItr.hasNext()) {

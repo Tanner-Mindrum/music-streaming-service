@@ -28,6 +28,13 @@ public class SongInfo {
         songList = new ArrayList<Songs>();
     }
 
+    /**
+     * Search for a song by matching the given parameter with a certain attribute of the song
+     * @param name - The search parameter a user wants to find songs by
+     * @return - A list of all found songs
+     * @throws IOException
+     * @throws ParseException
+     */
     public ArrayList<Songs> findSong(String name) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
         JSONArray information = (JSONArray) parser.parse(new FileReader("music.json"));

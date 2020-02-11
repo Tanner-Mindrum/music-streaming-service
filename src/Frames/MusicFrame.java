@@ -173,8 +173,8 @@ public class MusicFrame extends JFrame {
                 DefaultListModel<String> model = new DefaultListModel<>();
                 Set<String> currSongs = new HashSet<String>();
                 for (Songs s : foundSongs) {
-                    if (!currSongs.contains(s.getSongName())) {
-                        currSongs.add(s.getSongName());
+                    if (!currSongs.contains(s.getSongID())) {
+                        currSongs.add(s.getSongID());
                         foundFinalSongs.add(s);
                         model.addElement(s.getSongName());
                     }

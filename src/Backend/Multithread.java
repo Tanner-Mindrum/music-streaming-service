@@ -11,6 +11,7 @@ public class Multithread implements Runnable {
     private String idToPlay;
     private boolean running;
 
+    // Construct a default thread
     public Multithread() {
         songInfo = new SongInfo();
         player = new Player();
@@ -18,6 +19,7 @@ public class Multithread implements Runnable {
         running = false;
     }
 
+    // Construct a thread given an ID
     public Multithread(String id) {
         songInfo = new SongInfo();
         player = new Player();
@@ -25,6 +27,7 @@ public class Multithread implements Runnable {
         running = false;
     }
 
+    // Run the thread, and this particular thread will call the mp3 player
     @Override
     public void run() {
         try {
@@ -36,6 +39,7 @@ public class Multithread implements Runnable {
         }
     }
 
+    // Setters for specific fields
     public void setIdToPlay(String pID) {
         idToPlay = pID;
     }
@@ -44,6 +48,7 @@ public class Multithread implements Runnable {
         this.running = running;
     }
 
+    // Stop a running song
     public void stopSong() {
         player.mp3stop();
     }
