@@ -103,7 +103,6 @@ public class MusicFrame extends JFrame {
         stopButton = new JButton("Stop Song");
         stopButton.addActionListener(listener);
 
-        // TODO: Re-Fill Playlists after adding or deleting one
         // Playlist Display
         modifyUser = new ModifyUser(currUser.getUsername());
         playlists = modifyUser.getPlaylists();

@@ -23,6 +23,7 @@ public class LoginFrame extends JFrame {
     private JButton loginButton;
     private JButton signUpButton;
     private JLabel userDoesNotExistLabel;
+    private ImageIcon groove;
 
     private static final int FRAME_WIDTH = 600;
     private static final int FRAME_HEIGHT = 450;
@@ -35,6 +36,9 @@ public class LoginFrame extends JFrame {
     }
 
     public void createComponents() {
+        groove = new ImageIcon("imgs/groove2.PNG");
+        JLabel imgLabel = new JLabel(groove);
+        imgLabel.setHorizontalTextPosition(JLabel.CENTER);
 
         titleLabel = new JLabel("Groovee");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 30));
@@ -60,7 +64,8 @@ public class LoginFrame extends JFrame {
         JPanel loginPanel = new JPanel();
         loginPanel.add(Box.createRigidArea(new Dimension(2, 50)));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        loginPanel.add(titleLabel);
+        //loginPanel.add(titleLabel);
+        loginPanel.add(imgLabel);
         loginPanel.add(Box.createRigidArea(new Dimension(0, 15)));
 
         Box userDoesNotExistBox = Box.createHorizontalBox();
