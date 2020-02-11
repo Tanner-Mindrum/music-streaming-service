@@ -5,6 +5,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -172,7 +173,7 @@ public class ModifyUser {
 
 
     }
-    // TODO Check if working
+
     public void deletePlaylist(String playlistName) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
         JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
@@ -196,6 +197,44 @@ public class ModifyUser {
                             if (playlistName.equals(tempPlaylist.get("name").toString())) {
                                 // delete playlist from JSON
                                 playlists.remove(i);
+                            }
+                        }
+                    }
+                }
+            }
+            // Writing non-deleted playlists? to JSON file
+            PrintWriter fileWriter = new PrintWriter("user.json");
+            fileWriter.write(userArray.toJSONString());
+
+            fileWriter.flush();
+            fileWriter.close();
+        }
+    }
+
+    public void addToPlaylist(String songName, String playlistName) throws IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
+
+        for (Object info : userArray){
+            JSONObject userInfoSearch = (JSONObject) info;
+
+
+            Map userInfo = ((Map) userInfoSearch.get("info"));
+            Iterator<Map.Entry> releaseItr = userInfo.entrySet().iterator();
+            while (releaseItr.hasNext()){
+                Map.Entry data = releaseItr.next();
+                if (data.getKey().equals("username")){
+                    if (username.equals(data.getValue())){
+                        // Delete user's playlist with passed in name:
+                        // Iterate through the playlists and check the name
+                        JSONArray playlists = (JSONArray) userInfoSearch.get("playlists");
+                        for (int i = 0; i < playlists.size(); i++){
+                            JSONObject tempPlaylist = (JSONObject) playlists.get(i);
+                            // If playlistName matches
+                            if (playlistName.equals(tempPlaylist.get("name").toString())) {
+                                // Add song to playlist
+                                JSONArray songs = (JSONArray) tempPlaylist.get("songs");
+                                songs.add(songName);
                             }
                         }
                     }

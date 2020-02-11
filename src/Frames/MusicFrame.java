@@ -210,7 +210,12 @@ public class MusicFrame extends JFrame {
                 }
             }
             else if (e.getSource() == addToPlaylistButton) {
-                if (songList == null) {
+                if (songList != null) {
+                    try {
+                        modifyUser.addToPlaylist(songList.getSelectedValue(), playListList.getSelectedValue());
+                    } catch (IOException | ParseException ex) {
+                        ex.printStackTrace();
+                    }
                 }
             }
             else if (e.getSource() == playSongButton) {
