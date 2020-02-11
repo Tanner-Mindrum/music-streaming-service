@@ -5,7 +5,8 @@
       "dob": "January.1.2020",
       "id": 1,
       "email": "tan.min@email.com",
-      "username": "tannermin"
+      "username": "tannermin",
+      "password": "tanner"
     }
   },
   {

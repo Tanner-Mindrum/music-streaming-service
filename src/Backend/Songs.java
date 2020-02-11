@@ -26,7 +26,7 @@ public class Songs {
         albumName = "";
         songID = "";
     }
-    
+
 
     public String getSongName() {
         return songName;

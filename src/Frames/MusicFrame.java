@@ -180,7 +180,7 @@ public class MusicFrame extends JFrame {
                     if (!currSongs.contains(s.getSongID())) {
                         currSongs.add(s.getSongID());
                         foundFinalSongs.add(s);
-                        model.addElement(s.getSongName());
+                        model.addElement(s.getSongName() + " | " + s.getArtistName() + " | " + s.getAlbumName());
                     }
                 }
                 songList = new JList<>(model);
