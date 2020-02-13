@@ -160,6 +160,7 @@ public class LoginFrame extends JFrame {
                         } else {
                             MusicFrame musicFrame = new MusicFrame(new User(enterUsernameField.getText().trim()));
                             setVisible(false);
+                            musicFrame.setLocationRelativeTo(null);
                             musicFrame.setVisible(true);
                         }
                     } catch (IOException | ParseException e) {
@@ -172,6 +173,7 @@ public class LoginFrame extends JFrame {
                 SignUpFrame signUpFrame = new SignUpFrame();
                 setVisible(false);
                 signUpFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                signUpFrame.setLocationRelativeTo(null);
                 signUpFrame.setVisible(true);
             }
         }

@@ -86,11 +86,11 @@ public class MusicFrame extends JFrame {
         searchField.setAlignmentX(Component.CENTER_ALIGNMENT);
         searchField.addActionListener(listener);
 
-        songList.addListSelectionListener(e -> {
-            if (e.getValueIsAdjusting()) {
-                System.out.println("hello");
-            }
-        });
+//        songList.addListSelectionListener(e -> {
+//            if (e.getValueIsAdjusting()) {
+//                System.out.println("hello");
+//            }
+//        });
 
         searchButton = new JButton("Search");
         searchButton.addActionListener(listener);
@@ -209,6 +209,7 @@ public class MusicFrame extends JFrame {
             //This opens up a createplaylist frame for users to add a playlist
             else if (e.getSource() == createPlaylistButton) {
                 CreatePlaylistFrame2 pFrame = new CreatePlaylistFrame2(currUser);
+                pFrame.setLocationRelativeTo(null);
                 pFrame.setVisible(true);
             }
             //Allows the user to delete the playlist by clicking on an existing playlist
@@ -251,6 +252,7 @@ public class MusicFrame extends JFrame {
                 LoginFrame loginFrame = new LoginFrame();
                 setVisible(false);
                 loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                loginFrame.setLocationRelativeTo(null);
                 loginFrame.setVisible(true);
             }
             else if (e.getSource() == stopButton) {

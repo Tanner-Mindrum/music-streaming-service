@@ -188,6 +188,7 @@ public class SignUpFrame extends JFrame {
                 LoginFrame loginFrame = new LoginFrame();
                 setVisible(false);
                 loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                loginFrame.setLocationRelativeTo(null);
                 loginFrame.setVisible(true);
             }
             else if (click.getSource() == signUpButton) {
@@ -263,6 +264,7 @@ public class SignUpFrame extends JFrame {
                                 Integer.toString((int)yearBox.getSelectedItem()));
                         MusicFrame musicFrame = new MusicFrame(newUser);
                         setVisible(false);
+                        musicFrame.setLocationRelativeTo(null);
                         musicFrame.setVisible(true);
                     }
                 }
