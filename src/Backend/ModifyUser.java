@@ -5,10 +5,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -18,6 +15,7 @@ public class ModifyUser {
 
     private String username;
     private JSONObject userObject;
+    private SongInfo songInfo;
 
     // Constructor with username parameter to find user in JSON
     public ModifyUser(String name) {
@@ -296,8 +294,56 @@ public class ModifyUser {
             fileWriter.close();
         }
     }
-    // Getting songs from the playlists to display
 
+    /**
+     * Gets the songs from a playlist to update the display
+     * @return
+     * @throws IOException
+     * @throws ParseException
+     */
+    public ArrayList<Songs> getSongs(String playlistName) throws IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
+        JSONArray songArray = (JSONArray) parser.parse(new FileReader("music.json"));
+        ArrayList<Songs> songObjs = new ArrayList<>(); // add to this arraylist
+
+        // For each user:
+        for (Object info : userArray){
+            JSONObject userInfoSearch = (JSONObject) info;
+
+            Map userInfo = ((Map) userInfoSearch.get("info"));
+            Iterator<Map.Entry> releaseItr = userInfo.entrySet().iterator();
+            while (releaseItr.hasNext()){
+                Map.Entry data = releaseItr.next();
+                if (data.getKey().equals("username")){
+                    if (username.equals(data.getValue())){
+                        JSONArray playlistArray = (JSONArray) userInfoSearch.get("playlists");
+                        // Try to iterate the JSONArray of playlists
+                        for (int i = 0; i < playlistArray.size(); i++){
+                            JSONObject tempPlaylist = (JSONObject) playlistArray.get(i);
+                            // Iterate through songs in playlist
+                            if (playlistName.equals(tempPlaylist.get("name").toString())){
+                                // Display songs in playlist
+                                JSONArray songs = (JSONArray) tempPlaylist.get("songs");
+                                // Go through songs array
+                                for (int j = 0; j < songs.size(); j++) {
+                                    // Search json for ID match
+                                    SongInfo songInfo = new SongInfo();
+                                    songObjs.addAll(songInfo.findSong(songs.get(j).toString()));
+
+
+                                }
+                            }
+
+                       }
+                    }
+                }
+            }
+
+        }
+
+        return songObjs;
+    }
 
     // No duplicate Playlist names
 

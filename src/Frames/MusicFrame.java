@@ -54,7 +54,11 @@ public class MusicFrame extends JFrame {
                 if (index >= 0){
                     Object o = theList.getModel().getElementAt(index);
                     System.out.println("Double clicked on: " + o.toString());
-
+                    try {
+                        System.out.println(modifyUser.getSongs(o.toString()));
+                    } catch (IOException | ParseException e) {
+                        e.printStackTrace();
+                    }
                     // Refresh songList with playlist songs
                 }
             }
