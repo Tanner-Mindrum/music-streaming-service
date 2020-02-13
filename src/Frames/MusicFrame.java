@@ -7,8 +7,7 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -56,6 +55,20 @@ public class MusicFrame extends JFrame {
     }
 
     public void createComponents() throws IOException, ParseException {
+
+        MouseListener mouseListener = new MouseAdapter() {
+            public void mouseClicked(MouseEvent mouseEvent){
+                JList<String> theList = (JList) mouseEvent.getSource();
+                if (mouseEvent.getClickCount() == 2){
+                    int index = theList.locationToIndex(mouseEvent.getPoint());
+                    if (index >= 0){
+                        Object o = theList.getModel().getElementAt(index);
+                        System.out.println("Double clicked on: " + o.toString());
+                    }
+                }
+            }
+        };
+
         MusicFrameListener listener = new MusicFrameListener();
         panel = new JPanel();
 
@@ -119,7 +132,9 @@ public class MusicFrame extends JFrame {
             playListModel.addElement(element);
         }
         playListList = new JList<>(playListModel);
+        playListList.addMouseListener(mouseListener);
         playListPane = new JScrollPane(playListList);
+
 
         songModel = new DefaultListModel<String>();
         JList<String> songsList = new JList<>(songModel);
@@ -260,7 +275,17 @@ public class MusicFrame extends JFrame {
                     multithread.stopSong();
                 }
             }
+            else if (e.getSource() == playListPane){
+                if (e.getActionCommand().equals("MOUSE1")){
+                    System.out.println("double clicked in playlistBox" + e.getSource());
+
+                }
+            }
+
         }
+
+
+
     }
 
     class CreatePlaylistFrame2 extends JFrame {

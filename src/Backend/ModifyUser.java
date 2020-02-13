@@ -296,4 +296,9 @@ public class ModifyUser {
             fileWriter.close();
         }
     }
+    // Getting songs from the playlists to display
+
+    // No duplicate Playlist names
+
+
 }
