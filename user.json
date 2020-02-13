@@ -2,11 +2,11 @@
   {
     "playlists": [],
     "info": {
+      "password": "tanner",
       "dob": "January.1.2020",
       "id": 1,
       "email": "tan.min@email.com",
-      "username": "tannermin",
-      "password": "tanner"
+      "username": "tannermin"
     }
   },
   {
@@ -38,6 +38,12 @@
       {
         "songs": [],
         "name": "Jazz"
+      },
+      {
+        "songs": [
+          "SOAPMKZ12A58A764B7"
+        ],
+        "name": "testo"
       }
     ],
     "info": {

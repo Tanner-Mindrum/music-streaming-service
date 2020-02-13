@@ -4,6 +4,8 @@ import Backend.*;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -83,7 +85,12 @@ public class MusicFrame extends JFrame {
         searchField.setMaximumSize(searchField.getPreferredSize());
         searchField.setAlignmentX(Component.CENTER_ALIGNMENT);
         searchField.addActionListener(listener);
-        //panel.add(searchField);
+
+        songList.addListSelectionListener(e -> {
+            if (e.getValueIsAdjusting()) {
+                System.out.println("hello");
+            }
+        });
 
         searchButton = new JButton("Search");
         searchButton.addActionListener(listener);
@@ -219,7 +226,9 @@ public class MusicFrame extends JFrame {
             else if (e.getSource() == addToPlaylistButton) {
                 if (songList != null) {
                     try {
-                        modifyUser.addToPlaylist(songList.getSelectedValue(), playListList.getSelectedValue());
+                        //modifyUser.addToPlaylist(songList.getSelectedValue(), playListList.getSelectedValue());
+                        Songs songToAdd = (foundFinalSongs.get(songList.getSelectedIndex()));
+                        modifyUser.addToPlaylist(songToAdd, playListList.getSelectedValue());
                     } catch (IOException | ParseException ex) {
                         ex.printStackTrace();
                     }
@@ -237,7 +246,7 @@ public class MusicFrame extends JFrame {
                     musicThread.start();
                 }
             }
-            //This logs the user out of the musicframe
+            // This logs the user out of the musicframe
             else if (e.getSource() == m1) {
                 LoginFrame loginFrame = new LoginFrame();
                 setVisible(false);

@@ -42,15 +42,21 @@ public class ModifyUser {
 
         for (Object info : userArray) {
             JSONObject userInfoSearch = (JSONObject) info;
+            usernameFound = false;
 
             // Check if the username exists in the JSON
-            Map release = ((Map) userInfoSearch.get("info"));
-            Iterator<Map.Entry> releaseItr = release.entrySet().iterator();
-            while (releaseItr.hasNext()) {
-                Map.Entry data = releaseItr.next();
+            Map user = ((Map) userInfoSearch.get("info"));
+            Iterator<Map.Entry> userItr = user.entrySet().iterator();
+            while (userItr.hasNext()) {
+                Map.Entry data = userItr.next();
                 if (data.getKey().equals("username")) {
                     if (username.equals(data.getValue())) {
                         usernameFound = true;
+                    }
+                }
+                if (usernameFound && data.getKey().equals("password")) {
+                    if (password.equals(data.getValue())) {
+                        passwordFound = true;
                     }
                 }
             }
@@ -66,8 +72,11 @@ public class ModifyUser {
                     }
                 }
             }
+            if (usernameFound && passwordFound) {
+                return true;
+            }
         }
-        return usernameFound && passwordFound;
+        return false;
     }
 
     /**
@@ -236,16 +245,17 @@ public class ModifyUser {
 
     /**
      * Adds a selected song to a playlist
-     * @param songName
+     * @param song
      * @param playlistName
      * @throws IOException
      * @throws ParseException
      */
-    public void addToPlaylist(String songName, String playlistName) throws IOException, ParseException {
+    public void addToPlaylist(Songs song, String playlistName) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
         JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
+        boolean duplicate = false;
 
-        for (Object info : userArray){
+        for (Object info : userArray) {
             JSONObject userInfoSearch = (JSONObject) info;
 
 
@@ -264,7 +274,15 @@ public class ModifyUser {
                             if (playlistName.equals(tempPlaylist.get("name").toString())) {
                                 // Add song to playlist
                                 JSONArray songs = (JSONArray) tempPlaylist.get("songs");
-                                songs.add(songName);
+                                for (int j = 0; j < songs.size(); j++) {
+                                    if (song.getSongID().equals(songs.get(j))) {
+                                        duplicate = true;
+                                        break;
+                                    }
+                                }
+                                if (!duplicate) {
+                                    songs.add(song.getSongID());
+                                }
                             }
                         }
                     }

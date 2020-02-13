@@ -3,6 +3,7 @@ package Backend;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.advanced.AdvancedPlayer;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -18,8 +19,14 @@ public class Player {
     }
 
     public Player (String path) throws IOException, JavaLayerException {
-        is = new CECS327InputStream(path);
-        mp3player = new AdvancedPlayer(is);
+        try {
+            is = new CECS327InputStream(path);
+            mp3player = new AdvancedPlayer(is);
+        }
+        catch (FileNotFoundException f) {
+            System.out.println("No data for song");
+        }
+        //mp3player = new AdvancedPlayer(is);
     }
 
     /**
