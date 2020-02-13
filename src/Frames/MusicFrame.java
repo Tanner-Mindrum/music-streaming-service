@@ -46,6 +46,21 @@ public class MusicFrame extends JFrame {
     private JButton stopButton;
     ArrayList<Songs> foundSongs = new ArrayList<Songs>();
     ArrayList<Songs> foundFinalSongs = new ArrayList<Songs>();
+    public MouseListener mouseListener = new MouseAdapter() {
+        public void mouseClicked(MouseEvent mouseEvent){
+            JList<String> theList = (JList) mouseEvent.getSource();
+            if (mouseEvent.getClickCount() == 2){
+                int index = theList.locationToIndex(mouseEvent.getPoint());
+                if (index >= 0){
+                    Object o = theList.getModel().getElementAt(index);
+                    System.out.println("Double clicked on: " + o.toString());
+
+                    // Refresh songList with playlist songs
+                }
+            }
+        }
+    };
+
 
     public MusicFrame(User user) throws IOException, ParseException {
         currUser = user;
@@ -56,18 +71,7 @@ public class MusicFrame extends JFrame {
 
     public void createComponents() throws IOException, ParseException {
 
-        MouseListener mouseListener = new MouseAdapter() {
-            public void mouseClicked(MouseEvent mouseEvent){
-                JList<String> theList = (JList) mouseEvent.getSource();
-                if (mouseEvent.getClickCount() == 2){
-                    int index = theList.locationToIndex(mouseEvent.getPoint());
-                    if (index >= 0){
-                        Object o = theList.getModel().getElementAt(index);
-                        System.out.println("Double clicked on: " + o.toString());
-                    }
-                }
-            }
-        };
+
 
         MusicFrameListener listener = new MusicFrameListener();
         panel = new JPanel();
@@ -249,6 +253,20 @@ public class MusicFrame extends JFrame {
                         ex.printStackTrace();
                     }
                 }
+                MouseListener mouseListener = new MouseAdapter() {
+                    public void mouseClicked(MouseEvent mouseEvent){
+                        JList<String> theList = (JList) mouseEvent.getSource();
+                        if (mouseEvent.getClickCount() == 2){
+                            int index = theList.locationToIndex(mouseEvent.getPoint());
+                            if (index >= 0){
+                                Object o = theList.getModel().getElementAt(index);
+                                System.out.println("Double clicked on: " + o.toString());
+
+                                // Refresh songList with playlist songs
+                            }
+                        }
+                    }
+                };
             }
             //This plays the song when the user clicks playsong
             else if (e.getSource() == playSongButton) {
@@ -275,12 +293,7 @@ public class MusicFrame extends JFrame {
                     multithread.stopSong();
                 }
             }
-            else if (e.getSource() == playListPane){
-                if (e.getActionCommand().equals("MOUSE1")){
-                    System.out.println("double clicked in playlistBox" + e.getSource());
 
-                }
-            }
 
         }
 
@@ -360,6 +373,7 @@ public class MusicFrame extends JFrame {
             playListModel.addElement(element);
         }
         playListList = new JList<>(playListModel);
+        playListList.addMouseListener(mouseListener);
 
         playlistBox.remove(playListPane);
         repaint();
