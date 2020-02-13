@@ -140,6 +140,29 @@ public class SongInfo {
                 }
             }
 
+            Map idSearch = ((Map) entryInfo.get("song"));
+            Iterator<Map.Entry> idItr = idSearch.entrySet().iterator();
+            while (idItr.hasNext()) {
+                Map.Entry data = idItr.next();
+                if (data.getKey().equals("id")) {
+                    this.termsName = (String) data.getValue();
+                    if (match) {
+                        newSong.setSongID((String) data.getValue());
+                    }
+                    else if ((((String) data.getValue()).toLowerCase()).equals(name.toLowerCase())) {
+                        newSong.setSongName(songName);
+                        newSong.setSongLength(songLength);
+                        newSong.setSongID(songID);
+                        newSong.setArtistName(artistName);
+                        newSong.setAlbumName(albumName);
+                        newSong.setTermsName(termsName);
+                        songList.add(newSong);
+                    }
+                }
+            }
+
+
+
             // When we find a song match, we only display that one song, so we break
             if (match) {
                 songList.add(newSong);
