@@ -55,7 +55,25 @@ public class MusicFrame extends JFrame {
                     Object o = theList.getModel().getElementAt(index);
                     System.out.println("Double clicked on: " + o.toString());
                     try {
-                        System.out.println(modifyUser.getSongs(o.toString()));
+                        foundFinalSongs.clear();
+                        ArrayList<Songs> playlistSongs = modifyUser.getSongs(o.toString());
+                        DefaultListModel<String> model = new DefaultListModel<>();
+                        for (Songs s : playlistSongs) {
+                            foundFinalSongs.add(s);
+                            model.addElement(s.getSongName() + " | " + s.getArtistName() + " | " + s.getAlbumName());
+                        }
+                        songList = new JList<>(model);
+
+                        songsBox.remove(scrollPane);
+                        repaint();
+                        validate();
+                        scrollPane = new JScrollPane(songList);
+                        songsBox.add(scrollPane);
+                        songsBox.add(addToPlaylistButton);
+                        songsBox.add(playSongButton);
+                        songsBox.add(stopButton);
+                        validate();
+                        repaint();
                     } catch (IOException | ParseException e) {
                         e.printStackTrace();
                     }
