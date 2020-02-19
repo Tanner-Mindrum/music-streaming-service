@@ -53,13 +53,12 @@ public class MusicFrame extends JFrame {
                 int index = theList.locationToIndex(mouseEvent.getPoint());
                 if (index >= 0){
                     Object o = theList.getModel().getElementAt(index);
-                    System.out.println("Double clicked on: " + o.toString());
                     try {
                         foundFinalSongs.clear();
                         ArrayList<Songs> playlistSongs = modifyUser.getSongs(o.toString());
+                        foundFinalSongs.addAll(playlistSongs);
                         DefaultListModel<String> model = new DefaultListModel<>();
                         for (Songs s : playlistSongs) {
-                            foundFinalSongs.add(s);
                             model.addElement(s.getSongName() + " | " + s.getArtistName() + " | " + s.getAlbumName());
                         }
                         songList = new JList<>(model);

@@ -39,6 +39,7 @@ public class SongInfo {
         JSONParser parser = new JSONParser();
         JSONArray information = (JSONArray) parser.parse(new FileReader("music.json"));
         boolean match = false;
+        boolean idFound = false;
 
         for (Object info : information) {
             JSONObject entryInfo = (JSONObject) info;
@@ -150,6 +151,7 @@ public class SongInfo {
                         newSong.setSongID((String) data.getValue());
                     }
                     else if ((((String) data.getValue()).toLowerCase()).equals(name.toLowerCase())) {
+                        idFound = true;
                         newSong.setSongName(songName);
                         newSong.setSongLength(songLength);
                         newSong.setSongID(songID);
@@ -168,6 +170,7 @@ public class SongInfo {
                 songList.add(newSong);
                 break;
             }
+            else if (idFound) { break; }
         }
         return songList;
     }
@@ -176,4 +179,32 @@ public class SongInfo {
         return songID;
     }
 
+    public ArrayList<Songs> findSongByID(String name) throws IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        JSONArray information = (JSONArray) parser.parse(new FileReader("music.json"));
+
+        for (Object info : information) {
+            JSONObject entryInfo = (JSONObject) info;
+            newSong = new Songs();
+
+            Map idSearch = ((Map) entryInfo.get("song"));
+            Iterator<Map.Entry> idItr = idSearch.entrySet().iterator();
+            while (idItr.hasNext()) {
+                Map.Entry data = idItr.next();
+                if (data.getKey().equals("id")) {
+                    this.termsName = (String) data.getValue();
+                    if ((((String) data.getValue()).toLowerCase()).equals(name.toLowerCase())) {
+                        newSong.setSongName(songName);
+                        newSong.setSongLength(songLength);
+                        newSong.setSongID(songID);
+                        newSong.setArtistName(artistName);
+                        newSong.setAlbumName(albumName);
+                        newSong.setTermsName(termsName);
+                        songList.add(newSong);
+                    }
+                }
+            }
+        }
+        return songList;
+    }
 }
