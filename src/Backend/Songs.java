@@ -27,6 +27,14 @@ public class Songs {
         songID = "";
     }
 
+    public Songs(String sn, Double sl, String an, String aln, String sID){
+        songName = sn;
+        songLength = sl;
+        artistName = an;
+        albumName = aln;
+        songID = sID;
+    }
+
 
     public String getSongName() {
         return songName;

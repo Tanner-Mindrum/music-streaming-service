@@ -306,16 +306,14 @@ public class ModifyUser {
         JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
         JSONArray songArray = (JSONArray) parser.parse(new FileReader("music.json"));
         ArrayList<Songs> songObjs = new ArrayList<>(); // add to this arraylist
-        JSONArray songs = new JSONArray();
-        boolean found = false;
 
         // For each user:
-        for (Object info : userArray) {
+        for (Object info : userArray){
             JSONObject userInfoSearch = (JSONObject) info;
 
             Map userInfo = ((Map) userInfoSearch.get("info"));
             Iterator<Map.Entry> releaseItr = userInfo.entrySet().iterator();
-            while (releaseItr.hasNext() && !found) {
+            while (releaseItr.hasNext()){
                 Map.Entry data = releaseItr.next();
                 if (data.getKey().equals("username")){
                     if (username.equals(data.getValue())){
@@ -326,25 +324,21 @@ public class ModifyUser {
                             // Iterate through songs in playlist
                             if (playlistName.equals(tempPlaylist.get("name").toString())){
                                 // Display songs in playlist
-                                songs = (JSONArray) tempPlaylist.get("songs");
-                                found = true;
-                                break;
+                                JSONArray songs = (JSONArray) tempPlaylist.get("songs");
+                                // Go through songs array
+                                for (int j = 0; j < songs.size(); j++) {
+                                    // Search json for ID match
+                                    SongInfo songInfo = new SongInfo();
+                                    songObjs.addAll(songInfo.findSong(songs.get(j).toString()));
+                                }
+                                break; // stop playlist loop if we find the right playlist
                             }
-                       }
+                        }
                     }
+                    break; // stop info loop if we find the right playlist
                 }
             }
-            if (found) {
-                break;
-            }
-        }
 
-        SongInfo songInfo;
-        // Go through songs array
-        for (Object song : songs) {
-            songInfo = new SongInfo();
-            // Search json for ID match
-            songObjs.addAll(songInfo.findSong(song.toString()));
         }
 
         return songObjs;
