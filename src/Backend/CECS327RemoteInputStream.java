@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Base64;
 import com.google.gson.JsonObject;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
+
 import java.util.concurrent.Semaphore;
 
 
@@ -60,7 +63,7 @@ public class CECS327RemoteInputStream extends InputStream {
      * frament in nextBuf
      * @param fileName The name of the file
     */
-    public CECS327RemoteInputStream(String fileName, Proxy proxy) throws IOException {
+    public CECS327RemoteInputStream(String fileName, Proxy proxy) throws IOException, ParseException {
         sem = new Semaphore(1);
         try
         {
@@ -72,8 +75,10 @@ public class CECS327RemoteInputStream extends InputStream {
         this.fileName = fileName;
         this.buf  = new byte[FRAGMENT_SIZE];
         this.nextBuf  = new byte[FRAGMENT_SIZE];
-        JsonObject jsonRet = proxy.synchExecution("getFileSize", String.valueOf(this.fileName));
-        this.total = Integer.parseInt(jsonRet.get("ret").getAsString());
+        System.out.println(this.fileName);
+        JSONObject jsonRet = (this.proxy).synchExecution("getFileSize", this.fileName);
+        System.out.println("passed");
+        this.total = Integer.parseInt((String) jsonRet.get("ret"));
         getBuff(fragment);
         fragment++;
      }
@@ -88,8 +93,14 @@ public class CECS327RemoteInputStream extends InputStream {
         {
             public void run() {
 
-                JsonObject jsonRet = proxy.synchExecution("getSongChunk", fileName, fileName, fragment);
-                String s = jsonRet.get("ret").getAsString();
+                JSONObject jsonRet = null;
+                try {
+                    jsonRet = proxy.synchExecution("getSongChunk", fileName, fileName, fragment);
+                } catch (IOException | ParseException e) {
+                    e.printStackTrace();
+                }
+                //assert jsonRet != null;
+                String s = jsonRet.get("ret").toString();
                 nextBuf = Base64.getDecoder().decode(s);
                 sem.release();
                 System.out.println("Read buffer");
@@ -120,8 +131,10 @@ public class CECS327RemoteInputStream extends InputStream {
           {
                 System.out.println(exc);
           }
-	      for (int i=0; i< FRAGMENT_SIZE; i++)
-		      buf[i] = nextBuf[i];
+	      for (int i=0; i< FRAGMENT_SIZE; i++) {
+              System.out.println(nextBuf[i]);
+              buf[i] = nextBuf[i];
+          }
 
 	      getBuff(fragment);
 	      fragment++;

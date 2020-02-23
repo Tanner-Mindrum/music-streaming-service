@@ -2,6 +2,7 @@ package Backend;
 
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.advanced.AdvancedPlayer;
+import org.json.simple.parser.ParseException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -11,20 +12,21 @@ public class Player {
 
     private javazoom.jl.player.advanced.AdvancedPlayer mp3player;
     private InputStream is;
-    protected Proxy proxy;
+    private Proxy proxy;
 
     // Constructs a null input stream and advanced player object
     public Player() {
         is = null;
         mp3player = null;
+        proxy = new Proxy();
     }
 
     public Player (String path) throws IOException, JavaLayerException {
         try {
-            is = new CECS327RemoteInputStream(path, proxy);
+            is = new CECS327RemoteInputStream(path, new Proxy());
             mp3player = new AdvancedPlayer(is);
         }
-        catch (FileNotFoundException f) {
+        catch (FileNotFoundException | ParseException f) {
             System.out.println("No data for song");
         }
         //mp3player = new AdvancedPlayer(is);
