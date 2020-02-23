@@ -51,7 +51,7 @@ public class SongInfo {
                 Map.Entry data = songItr.next();
                 if (data.getKey().equals("title")) {
                     this.songName = (String) data.getValue();
-                    if ((((String) data.getValue()).toLowerCase()).equals(name)) {
+                    if ((((String) data.getValue()).toLowerCase()).contains(name)) {
                         match = true;
                         newSong.setSongName((String) data.getValue());
                     }
@@ -89,7 +89,7 @@ public class SongInfo {
                     if (match) {
                         newSong.setAlbumName((String) data.getValue());
                     }
-                    else if ((((String) data.getValue()).toLowerCase()).equals(name)) {
+                    else if ((((String) data.getValue()).toLowerCase()).contains(name)) {
                         newSong.setSongName(songName);
                         newSong.setSongLength(songLength);
                         newSong.setSongID(songID);
@@ -109,7 +109,7 @@ public class SongInfo {
                     if (match) {
                         newSong.setArtistName((String) data.getValue());
                     }
-                    else if ((((String) data.getValue()).toLowerCase()).equals(name)) {
+                    else if ((((String) data.getValue()).toLowerCase()).contains(name)) {
                         newSong.setSongName(songName);
                         newSong.setSongLength(songLength);
                         newSong.setSongID(songID);
@@ -129,7 +129,7 @@ public class SongInfo {
                     if (match) {
                         newSong.setTermsName((String) data.getValue());
                     }
-                    else if ((((String) data.getValue()).toLowerCase()).equals(name)) {
+                    else if ((((String) data.getValue()).toLowerCase()).contains(name)) {
                         newSong.setSongName(songName);
                         newSong.setSongLength(songLength);
                         newSong.setSongID(songID);
@@ -150,7 +150,7 @@ public class SongInfo {
                     if (match) {
                         newSong.setSongID((String) data.getValue());
                     }
-                    else if ((((String) data.getValue()).toLowerCase()).equals(name.toLowerCase())) {
+                    else if ((((String) data.getValue()).toLowerCase()).contains(name.toLowerCase())) {
                         idFound = true;
                         newSong.setSongName(songName);
                         newSong.setSongLength(songLength);

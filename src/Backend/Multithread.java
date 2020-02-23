@@ -31,8 +31,9 @@ public class Multithread implements Runnable {
     @Override
     public void run() {
         try {
-            player = new Player("out/production/music-streaming-service/musicsrc/" +
-                    idToPlay + ".mp3");
+//            player = new Player("out/production/music-streaming-service/musicsrc/" +
+//                    idToPlay + ".mp3");
+            player = new Player(idToPlay);
             player.mp3play();
         } catch (IOException | JavaLayerException | InterruptedException e) {
             e.printStackTrace();
