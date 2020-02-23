@@ -5,10 +5,12 @@ import Backend.User;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
+import javax.xml.crypto.Data;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.net.DatagramSocket;
 
 public class LoginFrame extends JFrame {
 
@@ -28,8 +30,11 @@ public class LoginFrame extends JFrame {
     private static final int FRAME_WIDTH = 600;
     private static final int FRAME_HEIGHT = 450;
 
+    private DatagramSocket socket;
 
-    public LoginFrame() {
+
+    public LoginFrame(DatagramSocket socket) {
+        this.socket = socket;
         createComponents();
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
         this.setTitle("Login");
@@ -158,7 +163,7 @@ public class LoginFrame extends JFrame {
                             noPasswordEnteredLabel.setVisible(false);
                             userDoesNotExistLabel.setVisible(true);
                         } else {
-                            MusicFrame musicFrame = new MusicFrame(new User(enterUsernameField.getText().trim()));
+                            MusicFrame musicFrame = new MusicFrame(new User(enterUsernameField.getText().trim()), socket);
                             setVisible(false);
                             musicFrame.setLocationRelativeTo(null);
                             musicFrame.setVisible(true);
@@ -170,7 +175,7 @@ public class LoginFrame extends JFrame {
             }
             else if (click.getSource() == signUpButton) {
                 // Open sign up frame
-                SignUpFrame signUpFrame = new SignUpFrame();
+                SignUpFrame signUpFrame = new SignUpFrame(socket);
                 setVisible(false);
                 signUpFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 signUpFrame.setLocationRelativeTo(null);

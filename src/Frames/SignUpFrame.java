@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.net.DatagramSocket;
 import java.util.ArrayList;
 
 public class SignUpFrame extends JFrame {
@@ -45,7 +46,10 @@ public class SignUpFrame extends JFrame {
 
     private ArrayList<Integer> years = new ArrayList<>();
 
-    public SignUpFrame() {
+    private DatagramSocket socket;
+
+    public SignUpFrame(DatagramSocket socket) {
+        this.socket = socket;
         for (int i = 2020; i >= 0; i--) {
             years.add(i);
         }
@@ -185,7 +189,7 @@ public class SignUpFrame extends JFrame {
     class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent click) {
             if (click.getSource() == backButton) {
-                LoginFrame loginFrame = new LoginFrame();
+                LoginFrame loginFrame = new LoginFrame(socket);
                 setVisible(false);
                 loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 loginFrame.setLocationRelativeTo(null);
@@ -262,7 +266,7 @@ public class SignUpFrame extends JFrame {
                         User newUser = new User(emailField.getText().trim(), userNameField.getText().trim(), passwordField.getText().trim(),
                                 (String) monthBox.getSelectedItem(), Integer.toString((int) dayBox.getSelectedItem()),
                                 Integer.toString((int)yearBox.getSelectedItem()));
-                        MusicFrame musicFrame = new MusicFrame(newUser);
+                        MusicFrame musicFrame = new MusicFrame(newUser, socket);
                         setVisible(false);
                         musicFrame.setLocationRelativeTo(null);
                         musicFrame.setVisible(true);

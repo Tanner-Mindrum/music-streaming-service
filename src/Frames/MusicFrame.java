@@ -88,13 +88,11 @@ public class MusicFrame extends JFrame {
     private DatagramSocket socket;
     private InetAddress address;
     private JButton serverTestButton;
-    //private MusicFrame client;
 
 
-    public MusicFrame(User user) throws IOException, ParseException {
-        new MusicServer().start();
-        //client = new
-        socket = new DatagramSocket();
+    public MusicFrame(User user, DatagramSocket pSocket) throws IOException, ParseException {
+//        new MusicServer().start();
+        socket = pSocket;
         address = InetAddress.getByName("localhost");
         currUser = user;
         createComponents();
@@ -319,7 +317,7 @@ public class MusicFrame extends JFrame {
             }
             // This logs the user out of the musicframe
             else if (e.getSource() == m1) {
-                LoginFrame loginFrame = new LoginFrame();
+                LoginFrame loginFrame = new LoginFrame(socket);
                 setVisible(false);
                 loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 loginFrame.setLocationRelativeTo(null);
