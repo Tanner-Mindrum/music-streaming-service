@@ -11,6 +11,7 @@ public class Player {
 
     private javazoom.jl.player.advanced.AdvancedPlayer mp3player;
     private InputStream is;
+    protected Proxy proxy;
 
     // Constructs a null input stream and advanced player object
     public Player() {
@@ -20,7 +21,7 @@ public class Player {
 
     public Player (String path) throws IOException, JavaLayerException {
         try {
-            is = new CECS327InputStream(path);
+            is = new CECS327RemoteInputStream(path, proxy);
             mp3player = new AdvancedPlayer(is);
         }
         catch (FileNotFoundException f) {

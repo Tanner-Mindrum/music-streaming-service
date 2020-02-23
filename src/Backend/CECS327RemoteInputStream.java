@@ -1,10 +1,10 @@
 package Backend; /**
-* The CECS327RemoteInputStream extends InputStream class. The class implements 
+* The CECS327RemoteInputStream extends InputStream class. The class implements
 * markers that are used in AudioInputStream
 *
 * @author  Oscar Morales-Ponce
 * @version 0.15
-* @since   2019-01-24 
+* @since   2019-01-24
 */
 
 
@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Base64;
 import com.google.gson.JsonObject;
-import java.util.concurrent.Semaphore; 
+import java.util.concurrent.Semaphore;
 
 
 public class CECS327RemoteInputStream extends InputStream {
@@ -29,12 +29,12 @@ public class CECS327RemoteInputStream extends InputStream {
     */
     protected int pos = 0;
      /**
-     * It stores a buffer with FRAGMENT_SIZE bytes for the current reading. 
+     * It stores a buffer with FRAGMENT_SIZE bytes for the current reading.
      * This variable is useful for UDP sockets. Thus bur is the datagram
      */
     protected byte buf[];
     /**
-     * It prepares for the nuext buffer. In UDP sockets you can read nextbufer 
+     * It prepares for the nuext buffer. In UDP sockets you can read nextbufer
      * while buf is in use
      */
     protected byte nextBuf[];
@@ -46,32 +46,32 @@ public class CECS327RemoteInputStream extends InputStream {
      /**
      * File name to stream
      */
-    protected Long fileName;
+    protected String fileName;
     /**
     * Instance of an implementation of proxyInterface
     */
-    protected ProxyInterface proxy;
-    
-    Semaphore sem; 
+    protected Proxy proxy;
+
+    Semaphore sem;
 
 
     /**
-     * Constructor of the class. Initialize the variables and reads the first 
+     * Constructor of the class. Initialize the variables and reads the first
      * frament in nextBuf
      * @param fileName The name of the file
     */
-    public CECS327RemoteInputStream(Long fileName, ProxyInterface proxy) throws IOException {
-        sem = new Semaphore(1); 
+    public CECS327RemoteInputStream(String fileName, Proxy proxy) throws IOException {
+        sem = new Semaphore(1);
         try
         {
-            sem.acquire(); 
-        } catch (InterruptedException exc) { 
+            sem.acquire();
+        } catch (InterruptedException exc) {
             System.out.println(exc);
         }
         this.proxy = proxy;
-        this.fileName = fileName;        
-        this.buf  = new byte[FRAGMENT_SIZE];	
-        this.nextBuf  = new byte[FRAGMENT_SIZE];	
+        this.fileName = fileName;
+        this.buf  = new byte[FRAGMENT_SIZE];
+        this.nextBuf  = new byte[FRAGMENT_SIZE];
         JsonObject jsonRet = proxy.synchExecution("getFileSize", String.valueOf(this.fileName));
         this.total = Integer.parseInt(jsonRet.get("ret").getAsString());
         getBuff(fragment);
@@ -87,15 +87,15 @@ public class CECS327RemoteInputStream extends InputStream {
         new Thread()
         {
             public void run() {
-             
+
                 JsonObject jsonRet = proxy.synchExecution("getSongChunk", fileName, fileName, fragment);
                 String s = jsonRet.get("ret").getAsString();
                 nextBuf = Base64.getDecoder().decode(s);
-                sem.release(); 
+                sem.release();
                 System.out.println("Read buffer");
             }
         }.start();
-       
+
      }
 
     /**
@@ -103,11 +103,11 @@ public class CECS327RemoteInputStream extends InputStream {
     */
     @Override
     public synchronized int read() throws IOException {
-     
-     
-	  if (pos >= total) 
-	  {	
-            pos = 0;      
+
+
+	  if (pos >= total)
+	  {
+            pos = 0;
             return -1;
 	  }
 	  int posmod = pos % FRAGMENT_SIZE;
@@ -115,20 +115,20 @@ public class CECS327RemoteInputStream extends InputStream {
 	  {
           try
           {
-            sem.acquire(); 
-          }catch (InterruptedException exc) 
-          { 
+            sem.acquire();
+          }catch (InterruptedException exc)
+          {
                 System.out.println(exc);
           }
 	      for (int i=0; i< FRAGMENT_SIZE; i++)
 		      buf[i] = nextBuf[i];
-          
+
 	      getBuff(fragment);
 	      fragment++;
 	  }
 	  int p = pos % FRAGMENT_SIZE;
 	  pos ++;
-      return buf[p] & 0xff; 
+      return buf[p] & 0xff;
     }
 
     /**
@@ -177,8 +177,8 @@ public class CECS327RemoteInputStream extends InputStream {
     }
 
     /**
-     * Returns an estimate of the number of bytes that can be read 
-     * (or skipped over) from this input stream without blocking by 
+     * Returns an estimate of the number of bytes that can be read
+     * (or skipped over) from this input stream without blocking by
      * the next invocation of a method for this input stream.
     */
     @Override
@@ -193,7 +193,7 @@ public class CECS327RemoteInputStream extends InputStream {
     public boolean markSupported() {
         return true;
     }
-	
+
     /**
      * Marks the current position in this input stream.
     */
@@ -203,7 +203,7 @@ public class CECS327RemoteInputStream extends InputStream {
     }
 
     /**
-     * Repositions this stream to the position at the time the 
+     * Repositions this stream to the position at the time the
      * mark method was last called on this input stream.
     */
     @Override
@@ -214,13 +214,13 @@ public class CECS327RemoteInputStream extends InputStream {
         fragment++;
         getBuff(fragment);
     }
-	
+
     /**
-     * Closes this input stream and releases any system resources 
+     * Closes this input stream and releases any system resources
      * associated with the stream.
     */
     @Override
     public void close() throws IOException {
     }
-	
+
 }
