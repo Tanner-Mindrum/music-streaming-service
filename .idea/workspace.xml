@@ -3,11 +3,22 @@
   <component name="ChangeListManager">
     <list default="true" id="6490e37d-a31c-4aae-a17b-084fd43a8c4d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Assignment2/CECS327RemoteInputStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/CECS327RemoteInputStream.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Assignment2/Dispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/Dispatcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Assignment2/DispatcherInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/DispatcherInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Assignment2/SongDispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/SongDispatcher.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -25,6 +36,11 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="Assignment2" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application">
@@ -46,7 +62,9 @@
       <option name="presentableId" value="Default" />
       <updated>1581438572513</updated>
       <workItem from="1582053435220" duration="6087000" />
-      <workItem from="1582233569892" duration="466000" />
+      <workItem from="1582233569892" duration="4063000" />
+      <workItem from="1582431453523" duration="963000" />
+      <workItem from="1582485015258" duration="1449000" />
     </task>
     <servers />
   </component>
@@ -58,6 +76,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="414" y="76" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1581217309517" />
+    <state x="710" y="331" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1582431695816">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="710" y="331" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1582431695816" />
     <state x="958" y="125" key="#com.intellij.ide.util.MemberChooser" timestamp="1581631330231">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -94,10 +116,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="710" y="150" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1581629432278" />
-    <state x="668" y="349" key="com.intellij.ide.util.TipDialog" timestamp="1582233604470">
+    <state x="668" y="349" key="com.intellij.ide.util.TipDialog" timestamp="1582485026984">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="668" y="349" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1582233604470" />
+    <state x="668" y="349" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1582485026984" />
     <state x="578" y="330" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1581633292573">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

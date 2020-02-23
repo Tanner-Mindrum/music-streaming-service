@@ -1,4 +1,4 @@
-/**
+package Backend; /**
 * The CECS327RemoteInputStream extends InputStream class. The class implements 
 * markers that are used in AudioInputStream
 *
@@ -8,7 +8,6 @@
 */
 
 
-import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Base64;
