@@ -9,6 +9,9 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -82,8 +85,17 @@ public class MusicFrame extends JFrame {
         }
     };
 
+    private DatagramSocket socket;
+    private InetAddress address;
+    private JButton serverTestButton;
+    //private MusicFrame client;
+
 
     public MusicFrame(User user) throws IOException, ParseException {
+        new MusicServer().start();
+        //client = new
+        socket = new DatagramSocket();
+        address = InetAddress.getByName("localhost");
         currUser = user;
         createComponents();
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -148,6 +160,9 @@ public class MusicFrame extends JFrame {
         stopButton = new JButton("Stop Song");
         stopButton.addActionListener(listener);
 
+        serverTestButton = new JButton("Test server");
+        serverTestButton.addActionListener(listener);
+
         // Playlist Display
         modifyUser = new ModifyUser(currUser.getUsername());
         playlists = modifyUser.getPlaylists();
@@ -184,6 +199,7 @@ public class MusicFrame extends JFrame {
         //playlistBox.setBorder(BorderFactory.createLineBorder(Color.RED));
         playlistBox.add(createPlaylistButton);
         playlistBox.add(deletePlaylistButton);
+        playlistBox.add(serverTestButton);
         panel.add(playlistBox, BorderLayout.CENTER);
 
         displaySongArea = new JTextArea(20, 50);
@@ -314,12 +330,38 @@ public class MusicFrame extends JFrame {
                     multithread.stopSong();
                 }
             }
+            else if (e.getSource() == serverTestButton) {
+                String echo = null;
+                try {
+                    echo = send("hello server");
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                System.out.println("test: " + echo);
+                try {
+                    echo = send("server is working");
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                System.out.println("test 2: " + echo);
+            }
+        } // end actionlistener method
+    } // End listener class
 
+    public String send(String msg) throws IOException {
+        byte[] buf = msg.getBytes();
+        DatagramPacket packet
+                = new DatagramPacket(buf, buf.length, address, 4445);
+        socket.send(packet);
+        packet = new DatagramPacket(buf, buf.length);
+        socket.receive(packet);
+        String received = new String(
+                packet.getData(), 0, packet.getLength());
+        return received;
+    }
 
-        }
-
-
-
+    public void close() {
+        socket.close();
     }
 
     class CreatePlaylistFrame2 extends JFrame {
