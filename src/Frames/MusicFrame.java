@@ -309,7 +309,11 @@ public class MusicFrame extends JFrame {
                 if (songList != null && !songList.isSelectionEmpty()) {
                     String songID = foundFinalSongs.get(songList.getSelectedIndex()).getSongID();
 
-                    multithread = new Multithread();
+                    try {
+                        multithread = new Multithread();
+                    } catch (IOException | ParseException ex) {
+                        ex.printStackTrace();
+                    }
                     musicThread = new Thread(multithread);
                     multithread.setIdToPlay(songID);
                     musicThread.start();

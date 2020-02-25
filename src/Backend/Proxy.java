@@ -28,6 +28,8 @@ public class Proxy {
 
         Thread thread = new Thread();
         thread.join();
+
+        return null;
     }
 
 }

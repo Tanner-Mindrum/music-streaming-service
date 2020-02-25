@@ -15,7 +15,7 @@ public class Player {
     private Proxy proxy;
 
     // Constructs a null input stream and advanced player object
-    public Player() {
+    public Player() throws IOException, ParseException {
         is = null;
         mp3player = null;
         proxy = new Proxy();
@@ -26,7 +26,7 @@ public class Player {
             is = new CECS327RemoteInputStream(path, new Proxy());
             mp3player = new AdvancedPlayer(is);
         }
-        catch (FileNotFoundException | ParseException f) {
+        catch (FileNotFoundException | ParseException | InterruptedException f) {
             System.out.println("No data for song");
         }
         //mp3player = new AdvancedPlayer(is);
