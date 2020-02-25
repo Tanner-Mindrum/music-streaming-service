@@ -21,7 +21,7 @@ public class Proxy {
 
     public JSONObject synchExecution(String methodName, Object... param) throws InterruptedException {
         HashMap<String, JSONObject> methods = catalog.getMethod();
-        
+        JSONObject remoteMethod = methods.get(methodName);
 
         for (Object s : param) {
         }

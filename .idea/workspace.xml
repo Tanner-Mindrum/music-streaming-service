@@ -2,26 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6490e37d-a31c-4aae-a17b-084fd43a8c4d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Backend/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Backend/ModifyUser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Backend/Multithread.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Backend/Player.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Backend/SongInfo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Backend/Songs.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Frames/LoginFrame$ButtonListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Frames/LoginFrame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Frames/MusicFrame$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Frames/MusicFrame$CreatePlaylistFrame2$ButtonListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Frames/MusicFrame$CreatePlaylistFrame2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Frames/MusicFrame$MusicFrameListener$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Frames/MusicFrame$MusicFrameListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Frames/MusicFrame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Frames/SignUpFrame$ButtonListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Frames/SignUpFrame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Backend/CECS327RemoteInputStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/CECS327RemoteInputStream.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Backend/Dispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/Dispatcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Backend/DispatcherInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/DispatcherInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backend/Proxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/Proxy.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
