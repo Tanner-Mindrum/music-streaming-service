@@ -63,7 +63,7 @@ public class CECS327RemoteInputStream extends InputStream {
      * frament in nextBuf
      * @param fileName The name of the file
     */
-    public CECS327RemoteInputStream(String fileName, Proxy proxy) throws IOException, ParseException {
+    public CECS327RemoteInputStream(String fileName, Proxy proxy) throws IOException, ParseException, InterruptedException {
         sem = new Semaphore(1);
         try
         {
@@ -96,7 +96,7 @@ public class CECS327RemoteInputStream extends InputStream {
                 JSONObject jsonRet = null;
                 try {
                     jsonRet = proxy.synchExecution("getSongChunk", fileName, fileName, fragment);
-                } catch (IOException | ParseException e) {
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 //assert jsonRet != null;
