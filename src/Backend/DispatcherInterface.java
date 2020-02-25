@@ -1,5 +1,9 @@
 package Backend;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.ParseException;
+
 public interface DispatcherInterface {
 /*
 * Executes a remote method.
@@ -16,7 +20,7 @@ public interface DispatcherInterface {
 * To execute a method it does
 * ListOfObjects["SongServices"].class.getMethod("getSongChunk").invoke(songId, 2);
 */
-    public String dispatch(String request);
+    public String dispatch(String request) throws FileNotFoundException, IOException, ParseException, org.json.simple.parser.ParseException;
 /*
 * Register the objects and methods that the dispatcher supports.
 * It inserts remoteObject into a hash map of objects. For example,

@@ -11,7 +11,6 @@ package Backend; /**
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Base64;
-import com.google.gson.JsonObject;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
