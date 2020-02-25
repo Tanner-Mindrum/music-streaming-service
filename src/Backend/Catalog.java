@@ -20,11 +20,11 @@ public class Catalog {
         methods = (JSONArray) parser.parse(new FileReader("Methods.json"));
         for (Object m : methods) {
             JSONObject entryInfo = (JSONObject) m;
-            methodMap.put(entryInfo.get("remoteMethod"), entryInfo);
+            methodMap.put((String) entryInfo.get("remoteMethod"), entryInfo);
         }
     }
 
-    public JSONArray getMethod() {
-        return methods;
+    public HashMap<String, JSONObject> getMethod() {
+        return methodMap;
     }
 }
