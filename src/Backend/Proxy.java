@@ -23,11 +23,22 @@ public class Proxy {
         HashMap<String, JSONObject> methods = catalog.getMethod();
         JSONObject remoteMethod = methods.get(methodName);
 
+        Map objectInfo = ((Map) remoteMethod.get("param"));
+        Iterator<Map.Entry> objectItr = objectInfo.entrySet().iterator();
         for (Object s : param) {
+            System.out.println(remoteMethod);
+            while (objectItr.hasNext()){
+                Map.Entry data = objectItr.next();
+                data.setValue(s);
+                break;
+            }
         }
+        System.out.println(remoteMethod);
 
-        Thread thread = new Thread();
-        thread.join();
+//        Thread thread = new Thread();
+//        thread.join();
+
+        return remoteMethod;
     }
 
 }

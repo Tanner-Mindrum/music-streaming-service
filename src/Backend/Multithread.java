@@ -1,6 +1,7 @@
 package Backend;
 
 import javazoom.jl.decoder.JavaLayerException;
+import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 
@@ -12,7 +13,7 @@ public class Multithread implements Runnable {
     private boolean running;
 
     // Construct a default thread
-    public Multithread() {
+    public Multithread() throws IOException, ParseException {
         songInfo = new SongInfo();
         player = new Player();
         idToPlay = "";
@@ -20,7 +21,7 @@ public class Multithread implements Runnable {
     }
 
     // Construct a thread given an ID
-    public Multithread(String id) {
+    public Multithread(String id) throws IOException, ParseException {
         songInfo = new SongInfo();
         player = new Player();
         idToPlay = id;

@@ -1,11 +1,11 @@
 {
-    "remoteMethod":"getSongChunk",
-    "objectName":"Songs",
-    "param":
-    {
-          "song":"SOAPMKZ12A58A764B7",
-          "fragment":2
-    },
-  "ret" : "4056",
-  "semantic" : "maybe"
+  "remoteMethod":"getSongChunk",
+  "objectName":"Songs",
+  "param":
+  {
+    "song":"SOAPMKZ12A58A764B7",
+    "fragment":3
+  },
+"ret" : "long",
+"semantic" : "maybe"
 }

@@ -7,7 +7,7 @@
     "song": "String",
     "fragment": 2
   },
-  "ret": "long",
+  "ret": "123",
   "semantic": "maybe"
 },
 
@@ -17,7 +17,7 @@
   "param": {
     "song": "String"
   },
-  "ret": "long",
+  "ret": "123",
   "semantic": "maybe"
 }
 

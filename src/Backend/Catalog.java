@@ -18,8 +18,10 @@ public class Catalog {
     public Catalog () throws IOException, ParseException {
         JSONParser parser = new JSONParser();
         methods = (JSONArray) parser.parse(new FileReader("Methods.json"));
+        methodMap = new HashMap<String, JSONObject>();
         for (Object m : methods) {
             JSONObject entryInfo = (JSONObject) m;
+            System.out.println(entryInfo.get("remoteMethod"));
             methodMap.put((String) entryInfo.get("remoteMethod"), entryInfo);
         }
     }

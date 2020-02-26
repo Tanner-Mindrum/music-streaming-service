@@ -94,7 +94,7 @@ public class CECS327RemoteInputStream extends InputStream {
 
                 JSONObject jsonRet = null;
                 try {
-                    jsonRet = proxy.synchExecution("getSongChunk", fileName, fileName, fragment);
+                    jsonRet = proxy.synchExecution("getSongChunk", fileName, fragment);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

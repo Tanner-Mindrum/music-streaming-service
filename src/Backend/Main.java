@@ -11,6 +11,11 @@ public class Main {
 
     public static void main(String[] args) throws SocketException {
         new MusicServer().start();
+
+//        boolean serverRunning = true;
+//        if (!serverRunning){
+//            new MusicServer().start();
+//        }
         DatagramSocket socket = new DatagramSocket();
 //        socket.close();
 //        socket = new DatagramSocket();
