@@ -26,7 +26,7 @@ public class Player {
             is = new CECS327RemoteInputStream(path, new Proxy());
             mp3player = new AdvancedPlayer(is);
         }
-        catch (FileNotFoundException | ParseException | InterruptedException f) {
+        catch (FileNotFoundException | ParseException | InterruptedException | java.text.ParseException f) {
             System.out.println("No data for song");
         }
         //mp3player = new AdvancedPlayer(is);

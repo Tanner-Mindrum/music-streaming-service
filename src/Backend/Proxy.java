@@ -14,29 +14,34 @@ import java.util.Map;
 public class Proxy {
 
     private Catalog catalog;
+    private Dispatcher d;
+    private SongDispatcher sd;
 
     public Proxy() throws IOException, ParseException {
         catalog = new Catalog();
+        sd = new SongDispatcher();
+        d = new Dispatcher();
     }
 
-    public JSONObject synchExecution(String methodName, Object... param) throws InterruptedException {
+    public JSONObject synchExecution(String methodName, Object... param) throws InterruptedException, java.text.ParseException, ParseException, IOException {
         HashMap<String, JSONObject> methods = catalog.getMethod();
         JSONObject remoteMethod = methods.get(methodName);
 
         Map objectInfo = ((Map) remoteMethod.get("param"));
         Iterator<Map.Entry> objectItr = objectInfo.entrySet().iterator();
         for (Object s : param) {
-            System.out.println(remoteMethod);
+            System.out.println(s);
             while (objectItr.hasNext()){
                 Map.Entry data = objectItr.next();
                 data.setValue(s);
                 break;
             }
         }
-        System.out.println(remoteMethod);
+        System.out.println(methodName);
+        d.registerObject(sd, "SongServices");
+        String test = d.dispatch(methodName);
+        System.out.println(test);
 
-//        Thread thread = new Thread();
-//        thread.join();
 
         return remoteMethod;
     }

@@ -50,11 +50,12 @@ public class Dispatcher implements DispatcherInterface {
 
         JSONObject jsonReturn = new JSONObject();
         JSONParser parser = new JSONParser();
-        JSONObject jsonRequest = (JSONObject) parser.parse(new FileReader(request + ".json"));
+        JSONObject jsonRequest = (JSONObject) parser.parse(new FileReader("./" + request + ".json"));
 
         try {
             // Obtains the object pointing to SongServices
-            Object object = (String) ListOfObjects.get(jsonRequest.get("objectName"));
+            System.out.println(jsonRequest.get("objectName"));
+            Object object = (Object) ListOfObjects.get(jsonRequest.get("objectName"));
             Method[] methods = object.getClass().getMethods();
             Method method = null;
             // Obtains the method
@@ -98,9 +99,12 @@ public class Dispatcher implements DispatcherInterface {
                         break;
                 }
             }
+            // TODO: FIXO
             // Prepare the return
             Class returnType = method.getReturnType();
+            System.out.println(returnType);
             String ret = "";
+            System.out.println("METHOD: " + method);
             switch (returnType.getCanonicalName())
             {
                 case "java.lang.Long":
@@ -108,13 +112,16 @@ public class Dispatcher implements DispatcherInterface {
                     break;
                 case "java.lang.Integer":
                     ret = method.invoke(object, parameter).toString();
+                    System.out.println("RET: " + ret);
                     break;
                 case "java.lang.String":
+                    System.out.println("made it");
                     ret = (String)method.invoke(object, parameter);
+                    System.out.println("RET 2: " + ret);
                     break;
             }
             jsonReturn.put("ret", ret);
-   
+
         } catch (InvocationTargetException | IllegalAccessException e)
         {
         //    System.out.println(e);

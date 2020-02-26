@@ -10,6 +10,7 @@ package Backend; /**
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Base64;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
@@ -62,7 +63,7 @@ public class CECS327RemoteInputStream extends InputStream {
      * frament in nextBuf
      * @param fileName The name of the file
     */
-    public CECS327RemoteInputStream(String fileName, Proxy proxy) throws IOException, ParseException, InterruptedException {
+    public CECS327RemoteInputStream(String fileName, Proxy proxy) throws IOException, ParseException, InterruptedException, java.text.ParseException {
         sem = new Semaphore(1);
         try
         {
@@ -95,12 +96,15 @@ public class CECS327RemoteInputStream extends InputStream {
                 JSONObject jsonRet = null;
                 try {
                     jsonRet = proxy.synchExecution("getSongChunk", fileName, fragment);
-                } catch (InterruptedException e) {
+                } catch (InterruptedException | java.text.ParseException | ParseException | IOException e) {
                     e.printStackTrace();
                 }
                 //assert jsonRet != null;
                 String s = jsonRet.get("ret").toString();
                 nextBuf = Base64.getDecoder().decode(s);
+                System.out.println("Buf Array: " + Arrays.toString(buf));
+                System.out.println(buf.length);
+                System.out.println("nextBuf Array: " + Arrays.toString(nextBuf));
                 sem.release();
                 System.out.println("Read buffer");
             }
@@ -130,8 +134,10 @@ public class CECS327RemoteInputStream extends InputStream {
           {
                 System.out.println(exc);
           }
+          System.out.println(FRAGMENT_SIZE);
 	      for (int i=0; i< FRAGMENT_SIZE; i++) {
-              System.out.println(nextBuf[i]);
+//              System.out.println(i);
+//              System.out.println(nextBuf.length);
               buf[i] = nextBuf[i];
           }
 

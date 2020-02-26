@@ -1,6 +1,6 @@
 {
   "remoteMethod":"getSongChunk",
-  "objectName":"Songs",
+  "objectName":"SongServices",
   "param":
   {
     "song":"SOAPMKZ12A58A764B7",
