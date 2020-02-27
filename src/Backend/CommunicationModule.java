@@ -2,10 +2,18 @@ package Backend;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 
 public class CommunicationModule {
 
-    public CommunicationModule() {
+    private DatagramSocket socket;
+    private InetAddress address;
+
+
+    public CommunicationModule(DatagramSocket s, InetAddress a) {
+        socket = s;
+        address = a;
     }
 
     public String send(String msg) throws IOException {
@@ -19,6 +27,4 @@ public class CommunicationModule {
                 packet.getData(), 0, packet.getLength());
         return received;
     }
-
-
 }

@@ -10,12 +10,6 @@ public class Main {
     private DatagramSocket socket;
 
     public static void main(String[] args) throws SocketException {
-        //new MusicServer().start();
-
-        Dispatcher dispatcher = new Dispatcher();
-        SongDispatcher sd = new SongDispatcher();
-        dispatcher.registerObject(sd, "SongServices");
-
         DatagramSocket socket = new DatagramSocket();
 
         // Spawn initial log in frame

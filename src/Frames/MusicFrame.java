@@ -95,10 +95,10 @@ public class MusicFrame extends JFrame {
     private CommunicationModule cm;
 
     public MusicFrame(User user, DatagramSocket pSocket, Dispatcher d) throws IOException, ParseException {
-        cm = new CommunicationModule();
         socket = pSocket;
         dispatcher = d;
         proxy = new Proxy(dispatcher);
+        cm = new CommunicationModule();
         address = InetAddress.getByName("localhost");
         currUser = user;
         createComponents();
@@ -352,7 +352,7 @@ public class MusicFrame extends JFrame {
 //                    ex.printStackTrace();
 //                }
 //                System.out.println("test 2: " + echo);
-                cm.send();
+                cm.send(socket, address);
             }
         } // end actionlistener method
     } // End listener class

@@ -37,8 +37,7 @@ public class Proxy {
                 break;
             }
         }
-//        System.out.println(methodName);
-//        d.registerObject(sd, "SongServices");
+
         String test = dispatcher.dispatch(methodName);
 
         // return the ret
@@ -46,9 +45,6 @@ public class Proxy {
         JSONObject obj = (JSONObject) parse.parse(test);
 
         System.out.println(obj);
-
-//        JSONObject obj = new JSONObject();
-//        obj.put("ret", remoteMethod.get("ret"));
 
         return obj;
     }
