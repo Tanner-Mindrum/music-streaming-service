@@ -10,18 +10,16 @@ public class Main {
     private DatagramSocket socket;
 
     public static void main(String[] args) throws SocketException {
-        new MusicServer().start();
+        //new MusicServer().start();
 
-//        boolean serverRunning = true;
-//        if (!serverRunning){
-//            new MusicServer().start();
-//        }
+        Dispatcher dispatcher = new Dispatcher();
+        SongDispatcher sd = new SongDispatcher();
+        dispatcher.registerObject(sd, "SongServices");
+
         DatagramSocket socket = new DatagramSocket();
-//        socket.close();
-//        socket = new DatagramSocket();
 
         // Spawn initial log in frame
-        JFrame frame = new LoginFrame(socket);
+        JFrame frame = new LoginFrame(socket, dispatcher);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

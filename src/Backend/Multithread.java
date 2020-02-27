@@ -11,6 +11,7 @@ public class Multithread implements Runnable {
     private Player player;
     private String idToPlay;
     private boolean running;
+    private Proxy proxy;
 
     // Construct a default thread
     public Multithread() throws IOException, ParseException {
@@ -21,11 +22,12 @@ public class Multithread implements Runnable {
     }
 
     // Construct a thread given an ID
-    public Multithread(String id) throws IOException, ParseException {
+    public Multithread(String id, Proxy p) throws IOException, ParseException {
         songInfo = new SongInfo();
         player = new Player();
         idToPlay = id;
         running = false;
+        proxy = p;
     }
 
     // Run the thread, and this particular thread will call the mp3 player

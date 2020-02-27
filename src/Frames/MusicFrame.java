@@ -89,10 +89,16 @@ public class MusicFrame extends JFrame {
     private InetAddress address;
     private JButton serverTestButton;
 
+    private Proxy proxy;
+    private Dispatcher dispatcher;
 
-    public MusicFrame(User user, DatagramSocket pSocket) throws IOException, ParseException {
-//        new MusicServer().start();
+    private CommunicationModule cm;
+
+    public MusicFrame(User user, DatagramSocket pSocket, Dispatcher d) throws IOException, ParseException {
+        cm = new CommunicationModule();
         socket = pSocket;
+        dispatcher = d;
+        proxy = new Proxy(dispatcher);
         address = InetAddress.getByName("localhost");
         currUser = user;
         createComponents();
@@ -333,19 +339,20 @@ public class MusicFrame extends JFrame {
                 }
             }
             else if (e.getSource() == serverTestButton) {
-                String echo = null;
-                try {
-                    echo = send("hello server");
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-                System.out.println("test: " + echo);
-                try {
-                    echo = send("server is working");
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-                System.out.println("test 2: " + echo);
+//                String echo = null;
+//                try {
+//                    echo = send("hello server");
+//                } catch (IOException ex) {
+//                    ex.printStackTrace();
+//                }
+//                System.out.println("test: " + echo);
+//                try {
+//                    echo = send("server is working");
+//                } catch (IOException ex) {
+//                    ex.printStackTrace();
+//                }
+//                System.out.println("test 2: " + echo);
+                cm.send();
             }
         } // end actionlistener method
     } // End listener class

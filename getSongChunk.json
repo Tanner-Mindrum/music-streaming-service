@@ -3,9 +3,9 @@
   "objectName":"SongServices",
   "param":
   {
-    "song":"SOAPMKZ12A58A764B7",
-    "fragment":3
+    "song":"String",
+    "fragment": "Integer"
   },
-"ret" : "long",
+"ret" : "Long",
 "semantic" : "maybe"
 }

@@ -14,13 +14,13 @@ import java.util.Map;
 public class Proxy {
 
     private Catalog catalog;
-    private Dispatcher d;
+    private Dispatcher dispatcher;
     private SongDispatcher sd;
 
-    public Proxy() throws IOException, ParseException {
+    public Proxy(Dispatcher d) throws IOException, ParseException {
         catalog = new Catalog();
         sd = new SongDispatcher();
-        d = new Dispatcher();
+        dispatcher = d;
     }
 
     public JSONObject synchExecution(String methodName, Object... param) throws InterruptedException, java.text.ParseException, ParseException, IOException {
@@ -37,13 +37,19 @@ public class Proxy {
                 break;
             }
         }
-        System.out.println(methodName);
-        d.registerObject(sd, "SongServices");
-        String test = d.dispatch(methodName);
-        System.out.println(test);
+//        System.out.println(methodName);
+//        d.registerObject(sd, "SongServices");
+        String test = dispatcher.dispatch(methodName);
 
+        // return the ret
+        JSONParser parse = new JSONParser();
+        JSONObject obj = (JSONObject) parse.parse(test);
 
-        return remoteMethod;
+        System.out.println(obj);
+
+//        JSONObject obj = new JSONObject();
+//        obj.put("ret", remoteMethod.get("ret"));
+
+        return obj;
     }
-
 }

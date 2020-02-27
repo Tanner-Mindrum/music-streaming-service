@@ -3,8 +3,8 @@
   "objectName":"SongServices",
   "param":
   {
-    "song":"SOAPMKZ12A58A764B7"
+    "song":"String"
   },
-  "ret" : "123",
+  "ret" : "Long",
   "semantic" : "maybe"
 }

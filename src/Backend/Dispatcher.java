@@ -117,7 +117,6 @@ public class Dispatcher implements DispatcherInterface {
                 case "java.lang.String":
                     System.out.println("made it");
                     ret = (String)method.invoke(object, parameter);
-                    System.out.println("RET 2: " + ret);
                     break;
             }
             jsonReturn.put("ret", ret);
