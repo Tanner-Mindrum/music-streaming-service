@@ -13,7 +13,7 @@ public class Main {
         DatagramSocket socket = new DatagramSocket();
 
         // Spawn initial log in frame
-        JFrame frame = new LoginFrame(socket, dispatcher);
+        JFrame frame = new LoginFrame(socket);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

@@ -56,6 +56,7 @@ public class Dispatcher implements DispatcherInterface {
             // Obtains the object pointing to SongServices
             System.out.println(jsonRequest.get("objectName"));
             Object object = (Object) ListOfObjects.get(jsonRequest.get("objectName"));
+            System.out.println(ListOfObjects);
             Method[] methods = object.getClass().getMethods();
             Method method = null;
             // Obtains the method
@@ -139,6 +140,7 @@ public class Dispatcher implements DispatcherInterface {
     */
     public void registerObject(Object remoteMethod, String objectName)
     {
+        System.out.println("REGISTERING");
         ListOfObjects.put(objectName, remoteMethod);
     }
     

@@ -90,14 +90,12 @@ public class MusicFrame extends JFrame {
     private JButton serverTestButton;
 
     private Proxy proxy;
-    private Dispatcher dispatcher;
 
     private CommunicationModule cm;
 
-    public MusicFrame(User user, DatagramSocket pSocket, Dispatcher d) throws IOException, ParseException {
+    public MusicFrame(User user, DatagramSocket pSocket) throws IOException, ParseException {
         socket = pSocket;
-        dispatcher = d;
-        proxy = new Proxy(dispatcher);
+        proxy = new Proxy();
         cm = new CommunicationModule();
         address = InetAddress.getByName("localhost");
         currUser = user;
@@ -352,7 +350,7 @@ public class MusicFrame extends JFrame {
 //                    ex.printStackTrace();
 //                }
 //                System.out.println("test 2: " + echo);
-                cm.send(socket, address);
+                //System.out.println(cm.send(""););
             }
         } // end actionlistener method
     } // End listener class
