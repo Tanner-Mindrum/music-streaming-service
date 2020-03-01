@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -90,13 +91,12 @@ public class MusicFrame extends JFrame {
     private JButton serverTestButton;
 
     private Proxy proxy;
+    private CommunicationModule comm;
 
-    private CommunicationModule cm;
-
-    public MusicFrame(User user, DatagramSocket pSocket) throws IOException, ParseException {
+    public MusicFrame(User user, DatagramSocket pSocket, CommunicationModule cm) throws IOException, ParseException {
         socket = pSocket;
-        proxy = new Proxy();
-        cm = new CommunicationModule();
+        comm = cm;
+        proxy = new Proxy(comm);
         address = InetAddress.getByName("localhost");
         currUser = user;
         createComponents();
@@ -314,7 +314,7 @@ public class MusicFrame extends JFrame {
                     String songID = foundFinalSongs.get(songList.getSelectedIndex()).getSongID();
 
                     try {
-                        multithread = new Multithread();
+                        multithread = new Multithread(comm);
                     } catch (IOException | ParseException ex) {
                         ex.printStackTrace();
                     }
@@ -325,7 +325,12 @@ public class MusicFrame extends JFrame {
             }
             // This logs the user out of the musicframe
             else if (e.getSource() == m1) {
-                LoginFrame loginFrame = new LoginFrame(socket);
+                LoginFrame loginFrame = null;
+                try {
+                    loginFrame = new LoginFrame(socket);
+                } catch (UnknownHostException ex) {
+                    ex.printStackTrace();
+                }
                 setVisible(false);
                 loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 loginFrame.setLocationRelativeTo(null);

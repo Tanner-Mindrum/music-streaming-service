@@ -44,9 +44,8 @@ public class Dispatcher implements DispatcherInterface {
     }
     */
     public String dispatch(String request) throws IOException, ParseException, FileNotFoundException, org.json.simple.parser.ParseException {
-//        JsonObject jsonReturn = new JsonObject();
-//        JsonParser parser = new JsonParser();
-//        JsonObject jsonRequest = parser.parse(request).getAsJsonObject();
+
+        System.out.println("made it");
 
         JSONObject jsonReturn = new JSONObject();
         JSONParser parser = new JSONParser();
@@ -71,7 +70,8 @@ public class Dispatcher implements DispatcherInterface {
                 jsonReturn.put("error", "Method does not exist");
                 return jsonReturn.toString();
             }
-            // Prepare the  parameters 
+            // Prepare the  parameters
+            System.out.println("Method: " + method);
             Class[] types =  method.getParameterTypes();
             Object[] parameter = new Object[types.length];
             String[] strParam = new String[types.length];
@@ -81,8 +81,8 @@ public class Dispatcher implements DispatcherInterface {
             while (releaseItr.hasNext()) {
                 Map.Entry entry = releaseItr.next();
                 strParam[j++] = entry.getValue().toString();
-
             }
+            System.out.println(Arrays.toString(strParam));
 
             // Prepare parameters
             for (int i=0; i<types.length; i++)
@@ -105,7 +105,7 @@ public class Dispatcher implements DispatcherInterface {
             Class returnType = method.getReturnType();
             System.out.println(returnType);
             String ret = "";
-            System.out.println("METHOD: " + method);
+            System.out.println("made it 2");
             switch (returnType.getCanonicalName())
             {
                 case "java.lang.Long":
@@ -138,10 +138,11 @@ public class Dispatcher implements DispatcherInterface {
     * @objectName: It is the main class that contains the remote methods
     * each object can contain several remote methods
     */
-    public void registerObject(Object remoteMethod, String objectName)
+    public void registerObject(Object objectName, String remoteMethod)
     {
         System.out.println("REGISTERING");
-        ListOfObjects.put(objectName, remoteMethod);
+        ListOfObjects.put(remoteMethod, objectName);
+        System.out.println(ListOfObjects);
     }
     
     //////////////////

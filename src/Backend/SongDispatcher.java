@@ -33,7 +33,7 @@ public class SongDispatcher
     {
         byte buf[] = new byte[FRAGMENT_SIZE];
 
-        File file = new File("./" + key);
+        File file = new File("./" + key + ".mp3");
         FileInputStream inputStream = new FileInputStream(file);
         inputStream.skip(fragment * FRAGMENT_SIZE);
         inputStream.read(buf);
@@ -49,7 +49,7 @@ public class SongDispatcher
      */
     public Integer getFileSize(String key) throws FileNotFoundException, IOException
     {
-        File file = new File("./" + key);
+        File file = new File("./" + key + ".mp3");
         Integer total =  (int)file.length();
 
         return total;

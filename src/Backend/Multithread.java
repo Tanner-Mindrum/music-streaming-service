@@ -12,10 +12,12 @@ public class Multithread implements Runnable {
     private String idToPlay;
     private boolean running;
     private Proxy proxy;
+    private CommunicationModule comm;
 
     // Construct a default thread
-    public Multithread() throws IOException, ParseException {
+    public Multithread(CommunicationModule cm) throws IOException, ParseException {
         songInfo = new SongInfo();
+        comm = cm;
         player = new Player();
         idToPlay = "";
         running = false;
@@ -36,7 +38,10 @@ public class Multithread implements Runnable {
         try {
 //            player = new Player("out/production/music-streaming-service/musicsrc/" +
 //                    idToPlay + ".mp3");
-            player = new Player(idToPlay);
+            if (comm == null) {
+                System.out.println("BLEEHH");
+            }
+            player = new Player(idToPlay, comm);
             player.mp3play();
         } catch (IOException | JavaLayerException | InterruptedException e) {
             e.printStackTrace();

@@ -1,6 +1,8 @@
 package Frames;
 
+import Backend.CommunicationModule;
 import Backend.ModifyUser;
+import Backend.ServerMain;
 import Backend.User;
 import org.json.simple.parser.ParseException;
 
@@ -10,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.DatagramSocket;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 public class SignUpFrame extends JFrame {
@@ -47,9 +50,11 @@ public class SignUpFrame extends JFrame {
     private ArrayList<Integer> years = new ArrayList<>();
 
     private DatagramSocket socket;
+    private CommunicationModule comm;
 
-    public SignUpFrame(DatagramSocket socket) {
+    public SignUpFrame(DatagramSocket socket, CommunicationModule cm) {
         this.socket = socket;
+        comm = cm;
         for (int i = 2020; i >= 0; i--) {
             years.add(i);
         }
@@ -189,7 +194,12 @@ public class SignUpFrame extends JFrame {
     class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent click) {
             if (click.getSource() == backButton) {
-                LoginFrame loginFrame = new LoginFrame(socket);
+                LoginFrame loginFrame = null;
+                try {
+                    loginFrame = new LoginFrame(socket);
+                } catch (UnknownHostException e) {
+                    e.printStackTrace();
+                }
                 setVisible(false);
                 loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 loginFrame.setLocationRelativeTo(null);
@@ -266,7 +276,7 @@ public class SignUpFrame extends JFrame {
                         User newUser = new User(emailField.getText().trim(), userNameField.getText().trim(), passwordField.getText().trim(),
                                 (String) monthBox.getSelectedItem(), Integer.toString((int) dayBox.getSelectedItem()),
                                 Integer.toString((int)yearBox.getSelectedItem()));
-                        MusicFrame musicFrame = new MusicFrame(newUser, socket);
+                        MusicFrame musicFrame = new MusicFrame(newUser, socket, comm);
                         setVisible(false);
                         musicFrame.setLocationRelativeTo(null);
                         musicFrame.setVisible(true);

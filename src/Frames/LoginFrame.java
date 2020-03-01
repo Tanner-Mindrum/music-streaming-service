@@ -1,6 +1,8 @@
 package Frames;
 
+import Backend.CommunicationModule;
 import Backend.ModifyUser;
+import Backend.ServerMain;
 import Backend.User;
 import org.json.simple.parser.ParseException;
 
@@ -11,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.DatagramSocket;
+import java.net.UnknownHostException;
 
 public class LoginFrame extends JFrame {
 
@@ -31,9 +34,11 @@ public class LoginFrame extends JFrame {
     private static final int FRAME_HEIGHT = 450;
 
     private DatagramSocket socket;
+    private CommunicationModule comm;
 
 
-    public LoginFrame(DatagramSocket socket) {
+    public LoginFrame(DatagramSocket socket) throws UnknownHostException {
+        comm = new CommunicationModule();
         this.socket = socket;
         createComponents();
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -163,7 +168,7 @@ public class LoginFrame extends JFrame {
                             noPasswordEnteredLabel.setVisible(false);
                             userDoesNotExistLabel.setVisible(true);
                         } else {
-                            MusicFrame musicFrame = new MusicFrame(new User(enterUsernameField.getText().trim()), socket);
+                            MusicFrame musicFrame = new MusicFrame(new User(enterUsernameField.getText().trim()), socket, comm);
                             setVisible(false);
                             musicFrame.setLocationRelativeTo(null);
                             musicFrame.setVisible(true);
@@ -175,7 +180,7 @@ public class LoginFrame extends JFrame {
             }
             else if (click.getSource() == signUpButton) {
                 // Open sign up frame
-                SignUpFrame signUpFrame = new SignUpFrame(socket);
+                SignUpFrame signUpFrame = new SignUpFrame(socket, comm);
                 setVisible(false);
                 signUpFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 signUpFrame.setLocationRelativeTo(null);

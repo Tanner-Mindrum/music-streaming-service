@@ -12,11 +12,14 @@ public class CommunicationModule {
     private int port;
     private InetAddress address;
     private Dispatcher dispatcher;
+    private SongDispatcher songDispatcher;
 
     public CommunicationModule() throws UnknownHostException {
         port = 4445;
         address = InetAddress.getByName("localhost");
-        dispatcher = new Dispatcher();
+        this.dispatcher = new Dispatcher();
+        this.songDispatcher = new SongDispatcher();
+        dispatcher.registerObject(songDispatcher, "SongServices");
     }
 
     public void send(String msg) throws IOException {
@@ -28,6 +31,7 @@ public class CommunicationModule {
     }
 
     public String recieve(String request) throws ParseException, org.json.simple.parser.ParseException, IOException {
+        System.out.println("REQUEST: " + request);
         return dispatcher.dispatch(request);
     }
 }

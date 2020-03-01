@@ -13,17 +13,22 @@ public class Player {
     private javazoom.jl.player.advanced.AdvancedPlayer mp3player;
     private InputStream is;
     private Proxy proxy;
+    private CommunicationModule comm;
 
     // Constructs a null input stream and advanced player object
     public Player() throws IOException, ParseException {
         is = null;
         mp3player = null;
-        proxy = new Proxy();
     }
 
-    public Player (String path) throws IOException, JavaLayerException {
+    public Player (String path, CommunicationModule cm) throws IOException, JavaLayerException {
         try {
-            is = new CECS327RemoteInputStream(path, new Proxy());
+            comm = cm;
+            if (comm == null) {
+                System.out.println("AYY");
+            }
+            proxy = new Proxy(comm);
+            is = new CECS327RemoteInputStream(path, proxy);
             mp3player = new AdvancedPlayer(is);
         }
         catch (FileNotFoundException | ParseException | InterruptedException | java.text.ParseException f) {
