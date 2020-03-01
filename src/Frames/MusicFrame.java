@@ -328,7 +328,7 @@ public class MusicFrame extends JFrame {
                 LoginFrame loginFrame = null;
                 try {
                     loginFrame = new LoginFrame(socket);
-                } catch (UnknownHostException ex) {
+                } catch (IOException | ParseException ex) {
                     ex.printStackTrace();
                 }
                 setVisible(false);

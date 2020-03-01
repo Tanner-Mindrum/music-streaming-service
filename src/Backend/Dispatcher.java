@@ -25,8 +25,7 @@ public class Dispatcher implements DispatcherInterface {
     HashMap<String, Object> ListOfObjects;
     
 
-    public Dispatcher()
-    {
+    public Dispatcher() throws IOException, org.json.simple.parser.ParseException {
         ListOfObjects = new HashMap<String, Object>();
     }
     
@@ -46,10 +45,15 @@ public class Dispatcher implements DispatcherInterface {
     public String dispatch(String request) throws IOException, ParseException, FileNotFoundException, org.json.simple.parser.ParseException {
 
         System.out.println("made it");
+//        HashMap<String, JSONObject> methods2 = catalog.getMethod();
+//        JSONObject remoteMethod = methods2.get(request);
 
         JSONObject jsonReturn = new JSONObject();
         JSONParser parser = new JSONParser();
-        JSONObject jsonRequest = (JSONObject) parser.parse(new FileReader("./" + request + ".json"));
+        //JSONObject jsonRequest = (JSONObject) parser.parse(new FileReader("./" + request + ".json"));
+        JSONObject jsonRequest = (JSONObject) parser.parse(new FileReader("./" + "Methods" + ".json"));
+        jsonRequest = (JSONObject) jsonRequest.get(request);
+        System.out.println("JSON REQ: " + jsonRequest);
 
         try {
             // Obtains the object pointing to SongServices
@@ -148,7 +152,7 @@ public class Dispatcher implements DispatcherInterface {
     //////////////////
     /* Just for Testing */
     //////////////////
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, org.json.simple.parser.ParseException {
         // Instance of the Dispatcher
         Dispatcher dispatcher = new Dispatcher();
         // Instance of the services that te dispatcher can handle

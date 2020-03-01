@@ -14,7 +14,7 @@ public class CommunicationModule {
     private Dispatcher dispatcher;
     private SongDispatcher songDispatcher;
 
-    public CommunicationModule() throws UnknownHostException {
+    public CommunicationModule() throws IOException, org.json.simple.parser.ParseException {
         port = 4445;
         address = InetAddress.getByName("localhost");
         this.dispatcher = new Dispatcher();

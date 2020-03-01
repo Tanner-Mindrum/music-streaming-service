@@ -5,7 +5,7 @@
   "objectName": "SongServices",
   "param": {
     "song": "String",
-    "fragment": "java.lang.Integer"
+    "fragment": "java.lang.Long"
   },
   "ret": "java.lang.Long",
   "semantic": "maybe"

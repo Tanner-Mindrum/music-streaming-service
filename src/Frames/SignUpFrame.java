@@ -197,7 +197,9 @@ public class SignUpFrame extends JFrame {
                 LoginFrame loginFrame = null;
                 try {
                     loginFrame = new LoginFrame(socket);
-                } catch (UnknownHostException e) {
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
                     e.printStackTrace();
                 }
                 setVisible(false);

@@ -37,7 +37,7 @@ public class LoginFrame extends JFrame {
     private CommunicationModule comm;
 
 
-    public LoginFrame(DatagramSocket socket) throws UnknownHostException {
+    public LoginFrame(DatagramSocket socket) throws IOException, ParseException {
         comm = new CommunicationModule();
         this.socket = socket;
         createComponents();
