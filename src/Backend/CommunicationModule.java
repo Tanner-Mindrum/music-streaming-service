@@ -1,5 +1,7 @@
 package Backend;
 
+import org.json.simple.JSONObject;
+
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -31,7 +33,6 @@ public class CommunicationModule {
     }
 
     public String recieve(String request) throws ParseException, org.json.simple.parser.ParseException, IOException {
-        System.out.println("REQUEST: " + request);
         return dispatcher.dispatch(request);
     }
 }

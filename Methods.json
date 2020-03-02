@@ -4,7 +4,7 @@
   "remoteMethod": "getSongChunk",
   "objectName": "SongServices",
   "param": {
-    "song": "String",
+    "song": "java.lang.String",
     "fragment": "java.lang.Long"
   },
   "ret": "java.lang.Long",

@@ -21,7 +21,6 @@ public class Catalog {
         methodMap = new HashMap<String, JSONObject>();
         for (Object m : methods) {
             JSONObject entryInfo = (JSONObject) m;
-            System.out.println(entryInfo.get("remoteMethod"));
             methodMap.put((String) entryInfo.get("remoteMethod"), entryInfo);
         }
     }

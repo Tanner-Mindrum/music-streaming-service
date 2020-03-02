@@ -69,16 +69,12 @@ public class CECS327RemoteInputStream extends InputStream {
         {
             sem.acquire();
         } catch (InterruptedException exc) {
-            System.out.println(exc);
         }
         this.proxy = proxy;
         this.fileName = fileName;
         this.buf  = new byte[FRAGMENT_SIZE];
         this.nextBuf  = new byte[FRAGMENT_SIZE];
-        System.out.println(this.fileName);
         JSONObject jsonRet = (this.proxy).synchExecution("getFileSize", this.fileName);
-        System.out.println("JSONRET: " + jsonRet);
-        System.out.println("passed");
         this.total = Integer.parseInt((String) jsonRet.get("ret"));
         getBuff(fragment);
         fragment++;
@@ -96,7 +92,6 @@ public class CECS327RemoteInputStream extends InputStream {
 
                 JSONObject jsonRet = null;
                 try {
-                    System.out.println("FRAGEMENT: " + fragment);
                     jsonRet = proxy.synchExecution("getSongChunk", fileName, fragment);
                 } catch (InterruptedException | java.text.ParseException | ParseException | IOException e) {
                     e.printStackTrace();
@@ -104,11 +99,7 @@ public class CECS327RemoteInputStream extends InputStream {
                 //assert jsonRet != null;
                 String s = jsonRet.get("ret").toString();
                 nextBuf = Base64.getDecoder().decode(s);
-                System.out.println("Buf Array: " + Arrays.toString(buf));
-                System.out.println(buf.length);
-                System.out.println("nextBuf Array: " + Arrays.toString(nextBuf));
                 sem.release();
-                System.out.println("Read buffer");
             }
         }.start();
 
@@ -136,11 +127,6 @@ public class CECS327RemoteInputStream extends InputStream {
           {
                 System.out.println(exc);
           }
-          System.out.println(FRAGMENT_SIZE);
-//	      for (int i=0; i< FRAGMENT_SIZE; i++) {
-//
-//              buf[i] = nextBuf[i];
-//          }
           System.arraycopy(nextBuf, 0, buf, 0, FRAGMENT_SIZE);
 
 	      getBuff(fragment);

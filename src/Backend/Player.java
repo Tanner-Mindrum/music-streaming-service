@@ -24,9 +24,6 @@ public class Player {
     public Player (String path, CommunicationModule cm) throws IOException, JavaLayerException {
         try {
             comm = cm;
-            if (comm == null) {
-                System.out.println("AYY");
-            }
             proxy = new Proxy(comm);
             is = new CECS327RemoteInputStream(path, proxy);
             mp3player = new AdvancedPlayer(is);

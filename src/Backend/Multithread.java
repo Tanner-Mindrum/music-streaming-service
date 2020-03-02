@@ -38,9 +38,6 @@ public class Multithread implements Runnable {
         try {
 //            player = new Player("out/production/music-streaming-service/musicsrc/" +
 //                    idToPlay + ".mp3");
-            if (comm == null) {
-                System.out.println("BLEEHH");
-            }
             player = new Player(idToPlay, comm);
             player.mp3play();
         } catch (IOException | JavaLayerException | InterruptedException e) {

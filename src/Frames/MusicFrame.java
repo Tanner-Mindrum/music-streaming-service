@@ -138,12 +138,6 @@ public class MusicFrame extends JFrame {
         searchField.setAlignmentX(Component.CENTER_ALIGNMENT);
         searchField.addActionListener(listener);
 
-//        songList.addListSelectionListener(e -> {
-//            if (e.getValueIsAdjusting()) {
-//                System.out.println("hello");
-//            }
-//        });
-
         searchButton = new JButton("Search");
         searchButton.addActionListener(listener);
 

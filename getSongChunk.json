@@ -3,7 +3,7 @@
   "objectName":"SongServices",
   "param":
   {
-    "song":"java.lang.String",
+    "song":"String",
     "fragment": "java.lang.Long"
   },
 "ret" : "java.lang.Long",

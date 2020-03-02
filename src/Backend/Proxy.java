@@ -24,13 +24,10 @@ public class Proxy {
     public JSONObject synchExecution(String methodName, Object... param) throws InterruptedException, java.text.ParseException, ParseException, IOException {
         HashMap<String, JSONObject> methods = catalog.getMethod();
         JSONObject remoteMethod = methods.get(methodName);
-//        JSONParser parser = new JSONParser();
-//        JSONObject jsonRequest = (JSONObject) parser.parse(new FileReader("./" + methodName + ".json"));
 
         Map objectInfo = ((Map) remoteMethod.get("param"));
         Iterator<Map.Entry> objectItr = objectInfo.entrySet().iterator();
         for (Object s : param) {
-            System.out.println(s);
             while (objectItr.hasNext()){
                 Map.Entry data = objectItr.next();
                 data.setValue(s);
@@ -38,15 +35,9 @@ public class Proxy {
             }
         }
 
-        System.out.println("REM: " + remoteMethod);
-
-        String test = comm.recieve(methodName);
-
-        // return the ret
+        String test = comm.recieve(remoteMethod.toString());
         JSONParser parse = new JSONParser();
         JSONObject obj = (JSONObject) parse.parse(test);
-
-        System.out.println(obj);
 
         return obj;
     }

@@ -6,14 +6,15 @@
       <change beforePath="$PROJECT_DIR$/Methods.json" beforeDir="false" afterPath="$PROJECT_DIR$/Methods.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/getSongChunk.json" beforeDir="false" afterPath="$PROJECT_DIR$/getSongChunk.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Backend/CECS327RemoteInputStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/CECS327RemoteInputStream.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backend/Catalog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/Catalog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Backend/CommunicationModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/CommunicationModule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Backend/Dispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/Dispatcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Backend/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backend/DispatcherInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/DispatcherInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backend/Multithread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/Multithread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backend/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Backend/Proxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/Proxy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Backend/ServerMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/ServerMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Frames/LoginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Frames/LoginFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Frames/MusicFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Frames/MusicFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Frames/SignUpFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Frames/SignUpFrame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +44,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../test/music-streaming-service" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
@@ -50,7 +52,7 @@
       <recent name="C:\CECS 327\music-streaming-service" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ServerMain">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" singleton="false">
       <option name="MAIN_CLASS_NAME" value="Backend.Main" />
       <module name="music-streaming-service" />
@@ -89,7 +91,7 @@
       <updated>1581438572513</updated>
       <workItem from="1582750487056" duration="7967000" />
       <workItem from="1583096419359" duration="602000" />
-      <workItem from="1583097356981" duration="9297000" />
+      <workItem from="1583097356981" duration="15496000" />
     </task>
     <servers />
   </component>
@@ -113,26 +115,30 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="271" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1582834332805" />
-    <state width="915" height="318" key="GridCell.Tab.0.bottom" timestamp="1583106724700">
+    <state x="1219" y="282" key="FileChooserDialogImpl" timestamp="1583108294964">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="1219" y="282" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1583108294964" />
+    <state width="914" height="246" key="GridCell.Tab.0.bottom" timestamp="1583112891272">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1582686004264" />
-    <state width="915" height="318" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1583106724700" />
-    <state width="915" height="318" key="GridCell.Tab.0.center" timestamp="1583106724700">
+    <state width="914" height="246" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1583112891272" />
+    <state width="914" height="246" key="GridCell.Tab.0.center" timestamp="1583112891272">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1582686004264" />
-    <state width="915" height="318" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1583106724700" />
-    <state width="915" height="318" key="GridCell.Tab.0.left" timestamp="1583106724699">
+    <state width="914" height="246" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1583112891272" />
+    <state width="914" height="246" key="GridCell.Tab.0.left" timestamp="1583112891272">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1582686004263" />
-    <state width="915" height="318" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1583106724699" />
-    <state width="915" height="318" key="GridCell.Tab.0.right" timestamp="1583106724700">
+    <state width="914" height="246" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1583112891272" />
+    <state width="914" height="246" key="GridCell.Tab.0.right" timestamp="1583112891272">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1582686004264" />
-    <state width="915" height="318" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1583106724700" />
+    <state width="914" height="246" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1583112891272" />
     <state x="147" y="71" key="MergeDialog" timestamp="1582486841100">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

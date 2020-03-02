@@ -16,6 +16,7 @@ import java.lang.reflect.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
@@ -44,22 +45,13 @@ public class Dispatcher implements DispatcherInterface {
     */
     public String dispatch(String request) throws IOException, ParseException, FileNotFoundException, org.json.simple.parser.ParseException {
 
-        System.out.println("made it");
-//        HashMap<String, JSONObject> methods2 = catalog.getMethod();
-//        JSONObject remoteMethod = methods2.get(request);
-
         JSONObject jsonReturn = new JSONObject();
         JSONParser parser = new JSONParser();
-        //JSONObject jsonRequest = (JSONObject) parser.parse(new FileReader("./" + request + ".json"));
-        JSONObject jsonRequest = (JSONObject) parser.parse(new FileReader("./" + "Methods" + ".json"));
-        jsonRequest = (JSONObject) jsonRequest.get(request);
-        System.out.println("JSON REQ: " + jsonRequest);
+        JSONObject jsonRequest = (JSONObject) parser.parse((request));
 
         try {
             // Obtains the object pointing to SongServices
-            System.out.println(jsonRequest.get("objectName"));
             Object object = (Object) ListOfObjects.get(jsonRequest.get("objectName"));
-            System.out.println(ListOfObjects);
             Method[] methods = object.getClass().getMethods();
             Method method = null;
             // Obtains the method
@@ -75,7 +67,6 @@ public class Dispatcher implements DispatcherInterface {
                 return jsonReturn.toString();
             }
             // Prepare the  parameters
-            System.out.println("Method: " + method);
             Class[] types =  method.getParameterTypes();
             Object[] parameter = new Object[types.length];
             String[] strParam = new String[types.length];
@@ -86,7 +77,6 @@ public class Dispatcher implements DispatcherInterface {
                 Map.Entry entry = releaseItr.next();
                 strParam[j++] = entry.getValue().toString();
             }
-            System.out.println(Arrays.toString(strParam));
 
             // Prepare parameters
             for (int i=0; i<types.length; i++)
@@ -104,12 +94,9 @@ public class Dispatcher implements DispatcherInterface {
                         break;
                 }
             }
-            // TODO: FIXO
             // Prepare the return
             Class returnType = method.getReturnType();
-            System.out.println(returnType);
             String ret = "";
-            System.out.println("made it 2");
             switch (returnType.getCanonicalName())
             {
                 case "java.lang.Long":
@@ -117,10 +104,8 @@ public class Dispatcher implements DispatcherInterface {
                     break;
                 case "java.lang.Integer":
                     ret = method.invoke(object, parameter).toString();
-                    System.out.println("RET: " + ret);
                     break;
                 case "java.lang.String":
-                    System.out.println("made it");
                     ret = (String)method.invoke(object, parameter);
                     break;
             }
@@ -128,7 +113,6 @@ public class Dispatcher implements DispatcherInterface {
 
         } catch (InvocationTargetException | IllegalAccessException e)
         {
-        //    System.out.println(e);
             jsonReturn.put("error", "Error on " + jsonRequest.get("objectName").toString() + "." + jsonRequest.get("remoteMethod").toString());
         }
      
@@ -144,9 +128,7 @@ public class Dispatcher implements DispatcherInterface {
     */
     public void registerObject(Object objectName, String remoteMethod)
     {
-        System.out.println("REGISTERING");
         ListOfObjects.put(remoteMethod, objectName);
-        System.out.println(ListOfObjects);
     }
     
     //////////////////
@@ -165,10 +147,8 @@ public class Dispatcher implements DispatcherInterface {
         // is obtained from the communication module
         try {
             String jsonRequest = new String(Files.readAllBytes(Paths.get("./getSongChunk.json")));
-            String ret = dispatcher.dispatch(jsonRequest);
-            System.out.println(ret);
+            //String ret = dispatcher.dispatch(jsonRequest);
 
-            //System.out.println(jsonRequest);
         } catch (Exception e)
         {
             System.out.println(e);
