@@ -32,7 +32,20 @@ public class CommunicationModule {
         socket.close();
     }
 
-    public String recieve(String request) throws ParseException, org.json.simple.parser.ParseException, IOException {
+    public String sendEcho(String msg) throws IOException {
+        final DatagramSocket socket = new DatagramSocket();
+        byte[] buf;
+        buf = msg.getBytes();
+        DatagramPacket packet = new DatagramPacket(buf, buf.length, address, 4445);
+        socket.send(packet);
+        packet = new DatagramPacket(buf, buf.length);
+        socket.receive(packet);
+        //System.out.println("hi");
+        String received = new String(packet.getData(), 0, packet.getLength());
+        return received;
+    }
+
+    public String receive(String request) throws ParseException, org.json.simple.parser.ParseException, IOException {
         return dispatcher.dispatch(request);
     }
 }

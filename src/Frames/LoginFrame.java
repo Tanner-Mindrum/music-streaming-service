@@ -39,6 +39,8 @@ public class LoginFrame extends JFrame {
 
     public LoginFrame(DatagramSocket socket) throws IOException, ParseException {
         comm = new CommunicationModule();
+        //System.out.println(comm.sendEcho("hello"));
+//        comm.sendEcho("end");
         this.socket = socket;
         createComponents();
         setSize(FRAME_WIDTH, FRAME_HEIGHT);

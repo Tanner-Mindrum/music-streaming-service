@@ -12,6 +12,7 @@ public class MusicServer extends Thread {
     private byte[] buf = new byte[256];
 
     public MusicServer() throws SocketException {
+        //System.out.println("hi");
         socket = new DatagramSocket(4445);
     }
 
@@ -19,8 +20,7 @@ public class MusicServer extends Thread {
         boolean running = true;
 
         while (running) {
-            DatagramPacket packet
-                    = new DatagramPacket(buf, buf.length);
+            DatagramPacket packet = new DatagramPacket(buf, buf.length);
             try {
                 socket.receive(packet);
             } catch (IOException e) {
@@ -30,8 +30,7 @@ public class MusicServer extends Thread {
             InetAddress address = packet.getAddress();
             int port = packet.getPort();
             packet = new DatagramPacket(buf, buf.length, address, port);
-            String received
-                    = new String(packet.getData(), 0, packet.getLength());
+            String received = new String(packet.getData(), 0, packet.getLength());
 
             if (received.equals("end")) {
                 running = false;

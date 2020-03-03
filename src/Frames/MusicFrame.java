@@ -336,20 +336,19 @@ public class MusicFrame extends JFrame {
                 }
             }
             else if (e.getSource() == serverTestButton) {
-//                String echo = null;
-//                try {
-//                    echo = send("hello server");
-//                } catch (IOException ex) {
-//                    ex.printStackTrace();
-//                }
-//                System.out.println("test: " + echo);
-//                try {
-//                    echo = send("server is working");
-//                } catch (IOException ex) {
-//                    ex.printStackTrace();
-//                }
-//                System.out.println("test 2: " + echo);
-                //System.out.println(cm.send(""););
+                String echo = null;
+                try {
+                    echo = send("hello server");
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                System.out.println("test: " + echo);
+                try {
+                    echo = send("server is working");
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                System.out.println("test 2: " + echo);
             }
         } // end actionlistener method
     } // End listener class

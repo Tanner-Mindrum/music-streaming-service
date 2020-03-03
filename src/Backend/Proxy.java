@@ -1,11 +1,9 @@
 package Backend;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -35,7 +33,7 @@ public class Proxy {
             }
         }
 
-        String test = comm.recieve(remoteMethod.toString());
+        String test = comm.receive(remoteMethod.toString());
         JSONParser parse = new JSONParser();
         JSONObject obj = (JSONObject) parse.parse(test);
 
