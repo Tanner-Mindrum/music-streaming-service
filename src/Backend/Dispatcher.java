@@ -47,7 +47,9 @@ public class Dispatcher implements DispatcherInterface {
 
         JSONObject jsonReturn = new JSONObject();
         JSONParser parser = new JSONParser();
-        JSONObject jsonRequest = (JSONObject) parser.parse((request));
+        JSONObject jsonRequest = (JSONObject) parser.parse(request);
+
+        //System.out.println(jsonRequest);
 
         try {
             // Obtains the object pointing to SongServices
@@ -115,6 +117,8 @@ public class Dispatcher implements DispatcherInterface {
         {
             jsonReturn.put("error", "Error on " + jsonRequest.get("objectName").toString() + "." + jsonRequest.get("remoteMethod").toString());
         }
+
+        //System.out.println(jsonReturn.toString());
      
         return jsonReturn.toString();
     }

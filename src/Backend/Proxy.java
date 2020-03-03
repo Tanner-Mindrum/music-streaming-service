@@ -33,7 +33,10 @@ public class Proxy {
             }
         }
 
-        String test = comm.receive(remoteMethod.toString());
+        //System.out.println("PROX: " + remoteMethod);
+
+        //String test = comm.receive(remoteMethod.toString());
+        String test = comm.sendEcho(remoteMethod.toString());
         JSONParser parse = new JSONParser();
         JSONObject obj = (JSONObject) parse.parse(test);
 

@@ -1,19 +1,32 @@
 package Backend;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Base64;
 
 public class MusicServer extends Thread {
 
     private DatagramSocket socket;
     private byte[] buf = new byte[256];
+    private Dispatcher dispatcher;
+    private SongDispatcher songDispatcher;
 
-    public MusicServer() throws SocketException {
-        //System.out.println("hi");
+    public MusicServer() throws IOException, ParseException {
         socket = new DatagramSocket(4445);
+        this.dispatcher = new Dispatcher();
+        this.songDispatcher = new SongDispatcher();
+        dispatcher.registerObject(songDispatcher, "SongServices");
+        System.out.println("SERVER STARTED");
     }
 
     public void run() {
@@ -27,18 +40,25 @@ public class MusicServer extends Thread {
                 e.printStackTrace();
             }
 
-            InetAddress address = packet.getAddress();
-            int port = packet.getPort();
-            packet = new DatagramPacket(buf, buf.length, address, port);
             String received = new String(packet.getData(), 0, packet.getLength());
 
-            if (received.equals("end")) {
-                running = false;
-                continue;
-            }
+            System.out.println("SERVER RECEIVE: " + received);
+
+            InetAddress address = packet.getAddress();
+            int port = packet.getPort();
+
             try {
+                String ret = dispatcher.dispatch(received);
+                byte[] buf;
+                buf = ret.getBytes();
+                packet = new DatagramPacket(buf, buf.length, address, port);
+                if (received.equals("end")) {
+                    running = false;
+                    continue;
+                }
                 socket.send(packet);
-            } catch (IOException e) {
+            }
+            catch (IOException | java.text.ParseException | ParseException e) {
                 e.printStackTrace();
             }
         }
