@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6490e37d-a31c-4aae-a17b-084fd43a8c4d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Methods.json" beforeDir="false" afterPath="$PROJECT_DIR$/Methods.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Backend/SongInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/music-streaming-service/Backend/SongInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Backend/MusicServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/MusicServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Backend/SongInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/SongInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Frames/MusicFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Frames/MusicFrame.java" afterDir="false" />
-    </list>
+    <list default="true" id="6490e37d-a31c-4aae-a17b-084fd43a8c4d" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -86,7 +79,7 @@
       <workItem from="1583096419359" duration="602000" />
       <workItem from="1583097356981" duration="17853000" />
       <workItem from="1583262232130" duration="10842000" />
-      <workItem from="1583352051874" duration="5645000" />
+      <workItem from="1583352051874" duration="5969000" />
     </task>
     <servers />
   </component>
