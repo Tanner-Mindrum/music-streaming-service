@@ -35,7 +35,7 @@ public class SongInfo {
      * @throws IOException
      * @throws ParseException
      */
-    public ArrayList<Songs> findSong(String name) throws IOException, ParseException {
+    public String findSong(String name) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
         JSONArray information = (JSONArray) parser.parse(new FileReader("music.json"));
         boolean match = false;
@@ -163,8 +163,6 @@ public class SongInfo {
                 }
             }
 
-
-
             // When we find a song match, we only display that one song, so we break
             if (match) {
                 songList.add(newSong);
@@ -173,14 +171,17 @@ public class SongInfo {
             else if (idFound) { break; }
         }
 
-        ArrayList<String> songNames = new ArrayList<>();
+        ArrayList<String> songInfo = new ArrayList<>();
         for (Songs s : songList) {
-            songNames.add(s.getSongName());
+            System.out.println(s.getClass());
+            songInfo.add(s.getSongName() + " | " + s.getArtistName() + " | " + s.getAlbumName());
         }
-        String songNamesAsString = String.join(",, ", songNames);
+        String songNamesAsString = String.join(",, ", songInfo);
         System.out.println(songNamesAsString);
 
-        return songList;
+
+        //return songList;
+        return songNamesAsString;
     }
 
     public String getSongID() {

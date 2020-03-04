@@ -14,6 +14,7 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -49,7 +50,9 @@ public class MusicFrame extends JFrame {
     private JMenuItem m1;
     private JButton stopButton;
     ArrayList<Songs> foundSongs = new ArrayList<Songs>();
+    ArrayList<String> foundSongsStrings = new ArrayList<>();
     ArrayList<Songs> foundFinalSongs = new ArrayList<Songs>();
+    ArrayList<String> foundFinalSongsStrings = new ArrayList<>();
     public MouseListener mouseListener = new MouseAdapter() {
         public void mouseClicked(MouseEvent mouseEvent){
             JList<String> theList = (JList) mouseEvent.getSource();
@@ -223,11 +226,18 @@ public class MusicFrame extends JFrame {
             The song arraylist will be cleared and the found songs will be displayed
             into the list for the user */
             if (e.getSource() == searchButton || e.getSource() == searchField) {
-                foundSongs.clear();
-                foundFinalSongs.clear();
+                foundSongsStrings.clear();
+                //foundSongs.clear();
+                foundFinalSongsStrings.clear();
+                //foundFinalSongs.clear();
                 // Search for song
                 try {
-                    foundSongs.addAll(findSongInfo.findSong(searchField.getText().trim().toLowerCase()));
+                    //foundSongsStrings.add()
+                    String[] tempSongs = findSongInfo.findSong(searchField.getText().trim().toLowerCase()).split(",, ");
+                    foundSongsStrings.addAll(Arrays.asList(tempSongs));
+                    //foundSongsStrings = Arrays.asList(tempSongs);
+                    //foundSongsStrings.add(findSongInfo.findSong(searchField.getText().trim().toLowerCase()).split(",, "));
+                    //foundSongs.addAll(findSongInfo.findSong(searchField.getText().trim().toLowerCase()));
                 } catch (IOException | ParseException ex) {
                     ex.printStackTrace();
                 }
@@ -235,13 +245,21 @@ public class MusicFrame extends JFrame {
                 // Loop through our array and add to model
                 DefaultListModel<String> model = new DefaultListModel<>();
                 Set<String> currSongs = new HashSet<String>();
-                for (Songs s : foundSongs) {
-                    if (!currSongs.contains(s.getSongID())) {
-                        currSongs.add(s.getSongID());
-                        foundFinalSongs.add(s);
-                        model.addElement(s.getSongName() + " | " + s.getArtistName() + " | " + s.getAlbumName());
+                for (String s : foundSongsStrings) {
+                    if (!currSongs.contains(s)) {
+                        currSongs.add(s);
+                        foundFinalSongsStrings.add(s);
+                        //foundFinalSongs.add(s);
+                        model.addElement(s);
                     }
                 }
+//                for (Songs s : foundSongs) {
+//                    if (!currSongs.contains(s.getSongID())) {
+//                        currSongs.add(s.getSongID());
+//                        foundFinalSongs.add(s);
+//                        model.addElement(s.getSongName() + " | " + s.getArtistName() + " | " + s.getAlbumName());
+//                    }
+//                }
                 songList = new JList<>(model);
 
                 songsBox.remove(scrollPane);

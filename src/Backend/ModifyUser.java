@@ -329,7 +329,7 @@ public class ModifyUser {
                                 for (int j = 0; j < songs.size(); j++) {
                                     // Search json for ID match
                                     SongInfo songInfo = new SongInfo();
-                                    songObjs.addAll(songInfo.findSong(songs.get(j).toString()));
+                                    //songObjs.addAll(songInfo.findSong(songs.get(j).toString()));
                                 }
                                 break; // stop playlist loop if we find the right playlist
                             }
