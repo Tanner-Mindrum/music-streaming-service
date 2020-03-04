@@ -1,6 +1,7 @@
 package Frames;
 
 import Backend.*;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
@@ -233,12 +234,13 @@ public class MusicFrame extends JFrame {
                 // Search for song
                 try {
                     //foundSongsStrings.add()
-                    String[] tempSongs = findSongInfo.findSong(searchField.getText().trim().toLowerCase()).split(",, ");
+                    JSONObject jsonReturn = proxy.synchExecution("findSong", searchField.getText().trim().toLowerCase());
+                    String stringOfSongs = (String) jsonReturn.get("ret");
+                    String[] tempSongs = (stringOfSongs).split(",, ");
+                    //String[] tempSongs = findSongInfo.findSong(searchField.getText().trim().toLowerCase()).split(",, ");
                     foundSongsStrings.addAll(Arrays.asList(tempSongs));
-                    //foundSongsStrings = Arrays.asList(tempSongs);
-                    //foundSongsStrings.add(findSongInfo.findSong(searchField.getText().trim().toLowerCase()).split(",, "));
                     //foundSongs.addAll(findSongInfo.findSong(searchField.getText().trim().toLowerCase()));
-                } catch (IOException | ParseException ex) {
+                } catch (IOException | ParseException | InterruptedException | java.text.ParseException ex) {
                     ex.printStackTrace();
                 }
 
@@ -250,7 +252,7 @@ public class MusicFrame extends JFrame {
                         currSongs.add(s);
                         foundFinalSongsStrings.add(s);
                         //foundFinalSongs.add(s);
-                        model.addElement(s);
+                        model.addElement(s.substring(0, s.length() - 19));
                     }
                 }
 //                for (Songs s : foundSongs) {
@@ -323,7 +325,11 @@ public class MusicFrame extends JFrame {
             else if (e.getSource() == playSongButton) {
 
                 if (songList != null && !songList.isSelectionEmpty()) {
-                    String songID = foundFinalSongs.get(songList.getSelectedIndex()).getSongID();
+                    String songID = foundFinalSongsStrings.get(songList.getSelectedIndex());
+                    songID = songID.substring(songID.lastIndexOf(':') + 1);
+                    System.out.println(songID);
+                    System.out.println("SONGIDDDD: " + songID);
+                    //String songID = foundFinalSongs.get(songList.getSelectedIndex()).getSongID();
 
                     try {
                         multithread = new Multithread(comm);

@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="6490e37d-a31c-4aae-a17b-084fd43a8c4d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Methods.json" beforeDir="false" afterPath="$PROJECT_DIR$/Methods.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/music-streaming-service/Backend/SongInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/music-streaming-service/Backend/SongInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Backend/ModifyUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/ModifyUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backend/MusicServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/MusicServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Backend/SongInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/SongInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Frames/MusicFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Frames/MusicFrame.java" afterDir="false" />
     </list>
@@ -85,7 +86,7 @@
       <workItem from="1583096419359" duration="602000" />
       <workItem from="1583097356981" duration="17853000" />
       <workItem from="1583262232130" duration="10842000" />
-      <workItem from="1583352051874" duration="3580000" />
+      <workItem from="1583352051874" duration="5645000" />
     </task>
     <servers />
   </component>
@@ -113,26 +114,26 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1219" y="282" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1583108294964" />
-    <state width="1877" height="245" key="GridCell.Tab.0.bottom" timestamp="1583355689873">
+    <state width="914" height="245" key="GridCell.Tab.0.bottom" timestamp="1583357586711">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1582686004264" />
-    <state width="1877" height="245" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1583355689873" />
-    <state width="1877" height="245" key="GridCell.Tab.0.center" timestamp="1583355689873">
+    <state width="914" height="245" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1583357586711" />
+    <state width="914" height="245" key="GridCell.Tab.0.center" timestamp="1583357586711">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1582686004264" />
-    <state width="1877" height="245" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1583355689873" />
-    <state width="1877" height="245" key="GridCell.Tab.0.left" timestamp="1583355689873">
+    <state width="914" height="245" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1583357586711" />
+    <state width="914" height="245" key="GridCell.Tab.0.left" timestamp="1583357586711">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1582686004263" />
-    <state width="1877" height="245" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1583355689873" />
-    <state width="1877" height="245" key="GridCell.Tab.0.right" timestamp="1583355689873">
+    <state width="914" height="245" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1583357586711" />
+    <state width="914" height="245" key="GridCell.Tab.0.right" timestamp="1583357586711">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1582686004264" />
-    <state width="1877" height="245" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1583355689873" />
+    <state width="914" height="245" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1583357586711" />
     <state width="1877" height="246" key="GridCell.Tab.1.bottom" timestamp="1583271250266">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -189,9 +190,9 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="439" y="205" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1581438739131" />
-    <state x="616" y="240" key="run.anything.popup" timestamp="1583272118230">
+    <state x="616" y="240" key="run.anything.popup" timestamp="1583356679883">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1583272118230" />
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1583356679883" />
   </component>
 </project>

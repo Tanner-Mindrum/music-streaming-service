@@ -173,8 +173,7 @@ public class SongInfo {
 
         ArrayList<String> songInfo = new ArrayList<>();
         for (Songs s : songList) {
-            System.out.println(s.getClass());
-            songInfo.add(s.getSongName() + " | " + s.getArtistName() + " | " + s.getAlbumName());
+            songInfo.add(s.getSongName() + " | " + s.getArtistName() + " | " + s.getAlbumName() + ":" + s.getSongID());
         }
         String songNamesAsString = String.join(",, ", songInfo);
         System.out.println(songNamesAsString);

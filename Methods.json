@@ -23,11 +23,11 @@
 
   {
     "remoteMethod": "findSong",
-    "objectName": "SongServices",
+    "objectName": "SongInfo",
     "param": {
       "song": "java.lang.String"
     },
-    "ret": "java.lang.Long",
+    "ret": "java.lang.String",
     "semantic": "maybe"
   }
 
