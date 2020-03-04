@@ -19,7 +19,17 @@
   },
   "ret": "java.lang.Long",
   "semantic": "maybe"
-}
+},
+
+  {
+    "remoteMethod": "findSong",
+    "objectName": "SongServices",
+    "param": {
+      "song": "java.lang.String"
+    },
+    "ret": "java.lang.Long",
+    "semantic": "maybe"
+  }
 
 ]
 

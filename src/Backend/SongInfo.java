@@ -172,6 +172,14 @@ public class SongInfo {
             }
             else if (idFound) { break; }
         }
+
+        ArrayList<String> songNames = new ArrayList<>();
+        for (Songs s : songList) {
+            songNames.add(s.getSongName());
+        }
+        String songNamesAsString = String.join(",, ", songNames);
+        System.out.println(songNamesAsString);
+
         return songList;
     }
 
