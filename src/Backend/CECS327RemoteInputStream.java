@@ -74,7 +74,7 @@ public class CECS327RemoteInputStream extends InputStream {
         this.fileName = fileName;
         this.buf  = new byte[FRAGMENT_SIZE];
         this.nextBuf  = new byte[FRAGMENT_SIZE];
-        JSONObject jsonRet = (this.proxy).synchExecution("getFileSize", this.fileName);
+        JSONObject jsonRet = (this.proxy).synchExecution("getFileSize", this.fileName, "maybe");
         this.total = Integer.parseInt((String) jsonRet.get("ret"));
         getBuff(fragment);
         fragment++;
@@ -92,7 +92,7 @@ public class CECS327RemoteInputStream extends InputStream {
 
                 JSONObject jsonRet = null;
                 try {
-                    jsonRet = proxy.synchExecution("getSongChunk", fileName, fragment);
+                    jsonRet = proxy.synchExecution("getSongChunk", fileName, fragment, "maybe");
                 } catch (InterruptedException | java.text.ParseException | ParseException | IOException e) {
                     e.printStackTrace();
                 }

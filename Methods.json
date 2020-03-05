@@ -1,35 +1,46 @@
 [
 
-{
-  "remoteMethod": "getSongChunk",
-  "objectName": "SongServices",
-  "param": {
-    "song": "java.lang.String",
-    "fragment": "java.lang.Long"
+  {
+    "remoteMethod": "getSongChunk",
+    "objectName": "SongServices",
+    "param": {
+      "song": "java.lang.String",
+      "fragment": "java.lang.Long"
+    },
+    "ret": "java.lang.Long",
+    "semantic": "maybe"
   },
-  "ret": "java.lang.Long",
-  "semantic": "maybe"
-},
 
-{
-  "remoteMethod": "getFileSize",
-  "objectName": "SongServices",
+  {
+    "remoteMethod": "getFileSize",
+    "objectName": "SongServices",
+    "param": {
+      "song": "java.lang.String"
+    },
+    "ret": "java.lang.Long",
+    "semantic": "maybe"
+  },
+
+  {
+  "remoteMethod": "findSong",
+  "objectName": "SongInfo",
   "param": {
     "song": "java.lang.String"
   },
-  "ret": "java.lang.Long",
+  "ret": "java.lang.String",
   "semantic": "maybe"
-},
-
+  },
   {
-    "remoteMethod": "findSong",
+    "remoteMethod": "checkUserExists",
     "objectName": "SongInfo",
     "param": {
-      "song": "java.lang.String"
+      "username": "java.lang.String",
+      "password": "java.lang.String"
     },
     "ret": "java.lang.String",
     "semantic": "maybe"
   }
+
 
 ]
 

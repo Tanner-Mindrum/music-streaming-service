@@ -110,6 +110,12 @@ public class Dispatcher implements DispatcherInterface {
                 case "java.lang.String":
                     ret = (String)method.invoke(object, parameter);
                     break;
+                case "java.lang.Boolean":
+                    ret = method.invoke(object, parameter).toString();
+                    break;
+                case "Null":
+                    ret = "Null";
+                    break;
             }
             jsonReturn.put("ret", ret);
 
