@@ -140,25 +140,5 @@
       "email": "quickscoper5406@gmail.com",
       "username": "Jeffrey Nguyen"
     }
-  },
-  {
-    "playlists": [],
-    "info": {
-      "password": null,
-      "dob": "",
-      "id": 6,
-      "email": "",
-      "username": ""
-    }
-  },
-  {
-    "playlists": [],
-    "info": {
-      "password": "ted",
-      "dob": "January.1.2020",
-      "id": 7,
-      "email": "ted",
-      "username": "tedt"
-    }
   }
 ]

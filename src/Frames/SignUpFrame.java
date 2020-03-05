@@ -282,7 +282,7 @@ public class SignUpFrame extends JFrame {
 
                         proxy.synchExecution("addUserToDatabase", emailField.getText().trim(), userNameField.getText().trim(), passwordField.getText().trim(),
                                 (String) monthBox.getSelectedItem(), Integer.toString((int) dayBox.getSelectedItem()),
-                                Integer.toString((int)yearBox.getSelectedItem()), "maybe");
+                                Integer.toString((int)yearBox.getSelectedItem()), "at most once");
 
                         MusicFrame musicFrame = new MusicFrame(userNameField.getText().trim(), socket, comm);
                         setVisible(false);

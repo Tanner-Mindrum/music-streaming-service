@@ -339,7 +339,6 @@ public class ModifyUser {
                                 for (int j = 0; j < songs.size(); j++) {
                                     // Search json for ID match
                                     //SongInfo songInfo = new SongInfo();
-                                    System.out.println(so);
                                     JSONObject jsonReturn = proxy.synchExecution("findSong", songs.get(j).toString(), "maybe");
                                     System.out.println("JSONRET: " + jsonReturn);
                                     songObjsStrings.add((String) jsonReturn.get("ret"));

@@ -41,6 +41,7 @@ public class CommunicationModule {
         socket.send(sendPacket);
         if (semantic.equals("at least once") || semantic.equals("at most once")) {
             while (attemptCount < 10) {
+                System.out.println("in loop");
                 try {
                     socket.receive(receivePacket);
                     break;
@@ -55,8 +56,11 @@ public class CommunicationModule {
             return "Timed out. Too many attempts.";
         }
 
-        socket.receive(receivePacket);
-        String received = new String(
+        String received = "";
+        if (semantic.equals("maybe")) {
+            socket.receive(receivePacket);
+        }
+        received = new String(
                 receivePacket.getData(), 0, receivePacket.getLength());
         System.out.println(receivePacket.getLength());
         System.out.println("Close...");
