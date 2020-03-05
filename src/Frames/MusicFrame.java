@@ -64,11 +64,15 @@ public class MusicFrame extends JFrame {
                     Object o = theList.getModel().getElementAt(index);
                     try {
                         foundFinalSongs.clear();
-                        ArrayList<Songs> playlistSongs = modifyUser.getSongs(usernameName, o.toString());
-                        foundFinalSongs.addAll(playlistSongs);
+                        //ArrayList<Songs> playlistSongs = modifyUser.getSongs(usernameName, o.toString());
+                        JSONObject jsonReturn = proxy.synchExecution("getSongs", usernameName, o.toString(), "maybe");
+                        String stringOfSongs = (String) jsonReturn.get("ret");
+                        String[] tempSongs = (stringOfSongs).split(",, ");
+                        foundFinalSongsStrings.addAll(Arrays.asList(tempSongs));
+                        //foundFinalSongs.addAll(playlistSongs);
                         DefaultListModel<String> model = new DefaultListModel<>();
-                        for (Songs s : playlistSongs) {
-                            model.addElement(s.getSongName() + " | " + s.getArtistName() + " | " + s.getAlbumName());
+                        for (String s : foundFinalSongsStrings) {
+                            model.addElement(s);
                         }
                         songList = new JList<>(model);
 
@@ -82,7 +86,7 @@ public class MusicFrame extends JFrame {
                         songsBox.add(stopButton);
                         validate();
                         repaint();
-                    } catch (IOException | ParseException e) {
+                    } catch (IOException | ParseException | java.text.ParseException | InterruptedException e) {
                         e.printStackTrace();
                     }
                     // Refresh songList with playlist songs
@@ -128,10 +132,10 @@ public class MusicFrame extends JFrame {
         //panel.add(titleLabel);
 
         // TODO: LIMIT NAME SIZE & Format in top bar
-        userNameLabel = new JLabel(String.format("<html><p>%s</p></html>", currUser.getUsername()));
+        userNameLabel = new JLabel(String.format("<html><p>%s</p></html>", currUserString));
 
         userMenuBar = new JMenuBar();
-        userMenu = new JMenu(String.format("<html><p>%s</p></html>", currUser.getUsername()));
+        userMenu = new JMenu(String.format("<html><p>%s</p></html>", currUserString));
         m1 = new JMenuItem("Log out");
         m1.addActionListener(listener);
         userMenu.add(m1);
@@ -166,8 +170,8 @@ public class MusicFrame extends JFrame {
         serverTestButton.addActionListener(listener);
 
         // Playlist Display
-        modifyUser = new ModifyUser(currUser.getUsername());
-        playlists = modifyUser.getPlaylists(usernameName);
+        modifyUser = new ModifyUser(currUserString);
+        playlists = modifyUser.getPlaylists(currUserString);
 
         DefaultListModel<String> playListModel = new DefaultListModel<String>();
         for (String element : playlists){
@@ -302,9 +306,12 @@ public class MusicFrame extends JFrame {
                 if (songList != null) {
                     try {
                         //modifyUser.addToPlaylist(songList.getSelectedValue(), playListList.getSelectedValue());
-                        Songs songToAdd = (foundFinalSongs.get(songList.getSelectedIndex()));
-                        modifyUser.addToPlaylist(usernameName, songToAdd, playListList.getSelectedValue());
-                    } catch (IOException | ParseException ex) {
+                        String songToAdd = (foundFinalSongsStrings.get(songList.getSelectedIndex()));
+                        //Songs songToAdd = (foundFinalSongs.get(songList.getSelectedIndex()));
+                        System.out.println("SONG TO ADD: " + songToAdd);
+                        proxy.synchExecution("addToPlaylist", usernameName, songToAdd.substring(songToAdd.lastIndexOf(':') + 1), playListList.getSelectedValue(), "maybe");
+                        //modifyUser.addToPlaylist(usernameName, songToAdd.substring(songToAdd.lastIndexOf(':') + 1), playListList.getSelectedValue());
+                    } catch (IOException | ParseException | java.text.ParseException | InterruptedException ex) {
                         ex.printStackTrace();
                     }
                 }
@@ -434,7 +441,12 @@ public class MusicFrame extends JFrame {
         class ButtonListener implements ActionListener {
             public void actionPerformed(ActionEvent click) {
                 if (click.getSource() == addButton || click.getSource() == playListNameField) {
-                    ModifyUser mu = new ModifyUser(currUser.getUsername());
+                    ModifyUser mu = null;
+                    try {
+                        mu = new ModifyUser(usernameName);
+                    } catch (IOException | ParseException e) {
+                        e.printStackTrace();
+                    }
                     try {
                         mu.createPlaylist(usernameName, playListNameField.getText().trim());
                     } catch (IOException | ParseException e) {

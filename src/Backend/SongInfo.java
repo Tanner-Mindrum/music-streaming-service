@@ -42,6 +42,8 @@ public class SongInfo {
         boolean idFound = false;
         songList.clear();
 
+        System.out.println("BEING CLLED");
+
         for (Object info : information) {
             JSONObject entryInfo = (JSONObject) info;
             newSong = new Songs();

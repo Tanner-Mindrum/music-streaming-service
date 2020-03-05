@@ -53,10 +53,30 @@
       "day": "java.lang.String",
       "year": "java.lang.String"
     },
-    "ret": "Null",
+    "ret": "java.lang.String",
+    "semantic": "maybe"
+  },
+  {
+    "remoteMethod": "addToPlaylist",
+    "objectName": "ModifyUser",
+    "param": {
+      "username" : "java.lang.String",
+      "song" : "java.lang.String",
+      "playlistName" : "java.lang.String"
+    },
+    "ret": "java.lang.String",
+    "semantic": "maybe"
+  },
+  {
+    "remoteMethod": "getSongs",
+    "objectName": "ModifyUser",
+    "param": {
+      "username" : "java.lang.String",
+      "playlistName" : "java.lang.String"
+    },
+    "ret": "java.lang.String",
     "semantic": "maybe"
   }
-
 
 ]
 

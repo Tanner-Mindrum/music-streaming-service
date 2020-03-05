@@ -114,7 +114,8 @@ public class Dispatcher implements DispatcherInterface {
                     ret = method.invoke(object, parameter).toString();
                     break;
                 case "Null":
-                    ret = "Null";
+                    ret = method.invoke(object, parameter).toString();
+                    //ret = "Null";
                     break;
             }
             jsonReturn.put("ret", ret);

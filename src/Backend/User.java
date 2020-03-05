@@ -42,7 +42,7 @@ public class User {
 
     }
 
-    public void addUserToDatabase(String email, String username, String password, String month, String day, String year) throws IOException, ParseException {
+    public String addUserToDatabase(String email, String username, String password, String month, String day, String year) throws IOException, ParseException {
         // Creating JSONArray for the array of users
         JSONParser parser = new JSONParser();
         // Tanner's path: C://CECS 327//music-streaming-service//user.json
@@ -50,17 +50,18 @@ public class User {
         // Creating the JSON Object
         JSONObject userObject = new JSONObject();
 
+        String dob = month + "." + day + "." + year;
 
         // Creating map for userInfo
         Map userInfo = new LinkedHashMap(4);
 
         // Inserting data into JSONObject
-        userInfo.put("email", this.email);
-        userInfo.put("username", this.username);
-        userInfo.put("password", this.password);
+        userInfo.put("email", email);
+        userInfo.put("username", username);
+        userInfo.put("password", password);
         this.id = userArray.size() + 1;
         userInfo.put("id", this.id);
-        userInfo.put("dob", this.dob);
+        userInfo.put("dob", dob);
 
         // Inserting userInfo to the user JSON object
         userObject.put("info", userInfo);
@@ -82,6 +83,8 @@ public class User {
 
         fileWriter.flush();
         fileWriter.close();
+
+        return "";
     }
 
     public int getID() {

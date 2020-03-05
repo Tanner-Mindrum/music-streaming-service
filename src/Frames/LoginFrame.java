@@ -163,7 +163,12 @@ public class LoginFrame extends JFrame {
                     noUsernameEnteredLabel.setVisible(false);
                     noPasswordEnteredLabel.setVisible(true);
                 } else {
-                    ModifyUser checkUser = new ModifyUser(enterUsernameField.getText().trim());
+                    ModifyUser checkUser = null;
+                    try {
+                        checkUser = new ModifyUser(enterUsernameField.getText().trim());
+                    } catch (IOException | ParseException e) {
+                        e.printStackTrace();
+                    }
                     try {
                         if (!checkUser.checkUserExists(enterUsernameField.getText().trim(), enterPasswordField.getText().trim())) {
                             noUsernameEnteredLabel.setVisible(false);

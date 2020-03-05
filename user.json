@@ -1,6 +1,19 @@
 [
   {
-    "playlists": [],
+    "playlists": [
+      {
+        "songs": [
+          "SOAPMKZ12A58A764B7"
+        ],
+        "name": "test list"
+      },
+      {
+        "songs": [
+          "SOFAOMI12A6D4FA2D8"
+        ],
+        "name": "lil uzi"
+      }
+    ],
     "info": {
       "password": "tanner",
       "dob": "January.1.2020",
@@ -126,6 +139,26 @@
       "id": 5,
       "email": "quickscoper5406@gmail.com",
       "username": "Jeffrey Nguyen"
+    }
+  },
+  {
+    "playlists": [],
+    "info": {
+      "password": null,
+      "dob": "",
+      "id": 6,
+      "email": "",
+      "username": ""
+    }
+  },
+  {
+    "playlists": [],
+    "info": {
+      "password": "ted",
+      "dob": "January.1.2020",
+      "id": 7,
+      "email": "ted",
+      "username": "tedt"
     }
   }
 ]

@@ -6,25 +6,26 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ModifyUser {
 
     private String username;
     private JSONObject userObject;
     private SongInfo songInfo;
+    private Proxy proxy;
+    private CommunicationModule comm;
 
     public ModifyUser(){
         userObject = null;
     }
 
     // Constructor with username parameter to find user in JSON
-    public ModifyUser(String name) {
+    public ModifyUser(String name) throws IOException, ParseException {
         this.username = name;
         userObject = null;
+        comm = new CommunicationModule();
+        proxy = new Proxy(comm);
     }
 
     /**
@@ -252,7 +253,7 @@ public class ModifyUser {
      * @throws IOException
      * @throws ParseException
      */
-    public void addToPlaylist(String username, Songs song, String playlistName) throws IOException, ParseException {
+    public String addToPlaylist(String username, String song, String playlistName) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
         JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
         boolean duplicate = false;
@@ -277,13 +278,13 @@ public class ModifyUser {
                                 // Add song to playlist
                                 JSONArray songs = (JSONArray) tempPlaylist.get("songs");
                                 for (int j = 0; j < songs.size(); j++) {
-                                    if (song.getSongID().equals(songs.get(j))) {
+                                    if (song.equals(songs.get(j))) {
                                         duplicate = true;
                                         break;
                                     }
                                 }
                                 if (!duplicate) {
-                                    songs.add(song.getSongID());
+                                    songs.add(song);
                                 }
                             }
                         }
@@ -297,6 +298,7 @@ public class ModifyUser {
             fileWriter.flush();
             fileWriter.close();
         }
+        return "";
     }
 
     /**
@@ -305,11 +307,14 @@ public class ModifyUser {
      * @throws IOException
      * @throws ParseException
      */
-    public ArrayList<Songs> getSongs(String username, String playlistName) throws IOException, ParseException {
+    public String getSongs(String username, String playlistName) throws IOException, ParseException, java.text.ParseException, InterruptedException {
         JSONParser parser = new JSONParser();
         JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
         JSONArray songArray = (JSONArray) parser.parse(new FileReader("music.json"));
         ArrayList<Songs> songObjs = new ArrayList<>(); // add to this arraylist
+        ArrayList<String> songObjsStrings = new ArrayList<String>();
+        String stringOfSongs = "";
+
 
         // For each user:
         for (Object info : userArray){
@@ -329,10 +334,17 @@ public class ModifyUser {
                             if (playlistName.equals(tempPlaylist.get("name").toString())){
                                 // Display songs in playlist
                                 JSONArray songs = (JSONArray) tempPlaylist.get("songs");
+                                System.out.println("SONGS: " + songs);
                                 // Go through songs array
                                 for (int j = 0; j < songs.size(); j++) {
                                     // Search json for ID match
-                                    SongInfo songInfo = new SongInfo();
+                                    //SongInfo songInfo = new SongInfo();
+                                    System.out.println(so);
+                                    JSONObject jsonReturn = proxy.synchExecution("findSong", songs.get(j).toString(), "maybe");
+                                    System.out.println("JSONRET: " + jsonReturn);
+                                    songObjsStrings.add((String) jsonReturn.get("ret"));
+                                    //String[] tempSongs = (stringOfSongs).split(",, ");
+                                    //songObjsStrings.addAll(Arrays.asList(tempSongs));
                                     //songObjs.addAll(songInfo.findSong(songs.get(j).toString()));
                                 }
                                 break; // stop playlist loop if we find the right playlist
@@ -345,7 +357,13 @@ public class ModifyUser {
 
         }
 
-        return songObjs;
+        ArrayList<String> songInfo = new ArrayList<>();
+        for (String s : songObjsStrings) {
+
+        }
+
+        System.out.println(stringOfSongs);
+        return stringOfSongs;
     }
 
     // No duplicate Playlist names

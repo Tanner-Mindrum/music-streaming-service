@@ -207,7 +207,12 @@ public class SignUpFrame extends JFrame {
                 loginFrame.setVisible(true);
             }
             else if (click.getSource() == signUpButton) {
-                ModifyUser checkUser = new ModifyUser(userNameField.getText().trim());
+                ModifyUser checkUser = null;
+                try {
+                    checkUser = new ModifyUser(userNameField.getText().trim());
+                } catch (IOException | ParseException e) {
+                    e.printStackTrace();
+                }
                 try {
                     if (emailField.getText().trim().length() == 0 && userNameField.getText().trim().length() == 0
                             && passwordField.getText().trim().length() == 0) {
