@@ -13,10 +13,12 @@ public class CommunicationModule {
     private InetAddress address;
 //    private Dispatcher dispatcher;
 //    private SongDispatcher songDispatcher;
+    DatagramSocket socket;
 
     public CommunicationModule() throws IOException, org.json.simple.parser.ParseException {
         port = 4445;
         address = InetAddress.getByName("localhost");
+        socket = new DatagramSocket();
     }
 
     public void send(String msg) throws IOException {
@@ -28,7 +30,7 @@ public class CommunicationModule {
     }
 
     public String sendEcho(String msg, String semantic) throws IOException {
-        final DatagramSocket socket = new DatagramSocket();
+        socket = new DatagramSocket();
         byte[] buf;
         byte[] buff = new byte[12228];
         int attemptCount = 0;

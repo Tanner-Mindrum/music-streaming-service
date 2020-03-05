@@ -54,16 +54,19 @@ public class MusicFrame extends JFrame {
     ArrayList<Songs> foundSongs = new ArrayList<Songs>();
     ArrayList<String> foundSongsStrings = new ArrayList<>();
     ArrayList<Songs> foundFinalSongs = new ArrayList<Songs>();
-    ArrayList<String> foundFinalSongsStrings = new ArrayList<>();
+    ArrayList<String> foundFinalSongsStrings;
+    ArrayList<String> foundFinalFinalSongsStrings;
     public MouseListener mouseListener = new MouseAdapter() {
         public void mouseClicked(MouseEvent mouseEvent){
             JList<String> theList = (JList) mouseEvent.getSource();
             if (mouseEvent.getClickCount() == 2){
                 int index = theList.locationToIndex(mouseEvent.getPoint());
-                if (index >= 0){
+                if (index >= 0) {
                     Object o = theList.getModel().getElementAt(index);
                     try {
+                        foundFinalFinalSongsStrings = new ArrayList<>();
                         foundFinalSongs = new ArrayList<>();
+                        foundFinalSongsStrings = new ArrayList<>();
                         //ArrayList<Songs> playlistSongs = modifyUser.getSongs(usernameName, o.toString());
                         JSONObject jsonTemp = proxy.synchExecution("getSongs", usernameName, o.toString(), "maybe");
                         String stringOfSongs = (String) jsonTemp.get("ret");
@@ -71,9 +74,22 @@ public class MusicFrame extends JFrame {
                         String[] tempSongs = stringOfSongs.split(",, ");
                         foundFinalSongsStrings.addAll(Arrays.asList(tempSongs));
                         System.out.println("FINAL: " + foundFinalSongsStrings);
+                        JSONObject jsonReturn = null;
+                        for (String id : foundFinalSongsStrings) {
+                            jsonReturn = proxy.synchExecution("findSong", id, "at least once");
+                            System.out.println(jsonReturn);
+                            String stringSong = (String) jsonReturn.get("ret");
+                            System.out.println(stringSong);
+                            foundFinalFinalSongsStrings.add(stringSong.substring(0, stringSong.length() - 19));
+                        }
+                        //String[] tempSongs = (stringOfSongs).split(",, ");
+                        //String[] tempSongs = findSongInfo.findSong(searchField.getText().trim().toLowerCase()).split(",, ");
+                        //foundSongsStrings.addAll(Arrays.asList(tempSongs));
+
+
                         //foundFinalSongs.addAll(playlistSongs);
                         DefaultListModel<String> model = new DefaultListModel<>();
-                        for (String s : foundFinalSongsStrings) {
+                        for (String s : foundFinalFinalSongsStrings) {
                             model.addElement(s);
                         }
                         songList = new JList<>(model);

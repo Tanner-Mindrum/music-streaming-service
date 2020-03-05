@@ -22,7 +22,6 @@ public class ModifyUser {
         comm = new CommunicationModule();
         proxy = new Proxy(comm);
         findSongInfo = new SongInfo();
-
     }
 
     // Constructor with username parameter to find user in JSON
@@ -321,6 +320,7 @@ public class ModifyUser {
         ArrayList<Songs> songObjs = new ArrayList<>(); // add to this arraylist
         ArrayList<String> songObjsStrings = new ArrayList<String>();
         String stringOfSongs = "";
+        ArrayList<String> tempSongIDs = new ArrayList<>();
 
 
         // For each user:
@@ -346,19 +346,12 @@ public class ModifyUser {
                                 for (int j = 0; j < songs.size(); j++) {
                                     // Search json for ID match
                                     //SongInfo songInfo = new SongInfo();
-                                    JSONObject jsonReturn = proxy.synchExecution("findSong",
-                                            songs.get(j).toString(), "maybe");
-                                    String stringSongs = jsonReturn.get("ret").toString();
-                                    System.out.println("YUH:" + stringSongs);
-                                    songObjsStrings.add(stringSongs);
-
-
-
-
-
-                                    //String[] tempSongs = (stringOfSongs).split(",, ");
-                                    //songObjsStrings.addAll(Arrays.asList(tempSongs));
-                                    //songObjs.addAll(songInfo.findSong(songs.get(j).toString()));
+//                                    JSONObject jsonReturn = proxy.synchExecution("findSong",
+//                                            songs.get(j).toString(), "maybe");
+//                                    String stringSongs = jsonReturn.get("ret").toString();
+//                                    System.out.println("YUH:" + stringSongs);
+//                                    songObjsStrings.add(stringSongs);
+                                    tempSongIDs.add(songs.get(j).toString());
                                 }
                                 break; // stop playlist loop if we find the right playlist
                             }
@@ -371,9 +364,7 @@ public class ModifyUser {
         }
 
         ArrayList<String> songInfo = new ArrayList<>();
-        for (String s : songObjsStrings) {
-            songInfo.add(s.toString());
-        }
+        songInfo.addAll(tempSongIDs);
         String songsString = String.join(",, ", songInfo);
         System.out.println("String of songs: " + songsString);
         return songsString;

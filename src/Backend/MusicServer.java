@@ -17,7 +17,7 @@ import java.util.Base64;
 public class MusicServer extends Thread {
 
     private DatagramSocket socket;
-    private byte[] buf = new byte[256];
+    private byte[] buf = new byte[512];
     private Dispatcher dispatcher;
     private SongDispatcher songDispatcher;
     private SongInfo songInfo;
