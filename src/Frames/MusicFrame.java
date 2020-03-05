@@ -63,12 +63,14 @@ public class MusicFrame extends JFrame {
                 if (index >= 0){
                     Object o = theList.getModel().getElementAt(index);
                     try {
-                        foundFinalSongs.clear();
+                        foundFinalSongs = new ArrayList<>();
                         //ArrayList<Songs> playlistSongs = modifyUser.getSongs(usernameName, o.toString());
-                        JSONObject jsonReturn = proxy.synchExecution("getSongs", usernameName, o.toString(), "maybe");
-                        String stringOfSongs = (String) jsonReturn.get("ret");
-                        String[] tempSongs = (stringOfSongs).split(",, ");
+                        JSONObject jsonTemp = proxy.synchExecution("getSongs", usernameName, o.toString(), "maybe");
+                        String stringOfSongs = (String) jsonTemp.get("ret");
+                        System.out.println("YUH:" + stringOfSongs);
+                        String[] tempSongs = stringOfSongs.split(",, ");
                         foundFinalSongsStrings.addAll(Arrays.asList(tempSongs));
+                        System.out.println("FINAL: " + foundFinalSongsStrings);
                         //foundFinalSongs.addAll(playlistSongs);
                         DefaultListModel<String> model = new DefaultListModel<>();
                         for (String s : foundFinalSongsStrings) {
@@ -102,10 +104,10 @@ public class MusicFrame extends JFrame {
     private Proxy proxy;
     private CommunicationModule comm;
 
-    public MusicFrame(String user, DatagramSocket pSocket, CommunicationModule cm) throws IOException, ParseException {
+    public MusicFrame(String user, DatagramSocket pSocket, CommunicationModule cm, Proxy proxy) throws IOException, ParseException {
         socket = pSocket;
         comm = cm;
-        proxy = new Proxy(comm);
+        this.proxy = proxy;
         address = InetAddress.getByName("localhost");
         currUserString = user;
         usernameName = currUserString;
@@ -325,6 +327,14 @@ public class MusicFrame extends JFrame {
                                 System.out.println("Double clicked on: " + o.toString());
 
                                 // Refresh songList with playlist songs
+
+                                try {
+                                    JSONObject jsonRet = proxy.synchExecution("getSongs", usernameName, o.toString(), "maybe");
+                                    String songsToDisplay = jsonRet.get("ret").toString();
+                                    System.out.println("SONGS TO DISPLAY: " + songsToDisplay);
+                                } catch (InterruptedException | java.text.ParseException | ParseException | IOException ex) {
+                                    ex.printStackTrace();
+                                }
                             }
                         }
                     }

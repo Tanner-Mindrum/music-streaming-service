@@ -286,7 +286,7 @@ public class SignUpFrame extends JFrame {
                                 (String) monthBox.getSelectedItem(), Integer.toString((int) dayBox.getSelectedItem()),
                                 Integer.toString((int)yearBox.getSelectedItem()), "at most once");
 
-                        MusicFrame musicFrame = new MusicFrame(userNameField.getText().trim(), socket, comm);
+                        MusicFrame musicFrame = new MusicFrame(userNameField.getText().trim(), socket, comm, proxy);
                         setVisible(false);
                         musicFrame.setLocationRelativeTo(null);
                         musicFrame.setVisible(true);

@@ -40,9 +40,9 @@ public class SongInfo {
         JSONArray information = (JSONArray) parser.parse(new FileReader("music.json"));
         boolean match = false;
         boolean idFound = false;
-        songList.clear();
+        songList = new ArrayList<>();
 
-        System.out.println("BEING CLLED");
+        System.out.println("BEING CALLED");
 
         for (Object info : information) {
             JSONObject entryInfo = (JSONObject) info;

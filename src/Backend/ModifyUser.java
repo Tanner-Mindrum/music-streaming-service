@@ -13,12 +13,16 @@ public class ModifyUser {
 
     private String username;
     private JSONObject userObject;
-    private SongInfo songInfo;
+    SongInfo findSongInfo;
     private Proxy proxy;
     private CommunicationModule comm;
 
-    public ModifyUser(){
+    public ModifyUser() throws IOException, ParseException {
         userObject = null;
+        comm = new CommunicationModule();
+        proxy = new Proxy(comm);
+        findSongInfo = new SongInfo();
+
     }
 
     // Constructor with username parameter to find user in JSON
@@ -27,6 +31,8 @@ public class ModifyUser {
         userObject = null;
         comm = new CommunicationModule();
         proxy = new Proxy(comm);
+        findSongInfo = new SongInfo();
+
     }
 
     /**
@@ -340,9 +346,16 @@ public class ModifyUser {
                                 for (int j = 0; j < songs.size(); j++) {
                                     // Search json for ID match
                                     //SongInfo songInfo = new SongInfo();
-                                    JSONObject jsonReturn = proxy.synchExecution("findSong", songs.get(j).toString(), "maybe");
-                                    System.out.println("JSONRET: " + jsonReturn);
-                                    songObjsStrings.add((String) jsonReturn.get("ret"));
+                                    JSONObject jsonReturn = proxy.synchExecution("findSong",
+                                            songs.get(j).toString(), "maybe");
+                                    String stringSongs = jsonReturn.get("ret").toString();
+                                    System.out.println("YUH:" + stringSongs);
+                                    songObjsStrings.add(stringSongs);
+
+
+
+
+
                                     //String[] tempSongs = (stringOfSongs).split(",, ");
                                     //songObjsStrings.addAll(Arrays.asList(tempSongs));
                                     //songObjs.addAll(songInfo.findSong(songs.get(j).toString()));
@@ -359,11 +372,11 @@ public class ModifyUser {
 
         ArrayList<String> songInfo = new ArrayList<>();
         for (String s : songObjsStrings) {
-
+            songInfo.add(s.toString());
         }
-
-        System.out.println(stringOfSongs);
-        return stringOfSongs;
+        String songsString = String.join(",, ", songInfo);
+        System.out.println("String of songs: " + songsString);
+        return songsString;
     }
 
     // No duplicate Playlist names

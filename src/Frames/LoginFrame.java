@@ -173,7 +173,7 @@ public class LoginFrame extends JFrame {
                             noPasswordEnteredLabel.setVisible(false);
                             userDoesNotExistLabel.setVisible(true);
                         } else {
-                            MusicFrame musicFrame = new MusicFrame(user, socket, comm);
+                            MusicFrame musicFrame = new MusicFrame(user, socket, comm, proxy);
                             setVisible(false);
                             musicFrame.setLocationRelativeTo(null);
                             musicFrame.setVisible(true);
