@@ -4,10 +4,7 @@ import org.json.simple.JSONObject;
 
 import javax.xml.crypto.Data;
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import java.net.*;
 import java.text.ParseException;
 
 public class CommunicationModule {
@@ -30,10 +27,11 @@ public class CommunicationModule {
         socket.close();
     }
 
-    public String sendEcho(String msg) throws IOException {
+    public String sendEcho(String msg, String semantic) throws IOException {
         final DatagramSocket socket = new DatagramSocket();
         byte[] buf;
         byte[] buff = new byte[12228];
+        int attemptCount = 0;
         System.out.println("MSG: " + msg);
         buf = msg.getBytes();
         DatagramPacket sendPacket = new DatagramPacket(buf, buf.length, address, port);
@@ -41,6 +39,22 @@ public class CommunicationModule {
         System.out.println("Sending msg of size: " + sendPacket.getLength() + "to " + sendPacket.getSocketAddress());
         System.out.println("Listening...");
         socket.send(sendPacket);
+        if (semantic.equals("at least once") || semantic.equals("at most once")) {
+            while (attemptCount < 10) {
+                try {
+                    socket.receive(receivePacket);
+                    break;
+                } catch (SocketTimeoutException e) {
+                    attemptCount++;
+                    socket.send(sendPacket);
+                }
+            }
+        }
+        if (attemptCount == 10) {
+            socket.close();
+            return "Timed out. Too many attempts.";
+        }
+
         socket.receive(receivePacket);
         String received = new String(
                 receivePacket.getData(), 0, receivePacket.getLength());
