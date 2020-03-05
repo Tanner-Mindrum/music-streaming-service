@@ -234,7 +234,7 @@ public class MusicFrame extends JFrame {
                 // Search for song
                 try {
                     //foundSongsStrings.add()
-                    JSONObject jsonReturn = proxy.synchExecution("findSong", searchField.getText().trim().toLowerCase());
+                    JSONObject jsonReturn = proxy.synchExecution("findSong", searchField.getText().trim().toLowerCase(), "maybe");
                     String stringOfSongs = (String) jsonReturn.get("ret");
                     String[] tempSongs = (stringOfSongs).split(",, ");
                     //String[] tempSongs = findSongInfo.findSong(searchField.getText().trim().toLowerCase()).split(",, ");

@@ -22,6 +22,7 @@ public class Proxy {
     public JSONObject synchExecution(String methodName, Object... param) throws InterruptedException, java.text.ParseException, ParseException, IOException {
         HashMap<String, JSONObject> methods = catalog.getMethod();
         JSONObject remoteMethod = methods.get(methodName);
+        //String semantic = param
 
         Map objectInfo = ((Map) remoteMethod.get("param"));
         Iterator<Map.Entry> objectItr = objectInfo.entrySet().iterator();
