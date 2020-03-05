@@ -50,6 +50,7 @@ public class MusicServer extends Thread {
                 e.printStackTrace();
             }
 
+            // Put this section in a thread to run the receive and process the input at the same time
             String received = new String(packet.getData(), 0, packet.getLength());
 
             System.out.println("SERVER RECEIVE: " + received);

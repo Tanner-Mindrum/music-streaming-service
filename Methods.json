@@ -106,6 +106,16 @@
     },
     "ret": "java.lang.String",
     "semantic": "maybe"
+  },
+  {
+    "remoteMethod": "deletePlaylist",
+    "objectName": "ModifyUser",
+    "param": {
+      "username" : "java.lang.String",
+      "playlistName" : "java.lang.String"
+    },
+    "ret": "java.lang.String",
+    "semantic": "maybe"
   }
 
 ]

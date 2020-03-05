@@ -217,7 +217,7 @@ public class ModifyUser {
      * @throws IOException
      * @throws ParseException
      */
-    public void deletePlaylist(String username, String playlistName) throws IOException, ParseException {
+    public String deletePlaylist(String username, String playlistName) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
         JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
 
@@ -252,6 +252,7 @@ public class ModifyUser {
             fileWriter.flush();
             fileWriter.close();
         }
+        return "";
     }
 
     /**

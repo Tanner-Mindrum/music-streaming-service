@@ -311,7 +311,8 @@ public class MusicFrame extends JFrame {
             else if (e.getSource() == deletePlaylistButton){
                 if (!playListList.isSelectionEmpty()) {
                     try {
-                        modifyUser.deletePlaylist(usernameName, playListList.getSelectedValue());
+                        proxy.synchExecution("deletePlaylist", usernameName, playListList.getSelectedValue(), "at least once");
+                        //modifyUser.deletePlaylist(usernameName, playListList.getSelectedValue());
                         refreshPlaylistList();
                     } catch (IOException | ParseException | java.text.ParseException | InterruptedException ex) {
                         ex.printStackTrace();
