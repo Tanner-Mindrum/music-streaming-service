@@ -44,7 +44,7 @@ public class MusicFrame extends JFrame {
     private Thread musicThread;
     private Multithread multithread;
     private ModifyUser modifyUser;
-    private ArrayList<String> playlists;
+    private ArrayList<String> playlists = new ArrayList<>();
     DefaultListModel<String> songModel;
     private JMenuBar userMenuBar;
     private JMenu userMenu;
@@ -54,7 +54,7 @@ public class MusicFrame extends JFrame {
     ArrayList<Songs> foundSongs = new ArrayList<Songs>();
     ArrayList<String> foundSongsStrings = new ArrayList<>();
     ArrayList<Songs> foundFinalSongs = new ArrayList<Songs>();
-    ArrayList<String> foundFinalSongsStrings;
+    ArrayList<String> foundFinalSongsStrings = new ArrayList<>();
     ArrayList<String> foundFinalFinalSongsStrings;
     public MouseListener mouseListener = new MouseAdapter() {
         public void mouseClicked(MouseEvent mouseEvent){
@@ -82,10 +82,6 @@ public class MusicFrame extends JFrame {
                             System.out.println(stringSong);
                             foundFinalFinalSongsStrings.add(stringSong.substring(0, stringSong.length() - 19));
                         }
-                        //String[] tempSongs = (stringOfSongs).split(",, ");
-                        //String[] tempSongs = findSongInfo.findSong(searchField.getText().trim().toLowerCase()).split(",, ");
-                        //foundSongsStrings.addAll(Arrays.asList(tempSongs));
-
 
                         //foundFinalSongs.addAll(playlistSongs);
                         DefaultListModel<String> model = new DefaultListModel<>();
@@ -120,7 +116,7 @@ public class MusicFrame extends JFrame {
     private Proxy proxy;
     private CommunicationModule comm;
 
-    public MusicFrame(String user, DatagramSocket pSocket, CommunicationModule cm, Proxy proxy) throws IOException, ParseException {
+    public MusicFrame(String user, DatagramSocket pSocket, CommunicationModule cm, Proxy proxy) throws IOException, ParseException, java.text.ParseException, InterruptedException {
         socket = pSocket;
         comm = cm;
         this.proxy = proxy;
@@ -132,7 +128,7 @@ public class MusicFrame extends JFrame {
         this.setTitle("Home Page");
     }
 
-    public void createComponents() throws IOException, ParseException {
+    public void createComponents() throws IOException, ParseException, java.text.ParseException, InterruptedException {
 
 
 
@@ -189,7 +185,10 @@ public class MusicFrame extends JFrame {
 
         // Playlist Display
         modifyUser = new ModifyUser(currUserString);
-        playlists = modifyUser.getPlaylists(currUserString);
+        JSONObject jsonReturn = proxy.synchExecution("getPlaylists", currUserString, "maybe");
+        String allSongs = (String) jsonReturn.get("ret");
+        String[] tempSongs = allSongs.split(",, ");
+        playlists.addAll(Arrays.asList(tempSongs));
 
         DefaultListModel<String> playListModel = new DefaultListModel<String>();
         for (String element : playlists){
@@ -223,7 +222,7 @@ public class MusicFrame extends JFrame {
         //playlistBox.setBorder(BorderFactory.createLineBorder(Color.RED));
         playlistBox.add(createPlaylistButton);
         playlistBox.add(deletePlaylistButton);
-        playlistBox.add(serverTestButton);
+        //playlistBox.add(serverTestButton);
         panel.add(playlistBox, BorderLayout.CENTER);
 
         displaySongArea = new JTextArea(20, 50);
@@ -314,7 +313,7 @@ public class MusicFrame extends JFrame {
                     try {
                         modifyUser.deletePlaylist(usernameName, playListList.getSelectedValue());
                         refreshPlaylistList();
-                    } catch (IOException | ParseException ex) {
+                    } catch (IOException | ParseException | java.text.ParseException | InterruptedException ex) {
                         ex.printStackTrace();
                     }
                 }
@@ -474,13 +473,15 @@ public class MusicFrame extends JFrame {
                         e.printStackTrace();
                     }
                     try {
-                        mu.createPlaylist(usernameName, playListNameField.getText().trim());
-                    } catch (IOException | ParseException e) {
+                        proxy.synchExecution("createPlaylist", usernameName,
+                                playListNameField.getText().trim(), "at most once");
+                        //mu.createPlaylist(usernameName, playListNameField.getText().trim());
+                    } catch (IOException | ParseException | InterruptedException | java.text.ParseException e) {
                         e.printStackTrace();
                     }
                     try {
                         refreshPlaylistList();
-                    } catch (IOException | ParseException e) {
+                    } catch (IOException | ParseException | java.text.ParseException | InterruptedException e) {
                         e.printStackTrace();
                     }
                     setVisible(false);
@@ -495,10 +496,14 @@ public class MusicFrame extends JFrame {
      * @throws IOException
      * @throws ParseException
      */
-    public void refreshPlaylistList() throws IOException, ParseException {
+    public void refreshPlaylistList() throws IOException, ParseException, java.text.ParseException, InterruptedException {
 
         playlists.clear();
-        playlists.addAll(modifyUser.getPlaylists(usernameName));
+        //playlists.addAll(modifyUser.getPlaylists(usernameName));
+        JSONObject jsonReturn = proxy.synchExecution("getPlaylists", currUserString, "maybe");
+        String allSongs = (String) jsonReturn.get("ret");
+        String[] tempSongs = allSongs.split(",, ");
+        playlists.addAll(Arrays.asList(tempSongs));
 
         DefaultListModel<String> playListModel = new DefaultListModel<String>();
         for (String element : playlists){

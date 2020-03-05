@@ -130,13 +130,15 @@ public class ModifyUser {
      * @throws IOException
      * @throws ParseException
      */
-    public ArrayList<String> getPlaylists(String username) throws IOException, ParseException {
+    public String getPlaylists(String username) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
         JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
         ArrayList<String> playlistNames = new ArrayList<>(); // add to this arraylist
 
+        System.out.println("HELLO");
+
         // For each user:
-        for (Object info : userArray){
+        for (Object info : userArray) {
             JSONObject userInfoSearch = (JSONObject) info;
 
             Map userInfo = ((Map) userInfoSearch.get("info"));
@@ -155,9 +157,8 @@ public class ModifyUser {
                     }
                 }
             }
-
         }
-        return playlistNames;
+        return String.join(",, ", playlistNames);
     }
 
 
@@ -167,7 +168,7 @@ public class ModifyUser {
      * @throws IOException
      * @throws ParseException
      */
-    public void createPlaylist(String username, String playlistName) throws IOException, ParseException {
+    public String createPlaylist(String username, String playlistName) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
         JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
 
@@ -207,6 +208,7 @@ public class ModifyUser {
             fileWriter.flush();
             fileWriter.close();
         }
+        return "";
     }
 
     /**

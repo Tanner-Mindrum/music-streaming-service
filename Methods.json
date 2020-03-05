@@ -87,6 +87,25 @@
     },
     "ret": "java.lang.String",
     "semantic": "maybe"
+  },
+  {
+    "remoteMethod": "createPlaylist",
+    "objectName": "ModifyUser",
+    "param": {
+      "username" : "java.lang.String",
+      "playlistName" : "java.lang.String"
+    },
+    "ret": "java.lang.String",
+    "semantic": "maybe"
+  },
+  {
+    "remoteMethod": "getPlaylists",
+    "objectName": "ModifyUser",
+    "param": {
+      "username" : "java.lang.String"
+    },
+    "ret": "java.lang.String",
+    "semantic": "maybe"
   }
 
 ]
