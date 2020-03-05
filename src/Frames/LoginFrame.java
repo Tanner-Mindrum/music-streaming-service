@@ -170,7 +170,7 @@ public class LoginFrame extends JFrame {
                             noPasswordEnteredLabel.setVisible(false);
                             userDoesNotExistLabel.setVisible(true);
                         } else {
-                            MusicFrame musicFrame = new MusicFrame(new User(enterUsernameField.getText().trim()), socket, comm);
+                            MusicFrame musicFrame = new MusicFrame(enterUsernameField.getText().trim(), socket, comm);
                             setVisible(false);
                             musicFrame.setLocationRelativeTo(null);
                             musicFrame.setVisible(true);
@@ -182,7 +182,12 @@ public class LoginFrame extends JFrame {
             }
             else if (click.getSource() == signUpButton) {
                 // Open sign up frame
-                SignUpFrame signUpFrame = new SignUpFrame(socket, comm);
+                SignUpFrame signUpFrame = null;
+                try {
+                    signUpFrame = new SignUpFrame(socket, comm);
+                } catch (IOException | ParseException e) {
+                    e.printStackTrace();
+                }
                 setVisible(false);
                 signUpFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 signUpFrame.setLocationRelativeTo(null);

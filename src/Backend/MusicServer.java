@@ -21,13 +21,16 @@ public class MusicServer extends Thread {
     private Dispatcher dispatcher;
     private SongDispatcher songDispatcher;
     private SongInfo songInfo;
+    private User user;
 
     public MusicServer() throws IOException, ParseException {
         socket = new DatagramSocket(4445);
         this.dispatcher = new Dispatcher();
         this.songDispatcher = new SongDispatcher();
         this.songInfo = new SongInfo();
+        this.user = new User();
 
+        dispatcher.registerObject(user, "User");
         dispatcher.registerObject(songDispatcher, "SongServices");
         dispatcher.registerObject(songInfo, "SongInfo");
         System.out.println("SERVER STARTED");

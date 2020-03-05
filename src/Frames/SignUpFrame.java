@@ -1,9 +1,6 @@
 package Frames;
 
-import Backend.CommunicationModule;
-import Backend.ModifyUser;
-import Backend.ServerMain;
-import Backend.User;
+import Backend.*;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
@@ -35,26 +32,28 @@ public class SignUpFrame extends JFrame {
     private JLabel noPasswordEnteredLabel;
     private JLabel passwordLabel;
     private JTextField passwordField;
+    private Proxy proxy;
 
 
     private static final int FRAME_WIDTH = 600;
     private static final int FRAME_HEIGHT = 450;
 
     private final String[] months = {"January", "February", "March", "April", "May",
-                                        "June", "July", "August", "September",
-                                        "October", "November", "December"};
+            "June", "July", "August", "September",
+            "October", "November", "December"};
 
     private final Integer[] days = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,
-                                        20,21,22,23,24,25,26,27,28,29,30,31};
+            20,21,22,23,24,25,26,27,28,29,30,31};
 
     private ArrayList<Integer> years = new ArrayList<>();
 
     private DatagramSocket socket;
     private CommunicationModule comm;
 
-    public SignUpFrame(DatagramSocket socket, CommunicationModule cm) {
+    public SignUpFrame(DatagramSocket socket, CommunicationModule cm) throws IOException, ParseException {
         this.socket = socket;
         comm = cm;
+        proxy = new Proxy(comm);
         for (int i = 2020; i >= 0; i--) {
             years.add(i);
         }
@@ -275,16 +274,18 @@ public class SignUpFrame extends JFrame {
                         duplicateUsernameLabel.setVisible(true);
                     }
                     else {
-                        User newUser = new User(emailField.getText().trim(), userNameField.getText().trim(), passwordField.getText().trim(),
+
+                        proxy.synchExecution("addUserToDatabase", emailField.getText().trim(), userNameField.getText().trim(), passwordField.getText().trim(),
                                 (String) monthBox.getSelectedItem(), Integer.toString((int) dayBox.getSelectedItem()),
-                                Integer.toString((int)yearBox.getSelectedItem()));
-                        MusicFrame musicFrame = new MusicFrame(newUser, socket, comm);
+                                Integer.toString((int)yearBox.getSelectedItem()), "maybe");
+
+                        MusicFrame musicFrame = new MusicFrame(userNameField.getText().trim(), socket, comm);
                         setVisible(false);
                         musicFrame.setLocationRelativeTo(null);
                         musicFrame.setVisible(true);
                     }
                 }
-                catch (IOException | ParseException e) {
+                catch (IOException | ParseException | InterruptedException | java.text.ParseException e) {
                     e.printStackTrace();
                 }
             }

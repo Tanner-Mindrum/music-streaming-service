@@ -40,6 +40,21 @@
     },
     "ret": "java.lang.String",
     "semantic": "maybe"
+  },
+
+  {
+    "remoteMethod": "addUserToDatabase",
+    "objectName": "User",
+    "param": {
+      "email": "java.lang.String",
+      "username": "java.lang.String",
+      "password": "java.lang.String",
+      "month": "java.lang.String",
+      "day": "java.lang.String",
+      "year": "java.lang.String"
+    },
+    "ret": "Null",
+    "semantic": "maybe"
   }
 
 

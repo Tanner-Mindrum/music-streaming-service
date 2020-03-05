@@ -50,6 +50,7 @@ public class MusicFrame extends JFrame {
     private JMenu userMenu;
     private JMenuItem m1;
     private JButton stopButton;
+    private String currUserString;
     ArrayList<Songs> foundSongs = new ArrayList<Songs>();
     ArrayList<String> foundSongsStrings = new ArrayList<>();
     ArrayList<Songs> foundFinalSongs = new ArrayList<Songs>();
@@ -97,13 +98,13 @@ public class MusicFrame extends JFrame {
     private Proxy proxy;
     private CommunicationModule comm;
 
-    public MusicFrame(User user, DatagramSocket pSocket, CommunicationModule cm) throws IOException, ParseException {
+    public MusicFrame(String user, DatagramSocket pSocket, CommunicationModule cm) throws IOException, ParseException {
         socket = pSocket;
         comm = cm;
         proxy = new Proxy(comm);
         address = InetAddress.getByName("localhost");
-        currUser = user;
-        usernameName = user.getUsername();
+        currUserString = user;
+        usernameName = currUserString;
         createComponents();
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
         this.setTitle("Home Page");
@@ -281,7 +282,7 @@ public class MusicFrame extends JFrame {
             }
             //This opens up a createplaylist frame for users to add a playlist
             else if (e.getSource() == createPlaylistButton) {
-                CreatePlaylistFrame2 pFrame = new CreatePlaylistFrame2(currUser);
+                CreatePlaylistFrame2 pFrame = new CreatePlaylistFrame2(currUserString);
                 pFrame.setLocationRelativeTo(null);
                 pFrame.setVisible(true);
             }
@@ -405,11 +406,11 @@ public class MusicFrame extends JFrame {
         private static final int FRAME_HEIGHT = 200;
 
 
-        public CreatePlaylistFrame2(User user) {
+        public CreatePlaylistFrame2(String user) {
             createComponents();
             setSize(FRAME_WIDTH, FRAME_HEIGHT);
             this.setTitle("Add playlist");
-            currUser = user;
+            currUserString = user;
         }
 
         public void createComponents() {

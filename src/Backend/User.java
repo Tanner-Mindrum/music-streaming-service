@@ -5,6 +5,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -31,13 +32,17 @@ public class User {
         this.username = username;
     }
 
-    public User(String email, String username, String password, String month, String day, String year) throws IOException, ParseException {
+    public User(String email, String username, String password, String month, String day, String year) {
         // Set fields
         this.email = email;
         this.username = username;
         this.password = password;
         this.dob = month + "." + day + "." + year;
 
+
+    }
+
+    public void addUserToDatabase(String email, String username, String password, String month, String day, String year) throws IOException, ParseException {
         // Creating JSONArray for the array of users
         JSONParser parser = new JSONParser();
         // Tanner's path: C://CECS 327//music-streaming-service//user.json
