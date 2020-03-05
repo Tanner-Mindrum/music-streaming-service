@@ -17,6 +17,10 @@ public class ModifyUser {
     private JSONObject userObject;
     private SongInfo songInfo;
 
+    public ModifyUser(){
+        userObject = null;
+    }
+
     // Constructor with username parameter to find user in JSON
     public ModifyUser(String name) {
         this.username = name;
@@ -79,13 +83,13 @@ public class ModifyUser {
 
     /**
      * Checks if a user already exists with the email or username given
-     * @param email
      * @param username
+     * @param email
      * @return
      * @throws IOException
      * @throws ParseException
      */
-    public String checkDuplicateUser(String email, String username) throws IOException, ParseException {
+    public String checkDuplicateUser(String username, String email) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
         JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
 
@@ -119,7 +123,7 @@ public class ModifyUser {
      * @throws IOException
      * @throws ParseException
      */
-    public ArrayList<String> getPlaylists() throws IOException, ParseException {
+    public ArrayList<String> getPlaylists(String username) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
         JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
         ArrayList<String> playlistNames = new ArrayList<>(); // add to this arraylist
@@ -156,7 +160,7 @@ public class ModifyUser {
      * @throws IOException
      * @throws ParseException
      */
-    public void createPlaylist(String playlistName) throws IOException, ParseException {
+    public void createPlaylist(String username, String playlistName) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
         JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
 
@@ -204,7 +208,7 @@ public class ModifyUser {
      * @throws IOException
      * @throws ParseException
      */
-    public void deletePlaylist(String playlistName) throws IOException, ParseException {
+    public void deletePlaylist(String username, String playlistName) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
         JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
 
@@ -248,7 +252,7 @@ public class ModifyUser {
      * @throws IOException
      * @throws ParseException
      */
-    public void addToPlaylist(Songs song, String playlistName) throws IOException, ParseException {
+    public void addToPlaylist(String username, Songs song, String playlistName) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
         JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
         boolean duplicate = false;
@@ -301,7 +305,7 @@ public class ModifyUser {
      * @throws IOException
      * @throws ParseException
      */
-    public ArrayList<Songs> getSongs(String playlistName) throws IOException, ParseException {
+    public ArrayList<Songs> getSongs(String username, String playlistName) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
         JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
         JSONArray songArray = (JSONArray) parser.parse(new FileReader("music.json"));

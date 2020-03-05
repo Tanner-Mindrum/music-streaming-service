@@ -30,9 +30,10 @@
   "ret": "java.lang.String",
   "semantic": "maybe"
   },
+
   {
     "remoteMethod": "checkUserExists",
-    "objectName": "SongInfo",
+    "objectName": "UserServices",
     "param": {
       "username": "java.lang.String",
       "password": "java.lang.String"

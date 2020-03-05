@@ -63,7 +63,7 @@ public class MusicFrame extends JFrame {
                     Object o = theList.getModel().getElementAt(index);
                     try {
                         foundFinalSongs.clear();
-                        ArrayList<Songs> playlistSongs = modifyUser.getSongs(o.toString());
+                        ArrayList<Songs> playlistSongs = modifyUser.getSongs(usernameName, o.toString());
                         foundFinalSongs.addAll(playlistSongs);
                         DefaultListModel<String> model = new DefaultListModel<>();
                         for (Songs s : playlistSongs) {
@@ -103,6 +103,7 @@ public class MusicFrame extends JFrame {
         proxy = new Proxy(comm);
         address = InetAddress.getByName("localhost");
         currUser = user;
+        usernameName = user.getUsername();
         createComponents();
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
         this.setTitle("Home Page");
@@ -165,7 +166,7 @@ public class MusicFrame extends JFrame {
 
         // Playlist Display
         modifyUser = new ModifyUser(currUser.getUsername());
-        playlists = modifyUser.getPlaylists();
+        playlists = modifyUser.getPlaylists(usernameName);
 
         DefaultListModel<String> playListModel = new DefaultListModel<String>();
         for (String element : playlists){
@@ -288,7 +289,7 @@ public class MusicFrame extends JFrame {
             else if (e.getSource() == deletePlaylistButton){
                 if (!playListList.isSelectionEmpty()) {
                     try {
-                        modifyUser.deletePlaylist(playListList.getSelectedValue());
+                        modifyUser.deletePlaylist(usernameName, playListList.getSelectedValue());
                         refreshPlaylistList();
                     } catch (IOException | ParseException ex) {
                         ex.printStackTrace();
@@ -301,7 +302,7 @@ public class MusicFrame extends JFrame {
                     try {
                         //modifyUser.addToPlaylist(songList.getSelectedValue(), playListList.getSelectedValue());
                         Songs songToAdd = (foundFinalSongs.get(songList.getSelectedIndex()));
-                        modifyUser.addToPlaylist(songToAdd, playListList.getSelectedValue());
+                        modifyUser.addToPlaylist(usernameName, songToAdd, playListList.getSelectedValue());
                     } catch (IOException | ParseException ex) {
                         ex.printStackTrace();
                     }
@@ -434,7 +435,7 @@ public class MusicFrame extends JFrame {
                 if (click.getSource() == addButton || click.getSource() == playListNameField) {
                     ModifyUser mu = new ModifyUser(currUser.getUsername());
                     try {
-                        mu.createPlaylist(playListNameField.getText().trim());
+                        mu.createPlaylist(usernameName, playListNameField.getText().trim());
                     } catch (IOException | ParseException e) {
                         e.printStackTrace();
                     }
@@ -458,7 +459,7 @@ public class MusicFrame extends JFrame {
     public void refreshPlaylistList() throws IOException, ParseException {
 
         playlists.clear();
-        playlists.addAll(modifyUser.getPlaylists());
+        playlists.addAll(modifyUser.getPlaylists(usernameName));
 
         DefaultListModel<String> playListModel = new DefaultListModel<String>();
         for (String element : playlists){
