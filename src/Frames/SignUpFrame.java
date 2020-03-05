@@ -1,6 +1,7 @@
 package Frames;
 
 import Backend.*;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
@@ -195,10 +196,8 @@ public class SignUpFrame extends JFrame {
             if (click.getSource() == backButton) {
                 LoginFrame loginFrame = null;
                 try {
-                    loginFrame = new LoginFrame(socket);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (ParseException e) {
+                    loginFrame = new LoginFrame(socket, proxy);
+                } catch (IOException | ParseException e) {
                     e.printStackTrace();
                 }
                 setVisible(false);
@@ -214,6 +213,11 @@ public class SignUpFrame extends JFrame {
                     e.printStackTrace();
                 }
                 try {
+                    String user = userNameField.getText().trim();
+                    String email = emailField.getText().trim();
+                    JSONObject dupe = proxy.synchExecution("checkDuplicateUser", user, email, "maybe");
+                    String retDupe = (String) dupe.get("ret");
+                    System.out.println("retDupe: " + retDupe);
                     if (emailField.getText().trim().length() == 0 && userNameField.getText().trim().length() == 0
                             && passwordField.getText().trim().length() == 0) {
                         duplicateEmailLabel.setVisible(false);
@@ -263,16 +267,14 @@ public class SignUpFrame extends JFrame {
                         noEmailEnteredLabel.setVisible(false);
                         noUsernameEnteredLabel.setVisible(false);
                     }
-                    else if (checkUser.checkDuplicateUser(emailField.getText().trim(),
-                            userNameField.getText().trim()).equals("email")) {
+                    else if (retDupe.equals("email")) {
                         duplicateUsernameLabel.setVisible(false);
                         noEmailEnteredLabel.setVisible(false);
                         noUsernameEnteredLabel.setVisible(false);
                         duplicateEmailLabel.setVisible(true);
 
                     }
-                    else if (checkUser.checkDuplicateUser(emailField.getText().trim(),
-                            userNameField.getText().trim()).equals("username")) {
+                    else if (retDupe.equals("username")) {
                         duplicateEmailLabel.setVisible(false);
                         noUsernameEnteredLabel.setVisible(false);
                         noEmailEnteredLabel.setVisible(false);

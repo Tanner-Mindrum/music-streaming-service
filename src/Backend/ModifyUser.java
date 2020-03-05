@@ -1,3 +1,4 @@
+
 package Backend;
 
 import org.json.simple.JSONArray;
@@ -36,7 +37,7 @@ public class ModifyUser {
      * @throws IOException
      * @throws ParseException
      */
-    public boolean checkUserExists(String username, String password) throws IOException, ParseException {
+    public String checkUserExists(String username, String password) throws IOException, ParseException {
         boolean usernameFound = false;
         boolean passwordFound = false;
 
@@ -76,10 +77,10 @@ public class ModifyUser {
                 }
             }
             if (usernameFound && passwordFound) {
-                return true;
+                return "true";
             }
         }
-        return false;
+        return "false";
     }
 
     /**
@@ -119,7 +120,7 @@ public class ModifyUser {
     }
 
     /**
-     * Gets the playlists to udpdate the display
+     * Gets the playlists to update the display
      * @return
      * @throws IOException
      * @throws ParseException

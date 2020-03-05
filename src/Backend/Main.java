@@ -14,9 +14,11 @@ public class Main {
 
     public static void main(String[] args) throws IOException, ParseException {
         DatagramSocket socket = new DatagramSocket();
+        CommunicationModule cm = new CommunicationModule();
+        Proxy proxy = new Proxy(cm);
 
         // Spawn initial log in frame
-        JFrame frame = new LoginFrame(socket);
+        JFrame frame = new LoginFrame(socket, proxy);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

@@ -33,10 +33,21 @@
 
   {
     "remoteMethod": "checkUserExists",
-    "objectName": "UserServices",
+    "objectName": "ModifyUser",
     "param": {
       "username": "java.lang.String",
       "password": "java.lang.String"
+    },
+    "ret": "java.lang.String",
+    "semantic": "maybe"
+  },
+
+  {
+    "remoteMethod": "checkDuplicateUser",
+    "objectName": "ModifyUser",
+    "param": {
+      "username": "java.lang.String",
+      "email": "java.lang.String"
     },
     "ret": "java.lang.String",
     "semantic": "maybe"

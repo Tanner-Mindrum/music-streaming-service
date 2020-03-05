@@ -1,19 +1,15 @@
 package Frames;
 
-import Backend.CommunicationModule;
-import Backend.ModifyUser;
-import Backend.ServerMain;
-import Backend.User;
+import Backend.*;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
-import javax.xml.crypto.Data;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.DatagramSocket;
-import java.net.UnknownHostException;
 
 public class LoginFrame extends JFrame {
 
@@ -35,14 +31,16 @@ public class LoginFrame extends JFrame {
 
     private DatagramSocket socket;
     private CommunicationModule comm;
+    private Proxy proxy;
 
 
-    public LoginFrame(DatagramSocket socket) throws IOException, ParseException {
+    public LoginFrame(DatagramSocket socket, Proxy proxy) throws IOException, ParseException {
         comm = new CommunicationModule();
         //System.out.println(comm.sendEcho("hello"));
 //        comm.sendEcho("end");
         this.socket = socket;
         createComponents();
+        this.proxy = proxy;
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
         this.setTitle("Login");
     }
@@ -163,24 +161,24 @@ public class LoginFrame extends JFrame {
                     noUsernameEnteredLabel.setVisible(false);
                     noPasswordEnteredLabel.setVisible(true);
                 } else {
-                    ModifyUser checkUser = null;
+                    String user = enterUsernameField.getText().trim();
+                    String pass = enterPasswordField.getText().trim();
                     try {
-                        checkUser = new ModifyUser(enterUsernameField.getText().trim());
-                    } catch (IOException | ParseException e) {
-                        e.printStackTrace();
-                    }
-                    try {
-                        if (!checkUser.checkUserExists(enterUsernameField.getText().trim(), enterPasswordField.getText().trim())) {
+                        JSONObject checkIt = proxy.synchExecution("checkUserExists", user, pass, "maybe");
+                        String userChecked = (String) checkIt.get("ret");
+                        System.out.println("UserChecked: " + userChecked);
+                        Boolean tested = userChecked.equals("true");
+                        if (!tested) {
                             noUsernameEnteredLabel.setVisible(false);
                             noPasswordEnteredLabel.setVisible(false);
                             userDoesNotExistLabel.setVisible(true);
                         } else {
-                            MusicFrame musicFrame = new MusicFrame(enterUsernameField.getText().trim(), socket, comm);
+                            MusicFrame musicFrame = new MusicFrame(user, socket, comm);
                             setVisible(false);
                             musicFrame.setLocationRelativeTo(null);
                             musicFrame.setVisible(true);
                         }
-                    } catch (IOException | ParseException e) {
+                    } catch (IOException | ParseException | InterruptedException | java.text.ParseException e) {
                         e.printStackTrace();
                     }
                 }

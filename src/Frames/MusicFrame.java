@@ -354,7 +354,7 @@ public class MusicFrame extends JFrame {
             else if (e.getSource() == m1) {
                 LoginFrame loginFrame = null;
                 try {
-                    loginFrame = new LoginFrame(socket);
+                    loginFrame = new LoginFrame(socket, proxy);
                 } catch (IOException | ParseException ex) {
                     ex.printStackTrace();
                 }
