@@ -27,6 +27,7 @@ public class MusicServer extends Thread {
         this.dispatcher = new Dispatcher();
         this.songDispatcher = new SongDispatcher();
         this.songInfo = new SongInfo();
+
         dispatcher.registerObject(songDispatcher, "SongServices");
         dispatcher.registerObject(songInfo, "SongInfo");
         System.out.println("SERVER STARTED");
