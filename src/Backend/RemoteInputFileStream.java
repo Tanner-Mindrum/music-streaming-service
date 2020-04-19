@@ -1,4 +1,4 @@
-/**
+package Backend; /**
 * RemoteInputFileStream Implements an Input Stream for big
 * files. It creates a server and return the address
 * The client must call connect() before reading
