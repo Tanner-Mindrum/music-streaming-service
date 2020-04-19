@@ -198,9 +198,6 @@ public class ModifyUser {
 
             }
 
-
-
-
             // Writing playlist to JSON file
             PrintWriter fileWriter = new PrintWriter("user.json");
             fileWriter.write(userArray.toJSONString());

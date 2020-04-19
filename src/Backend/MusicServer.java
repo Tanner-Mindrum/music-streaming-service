@@ -68,8 +68,7 @@ public class MusicServer extends Thread {
                     continue;
                 }
                 socket.send(packet);
-            }
-            catch (IOException | java.text.ParseException | ParseException e) {
+            } catch (IOException | java.text.ParseException | ParseException e) {
                 e.printStackTrace();
             }
         }
