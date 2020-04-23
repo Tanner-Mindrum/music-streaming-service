@@ -1,14 +1,11 @@
 package Backend;
 
-import java.rmi.*;
-import java.net.*;
-import java.util.*;
+import java.nio.charset.StandardCharsets;
 import java.io.*;
 import java.nio.file.*;
 import java.math.BigInteger;
 import java.security.*;
-// import a json package
-
+import com.google.gson.stream.JsonReader;
 
 /* JSON Format
 
@@ -29,7 +26,7 @@ import java.security.*;
             }
             page :
             {
-                number : "2"
+                number : "2" // []
                 guid   : "46312"
                 size   : "1024"
             }
@@ -42,8 +39,6 @@ import java.security.*;
         }
     }
 }
- 
- 
  */
 
 
@@ -72,51 +67,52 @@ public class DFS
     
     
     
-    public DFS(int port) throws Exception
-    {
-        
+    public DFS(int port) throws Exception {
         this.port = port;
         long guid = md5("" + port);
         chord = new Chord(port, guid);
         Files.createDirectories(Paths.get(guid+"/repository"));
     }
     
-    public  void join(String Ip, int port) throws Exception
-    {
+    public void join(String Ip, int port) throws Exception {
         chord.joinRing(Ip, port);
         chord.Print();
     }
-    
-  /*  public JSonParser readMetaData() throws Exception
-    {
-        JsonParser jsonParser _ null;
+
+    /**
+     * Read a Metadata JSON object
+     * @return JsonReader object (streaming JSON parser) which reads in Metadata as stream of tokens
+     * @throws IOException - Communication errors, I/O errors
+     */
+    public JsonReader readMetaData() throws IOException {
         long guid = md5("Metadata");
-        ChordMessageInterface peer = chord.locateSuccessor(guid);
-        InputStream metadataraw = peer.get(guid);
-        // jsonParser = Json.createParser(metadataraw);
-        return jsonParser;
+        return new JsonReader(new InputStreamReader(chord.locateSuccessor(guid).get(guid), StandardCharsets.UTF_8));
     }
-    
-    public void writeMetaData(InputStream stream) throws Exception
-    {
-        JsonParser jsonParser _ null;
+
+    /**
+     * Write
+     * @param stream
+     * @throws IOException
+     */
+    public void writeMetaData(InputStream stream) throws IOException {
         long guid = md5("Metadata");
-        ChordMessageInterface peer = chord.locateSuccessor(guid);
-        peer.put(guid, stream);
+        chord.locateSuccessor(guid).put(guid, stream);
     }
-   */
+
     public void mv(String oldName, String newName) throws Exception
     {
         // TODO:  Change the name in Metadata
+        // read file
         // Write Metadata
     }
 
     
-    public String ls() throws Exception
-    {
+    public String ls() throws IOException {
         String listOfFiles = "";
        // TODO: returns all the files in the Metadata
        // JsonParser jp = readMetaData();
+        JsonReader reader = readMetaData();
+        System.out.println(reader);
         return listOfFiles;
     }
 
@@ -126,8 +122,6 @@ public class DFS
          // TODO: Create the file fileName by adding a new entry to the Metadata
         // Write Metadata
 
-        
-        
     }
     public void delete(String fileName) throws Exception
     {

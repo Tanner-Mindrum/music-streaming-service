@@ -15,5 +15,6 @@
     <orderEntry type="library" name="decoder" level="project" />
     <orderEntry type="library" name="gson-2.8.6" level="application" />
     <orderEntry type="library" name="json-simple-1.1.1" level="project" />
+    <orderEntry type="library" name="gson-2.8.61" level="project" />
   </component>
 </module>
