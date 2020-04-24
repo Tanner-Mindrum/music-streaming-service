@@ -33,7 +33,7 @@ public class SongDispatcher
     {
         byte buf[] = new byte[FRAGMENT_SIZE];
 
-        File file = new File("./" + key + ".mp3");
+        File file = new File("./" + key + ".mp3");  // dfs.read(), locate successor
         FileInputStream inputStream = new FileInputStream(file);
         inputStream.skip(fragment * FRAGMENT_SIZE);
         inputStream.read(buf);

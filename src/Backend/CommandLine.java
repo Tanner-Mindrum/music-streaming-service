@@ -27,15 +27,32 @@ public class CommandLine {
         new CommandLine(2000);
     }
 
-    public void userInterface() throws IOException {
+    public void userInterface() throws Exception {
         Scanner in = new Scanner(System.in);
-        System.out.println("Command menu:\n-------------");
-        System.out.println("1. ls (list)");
-        System.out.println("\nEnter command: ");
+        boolean running = true;
+        while (running) {
+            System.out.println("Command menu:\n-------------");
+            System.out.println("1. join");
+            System.out.println("2. ls (list)");
+            System.out.println("3. touch");
+            System.out.println("10. quit");
+            System.out.println("\nEnter command: ");
 
-        if (in.nextLine().equals("ls")) {
-            dfs.ls();
+            String input = in.nextLine().trim();
+
+            if (input.equals("join")) {
+                System.out.println("Enter port: ");
+                dfs.join("localhost", Integer.parseInt(in.nextLine().trim()));
+            }
+            else if (input.equals("ls")) {
+                dfs.ls();
+            }
+            else if (input.equals("touch")) {
+                dfs.touch("blah");
+            }
+            else if (input.equals("quit")) {
+                running = false;
+            }
         }
-
     }
 }

@@ -37,7 +37,7 @@ public class SongInfo {
      */
     public String findSong(String name) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
-        JSONArray information = (JSONArray) parser.parse(new FileReader("music.json"));
+        JSONArray information = (JSONArray) parser.parse(new FileReader("music.json"));  // search method in chord, create method search in dfs return string
         boolean match = false;
         boolean idFound = false;
         songList = new ArrayList<>();
