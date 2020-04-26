@@ -45,13 +45,15 @@ public class CommandLine {
                 dfs.join("localhost", Integer.parseInt(in.nextLine().trim()));
             }
             else if (input.equals("ls")) {
-                dfs.ls();
+                System.out.println("\n" + dfs.ls());
             }
             else if (input.equals("touch")) {
-                dfs.touch("blah");
+                System.out.println("Enter file name: ");
+                dfs.touch(in.nextLine().trim());
             }
             else if (input.equals("quit")) {
                 running = false;
+                System.exit(0);
             }
         }
     }

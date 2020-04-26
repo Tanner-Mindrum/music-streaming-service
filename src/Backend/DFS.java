@@ -5,14 +5,9 @@ import java.io.*;
 import java.nio.file.*;
 import java.math.BigInteger;
 import java.security.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -125,31 +120,37 @@ public class DFS {
 
 
     public String ls() throws IOException {
-        String listOfFiles = "";
-       // TODO: returns all the files in the Metadata
-        JsonObject obj = JsonParser.parseReader(readMetaData()).getAsJsonObject();
-        return listOfFiles;
+        JsonObject metadata = JsonParser.parseReader(readMetaData()).getAsJsonObject();
+        JsonArray files = (JsonArray) metadata.get("metadata");
+
+        String finalFileList = "";
+        for (JsonElement jsonEle : files) {
+            JsonObject jsonObj = (JsonObject) jsonEle;
+            finalFileList += jsonObj.getAsJsonObject("file").get("name") + "\n";
+        }
+        return finalFileList;
     }
 
     
     public void touch(String fileName) throws Exception {
-         // TODO: Create the file fileName by adding a new entry to the Metadata
-        // Write Metadata
         JsonObject metadata = JsonParser.parseReader(readMetaData()).getAsJsonObject();
         JsonArray files = (JsonArray) metadata.get("metadata");
 
         JsonObject fileObj = new JsonObject();
+        JsonObject mainFileObj = new JsonObject();
         fileObj.addProperty("name", fileName);
         fileObj.addProperty("numberOfPages", 0);
         fileObj.addProperty("pageSize", 0);
         fileObj.addProperty("size", 0);
         JsonArray pages = new JsonArray();
         fileObj.add("page", pages);
-        files.add(fileObj);
+        mainFileObj.add("file", fileObj);
+        files.add(mainFileObj);
+
         InputStream stream = new ByteArrayInputStream(metadata.toString().getBytes());
         writeMetaData(stream);
-
     }
+
     public void delete(String fileName) throws Exception {
         // TODO: remove all the pages in the entry fileName in the Metadata and then the entry
         // for each page in Metadata.filename
@@ -157,8 +158,6 @@ public class DFS {
         //     peer.delete(page.guid)
         // delete Metadata.filename
         // Write Metadata
-
-        
     }
     
     public Byte[] read(String fileName, int pageNumber) throws Exception {
