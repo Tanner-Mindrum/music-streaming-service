@@ -195,7 +195,8 @@ public class DFS {
         return read(fileName, 1);
     }
 
-    public void append(String filename, Byte[] data) throws Exception {
+    // file name, file name to append
+    public void append(String filename, byte[] data) throws Exception {
         // TODO: append data to fileName. If it is needed, add a new page.
         // Let guid be the last page in Metadata.filename
         //ChordMessageInterface peer = chord.locateSuccessor(guid);

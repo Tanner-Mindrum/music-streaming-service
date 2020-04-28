@@ -1,5 +1,8 @@
 package Backend;
 
+import sun.misc.IOUtils;
+
+import java.nio.charset.StandardCharsets;
 import java.rmi.*;
 import java.net.*;
 import java.util.*;
@@ -37,6 +40,7 @@ public class CommandLine {
             System.out.println("3. list");
             System.out.println("4. touch");
             System.out.println("5. read");
+            System.out.println("6. append");
             System.out.println("10. quit");
             System.out.println("\nEnter command: ");
 
@@ -66,7 +70,19 @@ public class CommandLine {
                 System.out.println("Enter page number: ");
                 int pgNum = Integer.parseInt(in.nextLine().trim());
                 dfs.read(fileName, pgNum);
-                System.out.println(new String(dfs.read(fileName, pgNum)));
+            }
+            else if (input.equals("append") || input.equals("6")) {
+                System.out.println("Enter file name to append to: ");
+                String fileName = in.nextLine().trim();
+                System.out.println("Enter data to append: ");
+                String fileToAppend = in.nextLine().trim();
+                FileInputStream f = new FileInputStream(fileToAppend);
+                File appendingFile = new File(fileToAppend);
+                byte[] data = new byte[(int) appendingFile.length()];
+                System.out.println(data.length);
+                f.read(data);
+                f.close();
+                //dfs.append(fileName, data);
             }
             else if (input.equals("quit") || input.equals("10")) {
                 running = false;
