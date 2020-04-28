@@ -13,6 +13,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import javax.xml.bind.DatatypeConverter;
+
 /* JSON Format
 
  {
@@ -107,26 +109,29 @@ public class DFS {
      */
     public void writeMetaData(InputStream stream) throws IOException {
         long guid = md5("Metadata");
-        System.out.println(guid);
         chord.locateSuccessor(guid).put(guid, stream);
     }
 
-    public void mv(String oldName, String newName) throws Exception
-    {
-        // TODO:  Change the name in Metadata
-        // read file
-        // Write Metadata
+    public void mv(String oldName, String newName) throws Exception {
+        JsonObject metadata = JsonParser.parseReader(readMetaData()).getAsJsonObject();
+        JsonArray files = (JsonArray) metadata.get("metadata");
+        JsonObject fileObj = null;
+        for (JsonElement jsonEle : files) {
+            fileObj = ((JsonObject) jsonEle).getAsJsonObject("file");
+            if ((fileObj.get("name").toString().replaceAll("^\"|\"$", "")).equals(oldName))
+                fileObj.addProperty("name", newName);
+        }
+        InputStream stream = new ByteArrayInputStream(metadata.toString().getBytes());
+        writeMetaData(stream);
     }
-
 
     public String ls() throws IOException {
         JsonObject metadata = JsonParser.parseReader(readMetaData()).getAsJsonObject();
         JsonArray files = (JsonArray) metadata.get("metadata");
-
         String finalFileList = "";
         for (JsonElement jsonEle : files) {
             JsonObject jsonObj = (JsonObject) jsonEle;
-            finalFileList += jsonObj.getAsJsonObject("file").get("name") + "\n";
+            finalFileList += jsonObj.getAsJsonObject("file").get("name").toString() + "\n";
         }
         return finalFileList;
     }
@@ -143,7 +148,7 @@ public class DFS {
         fileObj.addProperty("pageSize", 0);
         fileObj.addProperty("size", 0);
         JsonArray pages = new JsonArray();
-        fileObj.add("page", pages);
+        fileObj.add("pages", pages);
         mainFileObj.add("file", fileObj);
         files.add(mainFileObj);
 
@@ -160,23 +165,37 @@ public class DFS {
         // Write Metadata
     }
     
-    public Byte[] read(String fileName, int pageNumber) throws Exception {
-        // TODO: read pageNumber from fileName
-        return null;
+    public InputStream read(String fileName, int pageNumber) throws Exception {
+        JsonObject metadata = JsonParser.parseReader(readMetaData()).getAsJsonObject();
+        JsonArray files = (JsonArray) metadata.get("metadata");
+        JsonObject fileObj = null;
+        InputStream stream = null;
+        for (JsonElement jsonEle : files) {
+            fileObj = ((JsonObject) jsonEle).getAsJsonObject("file");
+            if (fileObj.get("name").toString().replaceAll("^\"|\"$", "").equals(fileName)) {
+                JsonArray pageList = fileObj.get("pages").getAsJsonArray();
+                if (pageNumber == -1) pageNumber = pageList.size() - 1;
+                for (JsonElement jsonElem : pageList) {
+                    JsonObject pageObj = ((JsonObject) jsonElem).getAsJsonObject("page");
+                    if (pageObj.get("number").toString().equals(Integer.toString(pageNumber))) {
+                        long guid = Long.parseLong(pageObj.get("guid").toString());
+                        stream = chord.locateSuccessor(guid).get(guid);
+                    }
+                }
+            }
+        }
+        return stream;
     }
 
-    public Byte[] tail(String fileName) throws Exception
-    {
-        // TODO: return the last page of the fileName
-        return null;
+    public InputStream tail(String fileName) throws Exception {
+        return read(fileName, -1);
     }
-    public Byte[] head(String fileName) throws Exception
-    {
-        // TODO: return the first page of the fileName
-        return null;
+
+    public InputStream head(String fileName) throws Exception {
+        return read(fileName, 1);
     }
-    public void append(String filename, Byte[] data) throws Exception
-    {
+
+    public void append(String filename, Byte[] data) throws Exception {
         // TODO: append data to fileName. If it is needed, add a new page.
         // Let guid be the last page in Metadata.filename
         //ChordMessageInterface peer = chord.locateSuccessor(guid);
