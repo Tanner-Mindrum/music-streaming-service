@@ -145,7 +145,6 @@ public class DFS {
         JsonObject mainFileObj = new JsonObject();
         fileObj.addProperty("name", fileName);
         fileObj.addProperty("numberOfPages", 0);
-        fileObj.addProperty("pageSize", 0);
         fileObj.addProperty("size", 0);
         JsonArray pages = new JsonArray();
         fileObj.add("pages", pages);
@@ -236,6 +235,12 @@ public class DFS {
                 pgObj.addProperty("size", data.length);
                 mainPgObj.add("page", pgObj);
                 pgs.add(mainPgObj);
+                int numOfPages = Integer.parseInt(fileObj.get("numberOfPages").toString());
+                long size = Long.parseLong(fileObj.get("size").toString());
+                numOfPages++;
+                size += data.length;
+                fileObj.addProperty("numberOfPages", numOfPages);
+                fileObj.addProperty("size", size);
             }
         }
         writeMetaData(new ByteArrayInputStream(metadata.toString().getBytes()));

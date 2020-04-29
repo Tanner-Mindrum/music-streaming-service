@@ -2,28 +2,43 @@
   "metadata": [
     {
       "file": {
-        "name": "hunter",
+        "name": "users",
         "numberOfPages": 0,
         "pageSize": 0,
         "size": 0,
-        "page": []
+        "pages": [
+          {
+            "page": {
+              "number": 1,
+              "guid": 202208155,
+              "size": 3324
+            }
+          }
+        ]
       }
     },
     {
       "file": {
-        "name": "zeeb",
-        "numberOfPages": 0,
-        "pageSize": 0,
-        "size": 0,
-        "page": []
+        "name": "music",
+        "numberOfPages": 2,
+        "size": 5315645,
+        "pages": [
+          {
+            "page": {
+              "number": 1,
+              "guid": 449791531,
+              "size": 782933
+            }
+          },
+          {
+            "page": {
+              "number": 2,
+              "guid": 146065775,
+              "size": 4532712
+            }
+          }
+        ]
       }
-    },
-    {
-      "name": "zeeb",
-      "numberOfPages": 0,
-      "pageSize": 0,
-      "size": 0,
-      "page": []
     }
   ]
 }
