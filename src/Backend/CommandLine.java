@@ -94,7 +94,7 @@ public class CommandLine {
             else if (input.equals("tail") || input.equals("8")) {
                 System.out.println("Enter file name: ");
                 String fileName = in.nextLine().trim();
-                System.out.println(new String(dfs.head(fileName)));
+                System.out.println(new String(dfs.tail(fileName)));
             }
             else if (input.equals("delete") || input.equals("9")) {
                 System.out.println("Enter file name: ");

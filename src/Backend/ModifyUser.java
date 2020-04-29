@@ -42,7 +42,7 @@ public class ModifyUser {
      * @throws IOException
      * @throws ParseException
      */
-    public String checkUserExists(String username, String password) throws IOException, ParseException {
+    public String checkUserExists(String username, String password) throws Exception {
         boolean usernameFound = false;
         boolean passwordFound = false;
 

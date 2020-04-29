@@ -190,7 +190,7 @@ public class DFS {
             fileObj = ((JsonObject) jsonEle).getAsJsonObject("file");
             if (fileObj.get("name").toString().replaceAll("^\"|\"$", "").equals(fileName)) {
                 JsonArray pageList = fileObj.get("pages").getAsJsonArray();
-                if (pageNumber == -1) pageNumber = pageList.size() - 1;
+                if (pageNumber == -1) pageNumber = pageList.size();
                 for (JsonElement jsonElem : pageList) {
                     JsonObject pageObj = ((JsonObject) jsonElem).getAsJsonObject("page");
                     if (pageObj.get("number").toString().equals(Integer.toString(pageNumber))) {
