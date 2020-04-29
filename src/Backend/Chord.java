@@ -86,7 +86,6 @@ public class Chord extends java.rmi.server.UnicastRemoteObject implements ChordM
 	      if (isKeyInSemiCloseInterval(key, guid, successor.getId()))
 	        return successor;
 	      ChordMessageInterface j = closestPrecedingNode(key);
-	      
           if (j == null)
 	        return null;
 	      return j.locateSuccessor(key);

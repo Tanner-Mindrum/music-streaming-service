@@ -12,6 +12,7 @@ import com.google.gson.stream.JsonReader;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import sun.misc.IOUtils;
 
 import javax.xml.bind.DatatypeConverter;
 
@@ -22,7 +23,7 @@ import javax.xml.bind.DatatypeConverter;
     {
         file :  ~~ARRAY~~ MUSIC.json
         {
-            name  : "File1"
+            name  : "music"
             numberOfPages : "3"
             pageSize : "1024"
             size : "2291"
@@ -154,19 +155,37 @@ public class DFS {
     }
 
     public void delete(String fileName) throws Exception {
-        // TODO: remove all the pages in the entry fileName in the Metadata and then the entry
-        // for each page in Metadata.filename
-        //     peer = chord.locateSuccessor(page.guid);
-        //     peer.delete(page.guid)
-        // delete Metadata.filename
-        // Write Metadata
+        JsonObject metadata = JsonParser.parseReader(readMetaData()).getAsJsonObject();
+        JsonArray files = (JsonArray) metadata.get("metadata");
+        JsonObject fileObj = null;
+        int indx = 0;
+        int count = 0;
+        for (JsonElement jsonEle : files) {
+            fileObj = ((JsonObject) jsonEle).getAsJsonObject("file");
+            if ((fileObj.get("name").toString().replaceAll("^\"|\"$", "")).equals(fileName)) {
+                indx = count;
+                JsonArray pgs = (JsonArray) fileObj.get("pages");
+                for (JsonElement jsonElem : pgs) {
+                    JsonObject pageObj = ((JsonObject) jsonElem).getAsJsonObject("page");
+                    chord.locateSuccessor(Long.parseLong(pageObj.get("guid").toString()))
+                            .delete(Long.parseLong(pageObj.get("guid").toString()));
+                }
+                break;
+            }
+            count++;
+        }
+        if (count > -1) {
+            files.remove(count);
+            writeMetaData(new ByteArrayInputStream(metadata.toString().getBytes()));
+        }
     }
     
-    public InputStream read(String fileName, int pageNumber) throws Exception {
+    public byte[] read(String fileName, int pageNumber) throws Exception {
         JsonObject metadata = JsonParser.parseReader(readMetaData()).getAsJsonObject();
         JsonArray files = (JsonArray) metadata.get("metadata");
         JsonObject fileObj = null;
         InputStream stream = null;
+        byte[] buff = null;
         for (JsonElement jsonEle : files) {
             fileObj = ((JsonObject) jsonEle).getAsJsonObject("file");
             if (fileObj.get("name").toString().replaceAll("^\"|\"$", "").equals(fileName)) {
@@ -177,22 +196,29 @@ public class DFS {
                     if (pageObj.get("number").toString().equals(Integer.toString(pageNumber))) {
                         long guid = Long.parseLong(pageObj.get("guid").toString());
                         stream = chord.locateSuccessor(guid).get(guid);
+                        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                        buff = new byte[stream.available()];
+                        bos.write(buff, 0, stream.read(buff, 0, buff.length));
+                        bos.flush();
+                        stream.close();
+                        break;
                     }
                 }
             }
         }
-        return stream;
+        return buff;
     }
 
-    public InputStream tail(String fileName) throws Exception {
+    public byte[] tail(String fileName) throws Exception {
         return read(fileName, -1);
     }
 
-    public InputStream head(String fileName) throws Exception {
+    public byte[] head(String fileName) throws Exception {
         return read(fileName, 1);
     }
 
     public void append(String filename, byte[] data) throws Exception {
+        // TODO: Update file attributes after appending page
         JsonObject metadata = JsonParser.parseReader(readMetaData()).getAsJsonObject();
         JsonArray files = (JsonArray) metadata.get("metadata");
         JsonObject fileObj = null;

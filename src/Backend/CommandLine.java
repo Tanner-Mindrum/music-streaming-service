@@ -41,6 +41,9 @@ public class CommandLine {
             System.out.println("4. touch");
             System.out.println("5. read");
             System.out.println("6. append");
+            System.out.println("7. head");
+            System.out.println("8. tail");
+            System.out.println("9. delete");
             System.out.println("10. quit");
             System.out.println("\nEnter command: ");
 
@@ -69,11 +72,7 @@ public class CommandLine {
                 String fileName = in.nextLine().trim();
                 System.out.println("Enter page number: ");
                 int pgNum = Integer.parseInt(in.nextLine().trim());
-                StringBuilder builder = new StringBuilder();
-                Scanner scanner = new Scanner(dfs.read(fileName, pgNum));
-                while (scanner.hasNext())
-                    builder.append(scanner.nextLine());
-                System.out.println(builder.toString());
+                System.out.println(new String(dfs.read(fileName, pgNum)));
             }
             else if (input.equals("append") || input.equals("6")) {
                 System.out.println("Enter file name to append to: ");
@@ -86,6 +85,21 @@ public class CommandLine {
                 f.read(data);
                 f.close();
                 dfs.append(fileName, data);
+            }
+            else if (input.equals("head") || input.equals("7")) {
+                System.out.println("Enter file name: ");
+                String fileName = in.nextLine().trim();
+                System.out.println(new String(dfs.head(fileName)));
+            }
+            else if (input.equals("tail") || input.equals("8")) {
+                System.out.println("Enter file name: ");
+                String fileName = in.nextLine().trim();
+                System.out.println(new String(dfs.head(fileName)));
+            }
+            else if (input.equals("delete") || input.equals("9")) {
+                System.out.println("Enter file name: ");
+                String fileName = in.nextLine().trim();
+                dfs.delete(fileName);
             }
             else if (input.equals("quit") || input.equals("10")) {
                 running = false;
