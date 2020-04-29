@@ -69,7 +69,11 @@ public class CommandLine {
                 String fileName = in.nextLine().trim();
                 System.out.println("Enter page number: ");
                 int pgNum = Integer.parseInt(in.nextLine().trim());
-                dfs.read(fileName, pgNum);
+                StringBuilder builder = new StringBuilder();
+                Scanner scanner = new Scanner(dfs.read(fileName, pgNum));
+                while (scanner.hasNext())
+                    builder.append(scanner.nextLine());
+                System.out.println(builder.toString());
             }
             else if (input.equals("append") || input.equals("6")) {
                 System.out.println("Enter file name to append to: ");
@@ -79,10 +83,9 @@ public class CommandLine {
                 FileInputStream f = new FileInputStream(fileToAppend);
                 File appendingFile = new File(fileToAppend);
                 byte[] data = new byte[(int) appendingFile.length()];
-                System.out.println(data.length);
                 f.read(data);
                 f.close();
-                //dfs.append(fileName, data);
+                dfs.append(fileName, data);
             }
             else if (input.equals("quit") || input.equals("10")) {
                 running = false;

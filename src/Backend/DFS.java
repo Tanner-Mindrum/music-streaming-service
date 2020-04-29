@@ -140,7 +140,6 @@ public class DFS {
     public void touch(String fileName) throws Exception {
         JsonObject metadata = JsonParser.parseReader(readMetaData()).getAsJsonObject();
         JsonArray files = (JsonArray) metadata.get("metadata");
-
         JsonObject fileObj = new JsonObject();
         JsonObject mainFileObj = new JsonObject();
         fileObj.addProperty("name", fileName);
@@ -151,9 +150,7 @@ public class DFS {
         fileObj.add("pages", pages);
         mainFileObj.add("file", fileObj);
         files.add(mainFileObj);
-
-        InputStream stream = new ByteArrayInputStream(metadata.toString().getBytes());
-        writeMetaData(stream);
+        writeMetaData(new ByteArrayInputStream(metadata.toString().getBytes()));
     }
 
     public void delete(String fileName) throws Exception {
@@ -195,13 +192,26 @@ public class DFS {
         return read(fileName, 1);
     }
 
-    // file name, file name to append
     public void append(String filename, byte[] data) throws Exception {
-        // TODO: append data to fileName. If it is needed, add a new page.
-        // Let guid be the last page in Metadata.filename
-        //ChordMessageInterface peer = chord.locateSuccessor(guid);
-        //peer.put(guid, data);
-        // Write Metadata
+        JsonObject metadata = JsonParser.parseReader(readMetaData()).getAsJsonObject();
+        JsonArray files = (JsonArray) metadata.get("metadata");
+        JsonObject fileObj = null;
+        Random rand = new Random();
+        for (JsonElement jsonEle : files) {
+            fileObj = ((JsonObject) jsonEle).getAsJsonObject("file");
+            if ((fileObj.get("name").toString().replaceAll("^\"|\"$", "")).equals(filename)) {
+                JsonArray pgs = (JsonArray) fileObj.get("pages");
+                JsonObject pgObj = new JsonObject();
+                JsonObject mainPgObj = new JsonObject();
+                pgObj.addProperty("number", pgs.size()+1);
+                long guid = rand.nextInt(1000000000);
+                chord.locateSuccessor(guid).put(guid, new ByteArrayInputStream(data));
+                pgObj.addProperty("guid", guid);
+                pgObj.addProperty("size", data.length);
+                mainPgObj.add("page", pgObj);
+                pgs.add(mainPgObj);
+            }
+        }
+        writeMetaData(new ByteArrayInputStream(metadata.toString().getBytes()));
     }
-    
 }
