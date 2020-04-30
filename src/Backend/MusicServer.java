@@ -26,20 +26,20 @@ public class MusicServer extends Thread {
     private CommandLine command;
 
     public MusicServer() throws Exception {
-        //this.command = new CommandLine(2001, 4445);
+        this.command = new CommandLine(2001, 4445);
         socket = new DatagramSocket(4445);
         this.dispatcher = new Dispatcher();
         this.songDispatcher = new SongDispatcher();
         this.songInfo = new SongInfo();
         this.user = new User();
-        //this.modifyUser = new ModifyUser(command.dfs);
-        this.modifyUser = new ModifyUser();
+        this.modifyUser = new ModifyUser(command.dfs);
+        //this.modifyUser = new ModifyUser();
 
         dispatcher.registerObject(user, "User");
         dispatcher.registerObject(songDispatcher, "SongServices");
         dispatcher.registerObject(songInfo, "SongInfo");
         dispatcher.registerObject(modifyUser, "ModifyUser");
-        //dispatcher.registerObject(command, "CommandLine");
+        dispatcher.registerObject(command, "CommandLine");
     }
 
     public void run() {
