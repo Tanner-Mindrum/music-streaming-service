@@ -8,7 +8,7 @@ import java.net.UnknownHostException;
 
 public class ServerMain {
 
-    public static void main(String[] args) throws IOException, ParseException {
+    public static void main(String[] args) throws Exception {
         new MusicServer().start();
         Main.main(args);
     }

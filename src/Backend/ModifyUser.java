@@ -16,7 +16,14 @@ public class ModifyUser {
     SongInfo findSongInfo;
     private Proxy proxy;
     private CommunicationModule comm;
+    private DFS dfs;
 
+//    public ModifyUser(DFS dfs) throws IOException, ParseException {
+//        userObject = null;
+//        comm = new CommunicationModule();
+//        proxy = new Proxy(comm);
+//        findSongInfo = new SongInfo();
+//    }
     public ModifyUser() throws IOException, ParseException {
         userObject = null;
         comm = new CommunicationModule();
@@ -47,7 +54,10 @@ public class ModifyUser {
         boolean passwordFound = false;
 
         JSONParser parser = new JSONParser();
-        JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
+//        JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
+        JSONArray userArray = (JSONArray) parser.parse(new String(dfs.read("users", 1)));
+        System.out.println("NEW ARRAY: " + userArray.toString());
+
 
         for (Object info : userArray) {
             JSONObject userInfoSearch = (JSONObject) info;

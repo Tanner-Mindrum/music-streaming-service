@@ -167,7 +167,7 @@ public class LoginFrame extends JFrame {
                         JSONObject checkIt = proxy.synchExecution("checkUserExists", user, pass, "maybe");
                         String userChecked = (String) checkIt.get("ret");
                         System.out.println("UserChecked: " + userChecked);
-                        Boolean tested = userChecked.equals("true");
+                        boolean tested = userChecked.equals("true");
                         if (!tested) {
                             noUsernameEnteredLabel.setVisible(false);
                             noPasswordEnteredLabel.setVisible(false);

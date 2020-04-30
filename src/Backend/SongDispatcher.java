@@ -35,7 +35,7 @@ public class SongDispatcher
 
         File file = new File("./" + key + ".mp3");  // dfs.read(), locate successor
         FileInputStream inputStream = new FileInputStream(file);
-        inputStream.skip(fragment * FRAGMENT_SIZE);
+        inputStream.skip(fragment * FRAGMENT_SIZE); //frag size = offset, len = fragement
         inputStream.read(buf);
         inputStream.close();
 

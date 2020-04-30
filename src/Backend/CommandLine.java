@@ -12,25 +12,28 @@ import java.security.*;
 import java.nio.file.*;
 
 
-public class CommandLine {
-    DFS dfs;
-    public CommandLine(int p) throws Exception {
+public class CommandLine extends Thread {
+    public DFS dfs;
+    public int otherPort;
+    public CommandLine(int p, int otherPort) throws Exception {
         dfs = new DFS(p);
-        userInterface();
+        this.otherPort = otherPort;
+        dfs.join("localhost", otherPort);
+        start();
 
         // User interface:
         // join, ls, touch, delete, read, tail, head, append, move
     }
     
-    public static void main(String[] args) throws Exception  {
+/*    public static void main(String[] args) throws Exception  {
 //        if (args.length < 1 ) {
 //            throw new IllegalArgumentException("Parameter: <port>");
 //        }
         //new CommandLine(Integer.parseInt(args[0]));
-        new CommandLine(2000);
-    }
+        new CommandLine(2000, 4445);
+    }*/
 
-    public void userInterface() throws Exception {
+    public void run() {
         Scanner in = new Scanner(System.in);
         boolean running = true;
         while (running) {
@@ -51,55 +54,97 @@ public class CommandLine {
 
             if (input.equals("join") || input.equals("2")) {
                 System.out.println("Enter port: ");
-                dfs.join("localhost", Integer.parseInt(in.nextLine().trim()));
+                try {
+                    dfs.join("localhost", Integer.parseInt(in.nextLine().trim()));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             else if (input.equals("list") || input.equals("3")) {
-                System.out.println("\n" + dfs.ls());
+                try {
+                    System.out.println("\n" + dfs.ls());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
             else if (input.equals("touch") || input.equals("4")) {
                 System.out.println("Enter file name: ");
-                dfs.touch(in.nextLine().trim());
+                try {
+                    dfs.touch(in.nextLine().trim());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             else if (input.equals("move") || input.equals("1")) {
                 System.out.println("Enter old file name: ");
                 String oldFileName = in.nextLine().trim();
                 System.out.println("Enter new file name: ");
                 String newFileName = in.nextLine().trim();
-                dfs.mv(oldFileName, newFileName);
+                try {
+                    dfs.mv(oldFileName, newFileName);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             else if (input.equals("read") || input.equals("5")) {
                 System.out.println("Enter file name: ");
                 String fileName = in.nextLine().trim();
                 System.out.println("Enter page number: ");
                 int pgNum = Integer.parseInt(in.nextLine().trim());
-                System.out.println(new String(dfs.read(fileName, pgNum)));
+                try {
+                    System.out.println(new String(dfs.read(fileName, pgNum)));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             else if (input.equals("append") || input.equals("6")) {
                 System.out.println("Enter file name to append to: ");
                 String fileName = in.nextLine().trim();
                 System.out.println("Enter data to append: ");
                 String fileToAppend = in.nextLine().trim();
-                FileInputStream f = new FileInputStream(fileToAppend);
+                FileInputStream f = null;
+                try {
+                    f = new FileInputStream(fileToAppend);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
                 File appendingFile = new File(fileToAppend);
                 byte[] data = new byte[(int) appendingFile.length()];
-                f.read(data);
-                f.close();
-                dfs.append(fileName, data);
+                try {
+                    f.read(data);
+                    f.close();
+                    dfs.append(fileName, data);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
             }
             else if (input.equals("head") || input.equals("7")) {
                 System.out.println("Enter file name: ");
                 String fileName = in.nextLine().trim();
-                System.out.println(new String(dfs.head(fileName)));
+                try {
+                    System.out.println(new String(dfs.head(fileName)));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             else if (input.equals("tail") || input.equals("8")) {
                 System.out.println("Enter file name: ");
                 String fileName = in.nextLine().trim();
-                System.out.println(new String(dfs.tail(fileName)));
+                try {
+                    System.out.println(new String(dfs.tail(fileName)));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             else if (input.equals("delete") || input.equals("9")) {
                 System.out.println("Enter file name: ");
                 String fileName = in.nextLine().trim();
-                dfs.delete(fileName);
+                try {
+                    dfs.delete(fileName);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             else if (input.equals("quit") || input.equals("10")) {
                 running = false;

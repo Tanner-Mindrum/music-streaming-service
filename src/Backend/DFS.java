@@ -217,7 +217,6 @@ public class DFS {
     }
 
     public void append(String filename, byte[] data) throws Exception {
-        // TODO: Update file attributes after appending page
         JsonObject metadata = JsonParser.parseReader(readMetaData()).getAsJsonObject();
         JsonArray files = (JsonArray) metadata.get("metadata");
         JsonObject fileObj = null;
