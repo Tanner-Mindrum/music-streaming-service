@@ -34,6 +34,7 @@ public class SignUpFrame extends JFrame {
     private JLabel passwordLabel;
     private JTextField passwordField;
     private Proxy proxy;
+    private DFS myDfs;
 
 
     private static final int FRAME_WIDTH = 600;
@@ -51,10 +52,11 @@ public class SignUpFrame extends JFrame {
     private DatagramSocket socket;
     private CommunicationModule comm;
 
-    public SignUpFrame(DatagramSocket socket, CommunicationModule cm) throws IOException, ParseException {
+    public SignUpFrame(DatagramSocket socket, CommunicationModule cm, DFS dfs) throws IOException, ParseException {
         this.socket = socket;
         comm = cm;
         proxy = new Proxy(comm);
+        myDfs = dfs;
         for (int i = 2020; i >= 0; i--) {
             years.add(i);
         }
@@ -196,7 +198,7 @@ public class SignUpFrame extends JFrame {
             if (click.getSource() == backButton) {
                 LoginFrame loginFrame = null;
                 try {
-                    loginFrame = new LoginFrame(socket, proxy);
+                    loginFrame = new LoginFrame(socket, proxy, myDfs);
                 } catch (IOException | ParseException e) {
                     e.printStackTrace();
                 }
@@ -208,7 +210,7 @@ public class SignUpFrame extends JFrame {
             else if (click.getSource() == signUpButton) {
                 ModifyUser checkUser = null;
                 try {
-                    checkUser = new ModifyUser(userNameField.getText().trim());
+                    checkUser = new ModifyUser(userNameField.getText().trim(), myDfs);
                 } catch (IOException | ParseException e) {
                     e.printStackTrace();
                 }
@@ -286,7 +288,7 @@ public class SignUpFrame extends JFrame {
                                 (String) monthBox.getSelectedItem(), Integer.toString((int) dayBox.getSelectedItem()),
                                 Integer.toString((int)yearBox.getSelectedItem()), "at most once");
 
-                        MusicFrame musicFrame = new MusicFrame(userNameField.getText().trim(), socket, comm, proxy);
+                        MusicFrame musicFrame = new MusicFrame(userNameField.getText().trim(), socket, comm, proxy, myDfs);
                         setVisible(false);
                         musicFrame.setLocationRelativeTo(null);
                         musicFrame.setVisible(true);

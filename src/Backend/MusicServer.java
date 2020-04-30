@@ -30,8 +30,8 @@ public class MusicServer extends Thread {
         socket = new DatagramSocket(4445);
         this.dispatcher = new Dispatcher();
         this.songDispatcher = new SongDispatcher();
-        this.songInfo = new SongInfo();
-        this.user = new User();
+        this.songInfo = new SongInfo(command.dfs);
+        this.user = new User(command.dfs);
         this.modifyUser = new ModifyUser(command.dfs);
         //this.modifyUser = new ModifyUser();
 
@@ -76,5 +76,9 @@ public class MusicServer extends Thread {
             }
         }
         socket.close();
+    }
+
+    public CommandLine getCommandLine() {
+        return command;
     }
 }

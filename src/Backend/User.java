@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -20,33 +21,35 @@ public class User {
     private String password;
     private String dob;
     private int id;
+    private DFS myDfs;
 
-    public User() {
+    public User(DFS dfs) {
         email = "";
         username = "";
         dob = "";
         id = 0;
+        myDfs = dfs;
     }
 
-    public User(String username) {
+    public User(String username, DFS dfs) {
         this.username = username;
+        myDfs = dfs;
     }
 
-    public User(String email, String username, String password, String month, String day, String year) {
+    public User(String email, String username, String password, String month, String day, String year, DFS dfs) {
         // Set fields
         this.email = email;
         this.username = username;
         this.password = password;
         this.dob = month + "." + day + "." + year;
-
-
+        myDfs = dfs;
     }
 
-    public String addUserToDatabase(String email, String username, String password, String month, String day, String year) throws IOException, ParseException {
+    public String addUserToDatabase(String email, String username, String password, String month, String day, String year) throws Exception {
         // Creating JSONArray for the array of users
         JSONParser parser = new JSONParser();
         // Tanner's path: C://CECS 327//music-streaming-service//user.json
-        JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
+        JSONArray userArray = (JSONArray) parser.parse(new String(myDfs.read("users", 1)));
         // Creating the JSON Object
         JSONObject userObject = new JSONObject();
 
@@ -78,9 +81,8 @@ public class User {
 
 
         // writing JSON to file
-        PrintWriter fileWriter = new PrintWriter("user.json");
+        PrintWriter fileWriter = new PrintWriter(Arrays.toString((myDfs.read("users", 1))));
         fileWriter.write(userArray.toJSONString());
-
         fileWriter.flush();
         fileWriter.close();
 

@@ -32,15 +32,17 @@ public class LoginFrame extends JFrame {
     private DatagramSocket socket;
     private CommunicationModule comm;
     private Proxy proxy;
+    private DFS myDfs;
 
 
-    public LoginFrame(DatagramSocket socket, Proxy proxy) throws IOException, ParseException {
+    public LoginFrame(DatagramSocket socket, Proxy proxy, DFS dfs) throws IOException, ParseException {
         comm = new CommunicationModule();
         //System.out.println(comm.sendEcho("hello"));
 //        comm.sendEcho("end");
         this.socket = socket;
         createComponents();
         this.proxy = proxy;
+        myDfs = dfs;
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
         this.setTitle("Login");
     }
@@ -173,7 +175,7 @@ public class LoginFrame extends JFrame {
                             noPasswordEnteredLabel.setVisible(false);
                             userDoesNotExistLabel.setVisible(true);
                         } else {
-                            MusicFrame musicFrame = new MusicFrame(user, socket, comm, proxy);
+                            MusicFrame musicFrame = new MusicFrame(user, socket, comm, proxy, myDfs);
                             setVisible(false);
                             musicFrame.setLocationRelativeTo(null);
                             musicFrame.setVisible(true);
@@ -187,7 +189,7 @@ public class LoginFrame extends JFrame {
                 // Open sign up frame
                 SignUpFrame signUpFrame = null;
                 try {
-                    signUpFrame = new SignUpFrame(socket, comm);
+                    signUpFrame = new SignUpFrame(socket, comm, myDfs);
                 } catch (IOException | ParseException e) {
                     e.printStackTrace();
                 }

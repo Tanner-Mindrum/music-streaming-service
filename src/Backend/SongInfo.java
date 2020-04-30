@@ -23,9 +23,17 @@ public class SongInfo {
     private String albumName;
     private String termsName;
 
+    private DFS myDfs;
+
     public SongInfo() {
         newSong = null;
         songList = new ArrayList<Songs>();
+    }
+
+    public SongInfo(DFS dfs) {
+        newSong = null;
+        songList = new ArrayList<Songs>();
+        myDfs = dfs;
     }
 
     /**
@@ -35,155 +43,8 @@ public class SongInfo {
      * @throws IOException
      * @throws ParseException
      */
-    public String findSong(String name) throws IOException, ParseException {
-        JSONParser parser = new JSONParser();
-        JSONArray information = (JSONArray) parser.parse(new FileReader("music.json"));  // search method in chord, create method search in dfs return string
-        boolean match = false;
-        boolean idFound = false;
-        songList = new ArrayList<>();
-
-        System.out.println("BEING CALLED");
-
-        for (Object info : information) {
-            JSONObject entryInfo = (JSONObject) info;
-            newSong = new Songs();
-
-            Map song = ((Map) entryInfo.get("song"));
-            Iterator<Map.Entry> songItr = song.entrySet().iterator();
-            while (songItr.hasNext()) {
-                Map.Entry data = songItr.next();
-                if (data.getKey().equals("title")) {
-                    this.songName = (String) data.getValue();
-                    if ((((String) data.getValue()).toLowerCase()).contains(name)) {
-                        match = true;
-                        newSong.setSongName((String) data.getValue());
-                    }
-                }
-                if (data.getKey().equals("duration")) {
-                    assert data.getValue() instanceof Double;
-                    this.songLength = (Double) data.getValue();
-                    if (match) {
-                        newSong.setSongLength((Double) data.getValue());
-                    }
-                }
-                if (data.getKey().equals("id")) {
-                    assert data.getValue() instanceof String;
-                    this.songID = (String) data.getValue();
-                    if (match) {
-                        newSong.setSongID((String) data.getValue());
-                    }
-                }
-                if (data.getKey().equals("terms")) {
-                    assert data.getValue() instanceof String;
-                    this.songID = (String) data.getValue();
-                    if (match) {
-                        newSong.setTermsName((String) data.getValue());
-                    }
-                }
-            }
-
-            Map release = ((Map) entryInfo.get("release"));
-            Iterator<Map.Entry> releaseItr = release.entrySet().iterator();
-            while (releaseItr.hasNext()) {
-                Map.Entry data = releaseItr.next();
-                if (data.getKey().equals("name")) {
-                    // Check if album name match when searching by album
-                    this.albumName = (String) data.getValue();
-                    if (match) {
-                        newSong.setAlbumName((String) data.getValue());
-                    }
-                    else if ((((String) data.getValue()).toLowerCase()).contains(name)) {
-                        newSong.setSongName(songName);
-                        newSong.setSongLength(songLength);
-                        newSong.setSongID(songID);
-                        newSong.setArtistName(artistName);
-                        newSong.setAlbumName(albumName);
-                        songList.add(newSong);
-                    }
-                }
-            }
-
-            Map artist = ((Map) entryInfo.get("artist"));
-            Iterator<Map.Entry> artistItr = artist.entrySet().iterator();
-            while (artistItr.hasNext()) {
-                Map.Entry data = artistItr.next();
-                if (data.getKey().equals("name")) {
-                    this.artistName = (String) data.getValue();
-                    if (match) {
-                        newSong.setArtistName((String) data.getValue());
-                    }
-                    else if ((((String) data.getValue()).toLowerCase()).contains(name)) {
-                        newSong.setSongName(songName);
-                        newSong.setSongLength(songLength);
-                        newSong.setSongID(songID);
-                        newSong.setArtistName(artistName);
-                        newSong.setAlbumName(albumName);
-                        songList.add(newSong);
-                    }
-                }
-            }
-
-            Map artist2 = ((Map) entryInfo.get("artist"));
-            Iterator<Map.Entry> artistItr2 = artist2.entrySet().iterator();
-            while (artistItr2.hasNext()) {
-                Map.Entry data = artistItr2.next();
-                if (data.getKey().equals("terms")) {
-                    this.termsName = (String) data.getValue();
-                    if (match) {
-                        newSong.setTermsName((String) data.getValue());
-                    }
-                    else if ((((String) data.getValue()).toLowerCase()).contains(name)) {
-                        newSong.setSongName(songName);
-                        newSong.setSongLength(songLength);
-                        newSong.setSongID(songID);
-                        newSong.setArtistName(artistName);
-                        newSong.setAlbumName(albumName);
-                        newSong.setTermsName(termsName);
-                        songList.add(newSong);
-                    }
-                }
-            }
-
-            Map idSearch = ((Map) entryInfo.get("song"));
-            Iterator<Map.Entry> idItr = idSearch.entrySet().iterator();
-            while (idItr.hasNext()) {
-                Map.Entry data = idItr.next();
-                if (data.getKey().equals("id")) {
-                    this.termsName = (String) data.getValue();
-                    if (match) {
-                        newSong.setSongID((String) data.getValue());
-                    }
-                    else if ((((String) data.getValue()).toLowerCase()).contains(name.toLowerCase())) {
-                        idFound = true;
-                        newSong.setSongName(songName);
-                        newSong.setSongLength(songLength);
-                        newSong.setSongID(songID);
-                        newSong.setArtistName(artistName);
-                        newSong.setAlbumName(albumName);
-                        newSong.setTermsName(termsName);
-                        songList.add(newSong);
-                    }
-                }
-            }
-
-            // When we find a song match, we only display that one song, so we break
-            if (match) {
-                songList.add(newSong);
-                break;
-            }
-            else if (idFound) { break; }
-        }
-
-        ArrayList<String> songInfo = new ArrayList<>();
-        for (Songs s : songList) {
-            songInfo.add(s.getSongName() + " | " + s.getArtistName() + " | " + s.getAlbumName() + ":" + s.getSongID());
-        }
-        String songNamesAsString = String.join(",, ", songInfo);
-        System.out.println("SONG NAMES: " + songNamesAsString);
-
-
-        //return songList;
-        return songNamesAsString;
+    public String findSong(String name) throws IOException, ParseException, InterruptedException {
+        return myDfs.search(name);
     }
 
     public String getSongID() {

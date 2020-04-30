@@ -27,8 +27,16 @@ public class ModifyUser {
     }
 
     // Constructor with username parameter to find user in JSON
-    public ModifyUser(String name) throws IOException, ParseException {
+    public ModifyUser(String name, DFS dfs) throws IOException, ParseException {
         this.username = name;
+        userObject = null;
+        comm = new CommunicationModule();
+        proxy = new Proxy(comm);
+        findSongInfo = new SongInfo();
+        this.dfs = dfs;
+    }
+
+    public ModifyUser() throws IOException, ParseException {
         userObject = null;
         comm = new CommunicationModule();
         proxy = new Proxy(comm);
@@ -49,7 +57,6 @@ public class ModifyUser {
 
         JSONParser parser = new JSONParser();
         JSONArray userArray = (JSONArray) parser.parse(new String(dfs.read("users", 1)));
-
 
         for (Object info : userArray) {
             JSONObject userInfoSearch = (JSONObject) info;
@@ -98,9 +105,9 @@ public class ModifyUser {
      * @throws IOException
      * @throws ParseException
      */
-    public String checkDuplicateUser(String username, String email) throws IOException, ParseException {
+    public String checkDuplicateUser(String username, String email) throws Exception {
         JSONParser parser = new JSONParser();
-        JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
+        JSONArray userArray = (JSONArray) parser.parse(new String(dfs.read("users", 1)));
 
         for (Object info : userArray) {
             JSONObject userInfoSearch = (JSONObject) info;
@@ -132,9 +139,9 @@ public class ModifyUser {
      * @throws IOException
      * @throws ParseException
      */
-    public String getPlaylists(String username) throws IOException, ParseException {
+    public String getPlaylists(String username) throws Exception {
         JSONParser parser = new JSONParser();
-        JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
+        JSONArray userArray = (JSONArray) parser.parse(new String(dfs.read("users", 1)));
         ArrayList<String> playlistNames = new ArrayList<>(); // add to this arraylist
 
         System.out.println("HELLO");
@@ -170,9 +177,9 @@ public class ModifyUser {
      * @throws IOException
      * @throws ParseException
      */
-    public String createPlaylist(String username, String playlistName) throws IOException, ParseException {
+    public String createPlaylist(String username, String playlistName) throws Exception {
         JSONParser parser = new JSONParser();
-        JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
+        JSONArray userArray = (JSONArray) parser.parse(new String(dfs.read("users", 1)));
 
         for (Object info : userArray) {
             JSONObject userInfoSearch = (JSONObject) info;
@@ -216,9 +223,9 @@ public class ModifyUser {
      * @throws IOException
      * @throws ParseException
      */
-    public String deletePlaylist(String username, String playlistName) throws IOException, ParseException {
+    public String deletePlaylist(String username, String playlistName) throws Exception {
         JSONParser parser = new JSONParser();
-        JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
+        JSONArray userArray = (JSONArray) parser.parse(new String(dfs.read("users", 1)));
 
         for (Object info : userArray){
             JSONObject userInfoSearch = (JSONObject) info;
@@ -261,9 +268,9 @@ public class ModifyUser {
      * @throws IOException
      * @throws ParseException
      */
-    public String addToPlaylist(String username, String song, String playlistName) throws IOException, ParseException {
+    public String addToPlaylist(String username, String song, String playlistName) throws Exception {
         JSONParser parser = new JSONParser();
-        JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
+        JSONArray userArray = (JSONArray) parser.parse(new String(dfs.read("users", 1)));
         boolean duplicate = false;
 
         for (Object info : userArray) {
@@ -315,10 +322,10 @@ public class ModifyUser {
      * @throws IOException
      * @throws ParseException
      */
-    public String getSongs(String username, String playlistName) throws IOException, ParseException, java.text.ParseException, InterruptedException {
+    public String getSongs(String username, String playlistName) throws Exception {
         JSONParser parser = new JSONParser();
-        JSONArray userArray = (JSONArray) parser.parse(new FileReader("user.json"));
-        JSONArray songArray = (JSONArray) parser.parse(new FileReader("music.json"));
+        JSONArray userArray = (JSONArray) parser.parse(new String(dfs.read("users", 1)));
+        //JSONArray songArray = (JSONArray) parser.parse(new FileReader("music.json"));
         ArrayList<Songs> songObjs = new ArrayList<>(); // add to this arraylist
         ArrayList<String> songObjsStrings = new ArrayList<String>();
         String stringOfSongs = "";

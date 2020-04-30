@@ -115,14 +115,16 @@ public class MusicFrame extends JFrame {
 
     private Proxy proxy;
     private CommunicationModule comm;
+    private DFS myDfs;
 
-    public MusicFrame(String user, DatagramSocket pSocket, CommunicationModule cm, Proxy proxy) throws IOException, ParseException, java.text.ParseException, InterruptedException {
+    public MusicFrame(String user, DatagramSocket pSocket, CommunicationModule cm, Proxy proxy, DFS dfs) throws IOException, ParseException, java.text.ParseException, InterruptedException {
         socket = pSocket;
         comm = cm;
         this.proxy = proxy;
         address = InetAddress.getByName("localhost");
         currUserString = user;
         usernameName = currUserString;
+        myDfs = dfs;
         createComponents();
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
         this.setTitle("Home Page");
@@ -184,7 +186,7 @@ public class MusicFrame extends JFrame {
         serverTestButton.addActionListener(listener);
 
         // Playlist Display
-        modifyUser = new ModifyUser(currUserString);
+        modifyUser = new ModifyUser(currUserString, myDfs);
         JSONObject jsonReturn = proxy.synchExecution("getPlaylists", currUserString, "maybe");
         String allSongs = (String) jsonReturn.get("ret");
         String[] tempSongs = allSongs.split(",, ");
@@ -380,7 +382,7 @@ public class MusicFrame extends JFrame {
             else if (e.getSource() == m1) {
                 LoginFrame loginFrame = null;
                 try {
-                    loginFrame = new LoginFrame(socket, proxy);
+                    loginFrame = new LoginFrame(socket, proxy, myDfs);
                 } catch (IOException | ParseException ex) {
                     ex.printStackTrace();
                 }
@@ -469,7 +471,7 @@ public class MusicFrame extends JFrame {
                 if (click.getSource() == addButton || click.getSource() == playListNameField) {
                     ModifyUser mu = null;
                     try {
-                        mu = new ModifyUser(usernameName);
+                        mu = new ModifyUser(usernameName, myDfs);
                     } catch (IOException | ParseException e) {
                         e.printStackTrace();
                     }

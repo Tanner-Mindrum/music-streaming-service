@@ -1,5 +1,7 @@
 package Backend;
 
+import org.json.simple.parser.ParseException;
+
 import java.rmi.*;
 import java.io.*;
 
@@ -17,4 +19,5 @@ public interface ChordMessageInterface extends Remote
     public void put(long guidObject, InputStream inputStream) throws IOException, RemoteException;
     public InputStream get(long guidObject) throws IOException, RemoteException;
     public void delete(long guidObject) throws IOException, RemoteException;
+    public String findSong(long guid, String name) throws IOException, ParseException;
 }

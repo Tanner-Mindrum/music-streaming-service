@@ -1,44 +1,181 @@
-{
-  "metadata": [
-    {
-      "file": {
-        "name": "users",
-        "numberOfPages": 0,
-        "pageSize": 0,
-        "size": 0,
-        "pages": [
-          {
-            "page": {
-              "number": 1,
-              "guid": 202208155,
-              "size": 3324
-            }
-          }
-        ]
+[
+  {
+    "playlists": [
+      {
+        "songs": [
+          "SOAPMKZ12A58A764B7",
+          "SOFPGXP12A58A78AAB"
+        ],
+        "name": "test list"
+      },
+      {
+        "songs": [
+          "SOFAOMI12A6D4FA2D8"
+        ],
+        "name": "lil uzi"
+      },
+      {
+        "songs": [],
+        "name": "hey"
       }
-    },
-    {
-      "file": {
-        "name": "music",
-        "numberOfPages": 2,
-        "size": 5315645,
-        "pages": [
-          {
-            "page": {
-              "number": 1,
-              "guid": 449791531,
-              "size": 782933
-            }
-          },
-          {
-            "page": {
-              "number": 2,
-              "guid": 146065775,
-              "size": 4532712
-            }
-          }
-        ]
-      }
+    ],
+    "info": {
+      "password": "tanner",
+      "dob": "January.1.2020",
+      "id": 1,
+      "email": "tan.min@email.com",
+      "username": "tannermin"
     }
-  ]
-}
+  },
+  {
+    "playlists": [],
+    "info": {
+      "dob": "January.2.2020",
+      "id": 2,
+      "email": "tymee.kong@email.edu",
+      "username": "tymeekong"
+    }
+  },
+  {
+    "playlists": [
+      {
+        "songs": [],
+        "name": "Rap Workout"
+      },
+      {
+        "songs": [
+          "SOCHRXB12A8AE48069",
+          "SOMZWCG12A8C13C480",
+          "SOQLGFP12A58A7800E",
+          "SODKPKO12A58A79DF7",
+          "SOAPMKZ12A58A764B7"
+        ],
+        "name": "LOUD"
+      },
+      {
+        "songs": [
+          "SOAPMKZ12A58A764B7",
+          "SOCHRXB12A8AE48069",
+          "SOFAOMI12A6D4FA2D8"
+        ],
+        "name": "Lil Uzi"
+      },
+      {
+        "songs": [],
+        "name": "Jazz"
+      },
+      {
+        "songs": [
+          "SOAPMKZ12A58A764B7"
+        ],
+        "name": "testo"
+      },
+      {
+        "songs": [],
+        "name": "Test2"
+      },
+      {
+        "songs": [],
+        "name": "Test3"
+      },
+      {
+        "songs": [],
+        "name": "Test4"
+      },
+      {
+        "songs": [],
+        "name": "yuh"
+      },
+      {
+        "songs": [
+          "SOAPMKZ12A58A764B7"
+        ],
+        "name": "Hi"
+      },
+      {
+        "songs": [],
+        "name": "yuh2"
+      },
+      {
+        "songs": [],
+        "name": "hi2"
+      },
+      {
+        "songs": [],
+        "name": "hi3"
+      },
+      {
+        "songs": [],
+        "name": "hi4"
+      }
+    ],
+    "info": {
+      "password": "yuh",
+      "dob": "November.10.1998",
+      "id": 3,
+      "email": "huntertigerdavis@gmail.com",
+      "username": "huntershot"
+    }
+  },
+  {
+    "playlists": [
+      {
+        "songs": [],
+        "name": "Study"
+      },
+      {
+        "songs": [],
+        "name": "Workout"
+      }
+    ],
+    "info": {
+      "password": "litty",
+      "dob": "November.10.1998",
+      "id": 4,
+      "email": "hunterd98@gmail.com",
+      "username": "DynamicHunter"
+    }
+  },
+  {
+    "playlists": [
+      {
+        "songs": [],
+        "name": "Million Days"
+      }
+    ],
+    "info": {
+      "password": "0o00o0",
+      "dob": "January.1.2020",
+      "id": 5,
+      "email": "quickscoper5406@gmail.com",
+      "username": "Jeffrey Nguyen"
+    }
+  },
+  {
+    "playlists": [],
+    "info": {
+      "password": "lol",
+      "dob": "January.1.2020",
+      "id": 6,
+      "email": "aerijbg",
+      "username": "huntershot2"
+    }
+  },
+  {
+    "playlists": [
+      {
+        "songs": [
+          "SOFAOMI12A6D4FA2D8"
+        ],
+        "name": "looklist"
+      }
+    ],
+    "info": {
+      "password": "looky",
+      "dob": "January.1.2020",
+      "id": 7,
+      "email": "looky",
+      "username": "looky"
+    }
+  }
+]

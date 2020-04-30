@@ -4,6 +4,7 @@ import java.nio.charset.StandardCharsets;
 import java.io.*;
 import java.nio.file.*;
 import java.math.BigInteger;
+import java.rmi.RemoteException;
 import java.security.*;
 import java.util.*;
 
@@ -12,6 +13,7 @@ import com.google.gson.stream.JsonReader;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import sun.misc.IOUtils;
 
 import javax.xml.bind.DatatypeConverter;
@@ -243,5 +245,44 @@ public class DFS {
             }
         }
         writeMetaData(new ByteArrayInputStream(metadata.toString().getBytes()));
+    }
+
+    public String search(String name) throws InterruptedException {
+        JsonObject metadata = null;
+        String finalSongs = "";
+        try {
+            metadata = JsonParser.parseReader(readMetaData()).getAsJsonObject();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        JsonArray files = (JsonArray) metadata.get("metadata");
+        JsonObject fileObj = null;
+        for (JsonElement jsonEle : files) {
+            System.out.println("IN LOOP");
+            fileObj = ((JsonObject) jsonEle).getAsJsonObject("file");
+            if ((fileObj.get("name").toString().replaceAll("^\"|\"$", "")).equals("music")) {
+                JsonArray pageList = fileObj.get("pages").getAsJsonArray();
+                for (JsonElement jsonElem : pageList) {
+                    final String[] s = {""};
+                    Thread thread = new Thread(s[0]) {
+                        public void run() {
+                            System.out.println("IN THREAD");
+                            JsonObject pageObj = ((JsonObject) jsonElem).getAsJsonObject("page");
+                            try {
+                                long guid = Long.parseLong(pageObj.get("guid").toString());
+                                s[0] = chord.locateSuccessor(guid).findSong(guid, name);
+                            } catch (ParseException | IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    };
+                    thread.start();
+                    thread.join();
+                    finalSongs += s[0];
+                }
+
+            }
+        }
+        return finalSongs;
     }
 }

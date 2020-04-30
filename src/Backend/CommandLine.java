@@ -15,14 +15,12 @@ import java.nio.file.*;
 public class CommandLine extends Thread {
     public DFS dfs;
     public int otherPort;
+
     public CommandLine(int p, int otherPort) throws Exception {
         dfs = new DFS(p);
         this.otherPort = otherPort;
         dfs.join("localhost", otherPort);
         start();
-
-        // User interface:
-        // join, ls, touch, delete, read, tail, head, append, move
     }
     
 /*    public static void main(String[] args) throws Exception  {
