@@ -20,7 +20,7 @@ public class CommandLine extends Thread {
         dfs = new DFS(p);
         this.otherPort = otherPort;
         dfs.join("localhost", otherPort);
-        start();
+//        start();
     }
     
 /*    public static void main(String[] args) throws Exception  {
@@ -111,7 +111,7 @@ public class CommandLine extends Thread {
                 try {
                     f.read(data);
                     f.close();
-                    dfs.append(fileName, data);
+                    dfs.append(fileName, fileToAppend);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

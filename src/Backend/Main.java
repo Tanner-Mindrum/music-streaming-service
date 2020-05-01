@@ -18,6 +18,10 @@ public class Main {
         CommunicationModule cm = new CommunicationModule();
         Proxy proxy = new Proxy(cm);
         myDfs = cl.dfs;
+        CommandLine dfs1 = new CommandLine(2002, 2001);
+        CommandLine dfs2 = new CommandLine(2003, 2001);
+        CommandLine dfs3 = new CommandLine(2004, 2001);
+        cl.start();
 
         // Spawn initial log in frame
         JFrame frame = new LoginFrame(socket, proxy, myDfs);
