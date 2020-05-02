@@ -23,23 +23,25 @@ public class MusicServer extends Thread {
     private SongInfo songInfo;
     private User user;
     private ModifyUser modifyUser;
-    private CommandLine command;
+//    private CommandLine command;
+    private DFS myDfs;
 
     public MusicServer() throws Exception {
-        this.command = new CommandLine(2001, 4445);
+        //this.command = new CommandLine(2001, 4445);
+        this.myDfs = new DFS(2002);
+        //myDfs.join("localhost", 4445);
         socket = new DatagramSocket(4445);
         this.dispatcher = new Dispatcher();
         this.songDispatcher = new SongDispatcher();
-        this.songInfo = new SongInfo(command.dfs);
-        this.user = new User(command.dfs);
-        this.modifyUser = new ModifyUser(command.dfs);
+        this.songInfo = new SongInfo(myDfs);
+        this.user = new User(myDfs);
+        this.modifyUser = new ModifyUser(myDfs);
         //this.modifyUser = new ModifyUser();
 
         dispatcher.registerObject(user, "User");
         dispatcher.registerObject(songDispatcher, "SongServices");
         dispatcher.registerObject(songInfo, "SongInfo");
         dispatcher.registerObject(modifyUser, "ModifyUser");
-        dispatcher.registerObject(command, "CommandLine");
     }
 
     public void run() {
@@ -78,7 +80,7 @@ public class MusicServer extends Thread {
         socket.close();
     }
 
-    public CommandLine getCommandLine() {
-        return command;
+    public DFS getMyDfs() {
+        return myDfs;
     }
 }

@@ -14,22 +14,21 @@ import java.nio.file.*;
 
 public class CommandLine extends Thread {
     public DFS dfs;
-    public int otherPort;
 
-    public CommandLine(int p, int otherPort) throws Exception {
+    public CommandLine(int p, int portToConnectTo) throws Exception {
         dfs = new DFS(p);
-        this.otherPort = otherPort;
-        dfs.join("localhost", otherPort);
-//        start();
+        dfs.join("localhost", portToConnectTo);
+        start();
     }
     
-/*    public static void main(String[] args) throws Exception  {
-//        if (args.length < 1 ) {
-//            throw new IllegalArgumentException("Parameter: <port>");
-//        }
-        //new CommandLine(Integer.parseInt(args[0]));
-        new CommandLine(2000, 4445);
-    }*/
+    public static void main(String[] args) throws Exception  {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter new port: ");
+        int newPortJoining = Integer.parseInt(in.nextLine().trim());
+        System.out.println("Enter port to connect to: ");
+        int portToConnectTo = Integer.parseInt(in.nextLine().trim());
+        new CommandLine(newPortJoining, portToConnectTo);
+    }
 
     public void run() {
         Scanner in = new Scanner(System.in);
@@ -46,6 +45,7 @@ public class CommandLine extends Thread {
             System.out.println("8. tail");
             System.out.println("9. delete");
             System.out.println("10. quit");
+            System.out.println("11. print");
             System.out.println("\nEnter command: ");
 
             String input = in.nextLine().trim();
@@ -143,6 +143,9 @@ public class CommandLine extends Thread {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }
+            else if (input.equals("print")) {
+                dfs.chord.print();
             }
             else if (input.equals("quit") || input.equals("10")) {
                 running = false;

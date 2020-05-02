@@ -55,8 +55,10 @@ public class ModifyUser {
         boolean usernameFound = false;
         boolean passwordFound = false;
 
+
+
         JSONParser parser = new JSONParser();
-        JSONArray userArray = (JSONArray) parser.parse(new String(dfs.read("users", 1)));
+        JSONArray userArray = (JSONArray) parser.parse(new String(dfs.read("users.json", 1)));
 
         for (Object info : userArray) {
             JSONObject userInfoSearch = (JSONObject) info;
@@ -141,7 +143,7 @@ public class ModifyUser {
      */
     public String getPlaylists(String username) throws Exception {
         JSONParser parser = new JSONParser();
-        JSONArray userArray = (JSONArray) parser.parse(new String(dfs.read("users", 1)));
+        JSONArray userArray = (JSONArray) parser.parse(new String(dfs.read("users.json", 1)));
         ArrayList<String> playlistNames = new ArrayList<>(); // add to this arraylist
 
         System.out.println("HELLO");

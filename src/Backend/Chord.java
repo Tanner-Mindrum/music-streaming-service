@@ -469,24 +469,24 @@ public class Chord extends java.rmi.server.UnicastRemoteObject implements ChordM
     }
 
     public String getString(long guid) throws RemoteException {
-        //byte[] buff = null;
-        //        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-//        buff = new byte[stream.available()];
-//        bos.write(buff, 0, stream.read(buff, 0, buff.length));
-//        bos.flush();
-//        stream.close();
+
+        byte[] buff = null;
         String str = "";
         try {
-            File file = new File(prefix + guid);
-            FileInputStream inputStream = new FileInputStream(file);
-            // input stream to string
-            str = inputStream.toString();
-            inputStream.close();
+//            File file = new File(prefix + guid);
+//            FileInputStream inputStream = new FileInputStream(file);
+            RemoteInputFileStream r = get(guid);
+            r.connect();
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            buff = new byte[r.available()];
+            bos.write(buff, 0, r.read(buff, 0, buff.length));
+            bos.flush();
+            r.close();
         } catch (IOException e)
         {
             throw(new RemoteException("File does not exists"));
         }
-        return str;
+        return new String(buff);
     }
 
     /**
@@ -595,6 +595,8 @@ public class Chord extends java.rmi.server.UnicastRemoteObject implements ChordM
     public String findSong(long guid, String name) throws IOException, RemoteException {
 
         String stream = getString(guid);
+
+        System.out.println(stream);
 
         JSONParser parse = new JSONParser();
         JSONArray information = null;  // search method in chord, create method search in dfs return string

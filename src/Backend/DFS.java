@@ -80,7 +80,7 @@ public class DFS {
         File metadataFile = new File(guid+"/repository/"+md5("Metadata"));
         if (!metadataFile.exists()) {  // Check if metadata exists
             // Create new metadata
-            JSONArray metadataArray = new JSONArray();
+            JSONArray metadataArray  = new JSONArray();
             JSONObject metadata = new JSONObject();
             metadata.put("metadata", metadataArray);
             PrintWriter pw = new PrintWriter(metadataFile);
@@ -104,12 +104,13 @@ public class DFS {
         long guid = md5("Metadata");
         RemoteInputFileStream r = chord.locateSuccessor(guid).get(guid);
         r.connect();
+        chord.print();
         return new JsonReader(new InputStreamReader(r, StandardCharsets.UTF_8));
     }
 
     /**
      * Write
-     * @param stream
+     * @param
      * @throws IOException
      */
     public void writeMetaData(String metadata) throws IOException {
@@ -192,11 +193,13 @@ public class DFS {
         for (JsonElement jsonEle : files) {
             fileObj = ((JsonObject) jsonEle).getAsJsonObject("file");
             if (fileObj.get("name").toString().replaceAll("^\"|\"$", "").equals(fileName)) {
+                System.out.println("Reading file: " + fileObj.get("name"));
                 JsonArray pageList = fileObj.get("pages").getAsJsonArray();
                 if (pageNumber == -1) pageNumber = pageList.size();
                 for (JsonElement jsonElem : pageList) {
                     JsonObject pageObj = ((JsonObject) jsonElem).getAsJsonObject("page");
                     if (pageObj.get("number").toString().equals(Integer.toString(pageNumber))) {
+                        System.out.println("Reading page: " + pageObj.get("guid"));
                         long guid = Long.parseLong(pageObj.get("guid").toString());
                         stream = chord.locateSuccessor(guid).get(guid);
                         stream.connect();
@@ -234,7 +237,7 @@ public class DFS {
                 JsonObject pgObj = new JsonObject();
                 JsonObject mainPgObj = new JsonObject();
                 pgObj.addProperty("number", pgs.size()+1);
-                long guid = rand.nextInt(1000000000);
+                long guid = md5(filename + rand.nextInt(1000000000));
                 chord.locateSuccessor(guid).put(guid, new RemoteInputFileStream(fileToAppend, false));
                 pgObj.addProperty("guid", guid);
                 pgObj.addProperty("size", f.length()); // change later
@@ -266,25 +269,30 @@ public class DFS {
             fileObj = ((JsonObject) jsonEle).getAsJsonObject("file");
             if ((fileObj.get("name").toString().replaceAll("^\"|\"$", "")).equals("music")) {
                 JsonArray pageList = fileObj.get("pages").getAsJsonArray();
-                for (JsonElement jsonElem : pageList) {
-                    final String[] s = {""};
-                    Thread thread = new Thread(s[0]) {
+                String[] s = new String[pageList.size()];
+                Thread[] threads = new Thread[pageList.size()];
+                for (int i = 0; i < pageList.size(); i++) {
+                //for (JsonElement jsonElem : pageList) {
+                    int finalI = i;
+                    threads[i] = new Thread() {
                         public void run() {
                             System.out.println("IN THREAD");
-                            JsonObject pageObj = ((JsonObject) jsonElem).getAsJsonObject("page");
+                            JsonObject pageObj = ((JsonObject) pageList.get(finalI)).getAsJsonObject("page");
                             try {
                                 long guid = Long.parseLong(pageObj.get("guid").toString());
-                                s[0] = chord.locateSuccessor(guid).findSong(guid, name);
+                                s[finalI] = chord.locateSuccessor(guid).findSong(guid, name);
                             } catch (IOException | java.text.ParseException e) {
                                 e.printStackTrace();
                             }
                         }
-                    };
-                    thread.start();
-                    thread.join();
-                    finalSongs += s[0];
-                }
 
+                    };
+                    threads[i].start();
+                }
+                for (int j =0; j < s.length; j++) {
+                    threads[j].join();
+                    finalSongs += s[j];
+                }
             }
         }
         return finalSongs;

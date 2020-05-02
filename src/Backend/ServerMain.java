@@ -8,12 +8,12 @@ import java.net.UnknownHostException;
 
 public class ServerMain {
 
-    private static CommandLine cl;
+    private static DFS myDfs;
 
     public static void main(String[] args) throws Exception {
         MusicServer ms = new MusicServer();
         ms.start();
-        cl = ms.getCommandLine();
-        Main.main(args, cl);
+        myDfs = ms.getMyDfs();
+        Main.main(args, myDfs);
     }
 }
